@@ -107,7 +107,12 @@ if (!empty($userDetails->mailId)) {
 <br>Number of Menuscript Pages:".$nuberOfMenuscriptPages."<br>Category:".$category."<br>Book Title:".$bookTitle."<br>User Name:".$userName."<br>User Mail:".$userMail;
 */
 /*Project Id */
-$id = substr($authorName, 0, 4) . time() . substr($category, 0, 4);
+//$id = substr($authorName, 0, 4) . time() . substr($category, 0, 4);
+if($category=="Full Services")
+{
+    $id = substr($authorName, 0, 4) . time() ."fs";
+}
+
 //echo "<br>Project Id:" . $id;
 $eid = encryptor('encrypt', $id);
 //echo "<br>$id";
