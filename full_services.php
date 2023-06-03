@@ -69,7 +69,8 @@ require 'connection.php';
                 action="http://10.1.6.32/selfpublishing/productionMailer.php?id=<?php echo $eid;?>" method="post"
                 enctype="multipart/form-data" class="form" novalidate>
                 
-
+                <h5 class="text-danger text-center"><?php if (($result['submitCount'])) {
+                                    echo "If any query, Please contact <span class='text-primary'><u>selfpublish@s4carlisle.com</u></span>.";}?></h5>
                 <div class="row">
 
                     <div class="col-md-6 mt-md-0 mt-3">
@@ -491,10 +492,14 @@ require 'connection.php';
                         <br>
  
 
-                        <label>Please see sample templates below and pick a template that best suits your book.
+                        <label>Please see sample templates below and pick a template that best suits your book.<span class="text-danger">*</span>
                             <input type="text"
                                 id="coverImageId" name="coverImageId" class="text-primary"
-                                style="display:none;font-weight: bold;"></input></label>
+                                 <?php if ((!empty($result['template_id']))) {
+                            echo 'style="display:inline;font-weight: bold;  border:none" readonly="readonly"';
+                        } else{echo 'style="display:none;font-weight: bold;  border:none" readonly="readonly"';}?>  value="<?php if ((!empty($result['template_id']))) {
+                            echo $result['template_id'];
+                        } ?>"></input></label>
 
                         <div class="col-lg-12 border p-2">
                             <div class="row" id="result">
@@ -551,7 +556,7 @@ require 'connection.php';
                         <div class="col-md-6 mt-md-0 mt-3">
 
                             <div>
-                                <label> Upload Manuscript File(s) <div class="text-danger" id="fileErr"></div> </label>
+                                <label> Upload Manuscript File(s)<span class="text-danger">*</span> <div style="display:inline;" class="text-danger" id="fileErr"></div> </label>
                                 <div class="text-center">
                                     <label class="form-control upload_label">
                                         <input type="file" class="form-control upload_hide" id="fileUpload"
@@ -576,7 +581,8 @@ require 'connection.php';
                 
                 <div class="row">
                         <div class="col-md-12 mt-md-0 mt-3 text-center">
-                            <button type="submit" class="btn btn-primary btn-lg" name="save">Submit</button>
+                            <button type="submit" class="btn btn-primary btn-lg" name="save" <?php if (($result['submitCount'])) {
+                                    echo 'disabled="disabled"';}?>>Submit</button>
                         </div>
                 </div>
             </form>
