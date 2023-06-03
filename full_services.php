@@ -27,7 +27,7 @@ require 'connection.php';
     if (isset($_GET['id']) && !empty($_GET['id'])) {
         $id = $_GET['id'];
         $id = encryptor('decrypt', $id);
-        echo $id;
+        //echo $id;
         $eid = encryptor('encrypt', $id);
         try {
             if (!empty($id)) {
@@ -35,13 +35,13 @@ require 'connection.php';
                 $result = mysqli_fetch_array($fetch_data);
                 $submit = 1;
                 //$requestedServices = explode(' ', $result['requestedServices']);
-               
-                 //$requestedServices[]=$result['requestedServices'];
+    
+                //$requestedServices[]=$result['requestedServices'];
                 // in_array('CopyEditing',$result['requestedServices']) ? 'checked="checked"' : '';
                 //echo in_array('Copyediting',(explode(',', $result['requestedServices'])))?"test":"false";
-               
-               // echo implode(',',explode(',',$result['requestedServices']));
-                
+    
+                // echo implode(',',explode(',',$result['requestedServices']));
+    
             }
         } catch (Exception $e) {
 
@@ -66,11 +66,14 @@ require 'connection.php';
         <div class="wrapper rounded bg-white">
 
             <form name="authorForm" onsubmit="return validateForm()"
-                action="http://10.1.6.32/selfpublishing/productionMailer.php?id=<?php echo $eid;?>" method="post"
+                action="http://10.1.6.32/selfpublishing/productionMailer.php?id=<?php echo $eid; ?>" method="post"
                 enctype="multipart/form-data" class="form" novalidate>
-                
-                <h5 class="text-danger text-center"><?php if (($result['submitCount'])) {
-                                    echo "If any query, Please contact <span class='text-primary'><u>selfpublish@s4carlisle.com</u></span>.";}?></h5>
+
+                <h5 class="text-danger text-center">
+                    <?php if (($result['submitCount'])) {
+                        echo "If any query, Please contact <span class='text-primary'><u>selfpublish@s4carlisle.com</u></span>.";
+                    } ?>
+                </h5>
                 <div class="row">
 
                     <div class="col-md-6 mt-md-0 mt-3">
@@ -144,7 +147,7 @@ require 'connection.php';
 
                 <div class="row">
                     <div class="col-md-6 mt-md-0 mt-3">
-                        
+
                         <label>Cover Type<span class="text-danger">*</span></label>
 
                         <select class="form-control" name="coverType" id="coverType" required <?php if ((!empty($result['coverType']))) {
@@ -162,7 +165,7 @@ require 'connection.php';
                         </select>
                         <div class="text-danger" id="coverTypeErr"></div>
                     </div>
-                    
+
                     <div class="col-md-6 mt-md-0 mt-3">
                         <label>Price to Create Barcode <span class="text-danger">*</span></label>
                         <input type="text" name="priceBarcode" class="form-control" value="<?php if ((!empty($result['priceBarcode']))) {
@@ -250,15 +253,17 @@ require 'connection.php';
                          } ?>>
                         <div class="text-danger" id="paperWeightErr"></div>
                         <br>
-                       
+
                         <label>Requested Services<span class="text-danger">*</span></label>
                         <div class=" align-items-center mt-2">
-                            <label class="option1"><input type="checkbox"  name="requestedServices[]"
-                                    value="Copyediting" <?php if ((!empty($result['requestedServices']))) {
-                             echo in_array('Copyediting',(explode(',', $result['requestedServices'])))?'checked="checked"':'';}?> >Copyediting<span class="checkmark"></span></label>
-                            <label class="option1"><input type="checkbox" name="requestedServices[]"
-                                    value="Indexing" <?php if ((!empty($result['requestedServices']))) {
-                             echo in_array('Indexing',(explode(',', $result['requestedServices'])))?'checked="checked"':'';}?>>Indexing<span class="checkmark"></span></label>
+                            <label class="option1"><input type="checkbox" name="requestedServices[]" value="Copyediting"
+                                    <?php if ((!empty($result['requestedServices']))) {
+                                        echo in_array('Copyediting', (explode(',', $result['requestedServices']))) ? 'checked="checked"' : '';
+                                    } ?>>Copyediting<span class="checkmark"></span></label>
+                            <label class="option1"><input type="checkbox" name="requestedServices[]" value="Indexing"
+                                    <?php if ((!empty($result['requestedServices']))) {
+                                        echo in_array('Indexing', (explode(',', $result['requestedServices']))) ? 'checked="checked"' : '';
+                                    } ?>>Indexing<span class="checkmark"></span></label>
                         </div>
                         <div class="text-danger" id="servicesErr"></div>
                     </div>
@@ -490,45 +495,82 @@ require 'connection.php';
                         </div>
                         <div class="text-danger" id="dimenSpecificationErr"></div>
                         <br>
- 
 
-                        <label>Please see sample templates below and pick a template that best suits your book.<span class="text-danger">*</span>
-                            <input type="text"
-                                id="coverImageId" name="coverImageId" class="text-primary"
-                                 <?php if ((!empty($result['template_id']))) {
-                            echo 'style="display:inline;font-weight: bold;  border:none" readonly="readonly"';
-                        } else{echo 'style="display:none;font-weight: bold;  border:none" readonly="readonly"';}?>  value="<?php if ((!empty($result['template_id']))) {
-                            echo $result['template_id'];
-                        } ?>"></input></label>
 
-                        <div class="col-lg-12 border p-2">
+                        <label>Please see sample templates below and pick a template that best suits your book.<span
+                                class="text-danger">*</span>
+                            <input type="text" id="coverImageId" name="coverImageId" class="text-primary" <?php if ((!empty($result['template_id']))) {
+                                echo 'style="display:inline;font-weight: bold;  border:none;" readonly="readonly"';
+                            } else {
+                                echo 'style="display:none;font-weight: bold;  border:none;" readonly="readonly"';
+                            } ?> value="<?php if ((!empty($result['template_id']))) {
+                                  echo $result['template_id'];
+                              } ?>">
+                            </input>
+                        </label>
+
+
+                        <div <?php if ((!empty($result['template_id']))) {
+                            echo 'style="display:none;"';
+                        } else {
+                            echo 'style="display:block;"';
+                        } ?>>
+
+                            <div class="col-lg-12 border p-2">
+                                <div class="row" id="result">
+                                    <?php
+                                    $sql = "SELECT * FROM covers";
+                                    $result1 = $conn->query($sql);
+                                    while ($row = $result1->fetch_assoc()) {
+                                        ?>
+                                        <div class="col-md-3 mb-2" id="<?= $row['cover_id']; ?>"
+                                            value="<?= $row['cover_id']; ?>">
+
+                                            <button type="button" id="<?= $row['cover_id']; ?>"
+                                                onclick="show_coverId('<?= $row['cover_id']; ?>')"
+                                                value="<?= $row['cover_id']; ?>">
+                                                <img class="card-img-top" src="images/<?= $row['cover_image']; ?>"
+                                                    alt="<?= $row['cover_image']; ?>" />
+                                            </button>
+
+                                        </div>
+
+                                    <?php } ?>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="border p-2"<?php if ((!empty($result['template_id']))) {
+                            echo 'style="display:block;"';
+                        } else {
+                            echo 'style="display:none;"';
+                        } ?>>
+
                             <div class="row" id="result">
                                 <?php
-                                $sql = "SELECT * FROM covers";
-                                $result1 = $conn->query($sql);
-                                while ($row = $result1->fetch_assoc()) {
-                                    ?>
-                                    <div class="col-md-3 mb-2" id="<?= $row['cover_id']; ?>"
-                                        value="<?= $row['cover_id']; ?>">
+                                $coverId = trim($result['template_id']);
+                                //echo $coverId;
+                                $sql2 = "select * from covers where cover_id='$coverId'";
+                                //echo $sql2;
+                                //$sql = "SELECT * FROM covers where cover_id='$cover_id'";
+                                $fetch_data1 = mysqli_query($conn, $sql2);
 
-                                        <button type="button" id="<?= $row['cover_id']; ?>"
-                                            onclick="show_coverId('<?= $row['cover_id']; ?>')"
-                                            value="<?= $row['cover_id']; ?>">
-                                            <img class="card-img-top" src="images/<?= $row['cover_image']; ?>"
-                                                alt="<?= $row['cover_image']; ?>" />
-                                        </button>
+                                $result2 = mysqli_fetch_array($fetch_data1);
+                                ?>
+                                <p class="text-center">Selected Template</p>
+                                <img src="images/<?php if ((!empty($result2['cover_image']))) {
+                                    echo $result2['cover_image'];
+                                } ?>" alt="<?php if ((!empty($result2['cover_image']))) {
+                                     echo $result2['cover_image'];
+                                 } ?>" />
 
-                                    </div>
-
-                                <?php } ?>
                             </div>
                         </div>
 
+
+
                     </div>
 
-                </div> 
-                                
-                <div class="row">
+                    <div class="row">
                         <div class="col-md-6 mt-md-0 mt-3">
                             <label>Your vision for your Design <span class="text-danger">*</span>
                                 <div style="display: inline-block;" data-toggle="tooltip" data-placement="top"
@@ -546,7 +588,7 @@ require 'connection.php';
                             </label>
                             <textarea class="form-control" name="visionDesign" id="visionDesign" rows="5" <?php if ((!empty($result['visionDesign']))) {
                                 echo 'readonly="readonly"';
-                            } ?> data-toggle="tooltip" data-placement="top"
+                            } ?>   data-toggle="tooltip" data-placement="top"
                                 title="Complete this information as you wish to have it appear on Spine."><?php if ((!empty($result['visionDesign']))) {
                                     echo $result['visionDesign'];
                                 } ?></textarea>
@@ -555,8 +597,14 @@ require 'connection.php';
                         </div>
                         <div class="col-md-6 mt-md-0 mt-3">
 
-                            <div>
-                                <label> Upload Manuscript File(s)<span class="text-danger">*</span> <div style="display:inline;" class="text-danger" id="fileErr"></div> </label>
+                            <div <?php if ((!empty($result['fileName']))) {
+                                echo 'style="display:none;"';
+                            } else {
+                                echo 'style="display:block;"';
+                            } ?>>
+                                <label> Upload Manuscript File(s)<span class="text-danger">*</span>
+                                    <div style="display:inline;" class="text-danger" id="fileErr"></div>
+                                </label>
                                 <div class="text-center">
                                     <label class="form-control upload_label">
                                         <input type="file" class="form-control upload_hide" id="fileUpload"
@@ -572,19 +620,41 @@ require 'connection.php';
                                 </div>
 
                             </div>
+                            <div <?php if ((!empty($result['fileName']))) {
+                                echo 'style="display:block;"';
+                            } else {
+                                echo 'style="display:none;"';
+                            } ?>>
+                                <label> Download Manuscript File<span class="text-danger">*</span></label>
+                                <div class="text-center">
+                                    <label class="form-control upload_label">
+                                        <a download="<?php echo $result['fileName']; ?>"
+                                            href="uploads/<?php echo $result['fileName'] ?>"><span><i
+                                                    class="fa fa-cloud-download text-centre text-primary fa-5x"></i></span>
+                                            <p class="text-centre text-primary" id="noOfFiles">Download Manuscript
+                                                file(s)
+                                            </p>
+                                        </a>
+
+                                    </label>
+
+                                </div>
+
+                            </div>
 
 
                         </div>
 
-                </div>
-             
-                
-                <div class="row">
+                    </div>
+
+
+                    <div class="row">
                         <div class="col-md-12 mt-md-0 mt-3 text-center">
                             <button type="submit" class="btn btn-primary btn-lg" name="save" <?php if (($result['submitCount'])) {
-                                    echo 'disabled="disabled"';}?>>Submit</button>
+                                echo 'disabled="disabled"';
+                            } ?>>Submit</button>
                         </div>
-                </div>
+                    </div>
             </form>
         </div>
     </div>

@@ -103,12 +103,12 @@ if (!empty($userDetails->mailId)) {
 
 
 
-echo "Author Name:".$authorName."<br>Author Mail:".$authorEmail."<br>ISBN:".$isbn."<br>Interior Design:".$interiorDesign."<br>Editorial Complexity".$editorialComplexity."
+/*echo "Author Name:".$authorName."<br>Author Mail:".$authorEmail."<br>ISBN:".$isbn."<br>Interior Design:".$interiorDesign."<br>Editorial Complexity".$editorialComplexity."
 <br>Number of Menuscript Pages:".$nuberOfMenuscriptPages."<br>Category:".$category."<br>Book Title:".$bookTitle."<br>User Name:".$userName."<br>User Mail:".$userMail;
-
+*/
 /*Project Id */
 $id = substr($authorName, 0, 4) . time() . substr($category, 0, 4);
-echo "<br>Project Id:" . $id;
+//echo "<br>Project Id:" . $id;
 $eid = encryptor('encrypt', $id);
 //echo "<br>$id";
 
@@ -116,7 +116,7 @@ try {
     $sql1 = "INSERT INTO services (id,authorName,authorEmail,category,bookTitle,isbn,interiorDesign,editorialComplexity,nuberOfMenuscriptPages,userName,userMail) 
 VALUES ('" . $id . "','" . $authorName . "','" . $authorEmail . "','" . $category . "','" . $bookTitle . "','" . $isbn . "','" . $interiorDesign . "','" . $editorialComplexity . "','" . $nuberOfMenuscriptPages . "','" . $userName . "','" . $userMail . "')";
     mysqli_query($conn, $sql1);
-    echo "Record inserted";
+    //echo "Record inserted";
 } catch (Exception $e) {
     echo 'Error: ' . $e->getMessage();
 }

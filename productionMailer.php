@@ -27,7 +27,7 @@ $priceBarcode = $_POST['priceBarcode'];
 $authorImage = $_POST['authorImage'];
 $artImage = $_POST['artImage'];
 $visionDesign = $_POST['visionDesign'];
-$template_id = $_POST['coverImageId'];
+$template_id = trim($_POST['coverImageId']);
 $submitCount=1;
 
 if (isset($_POST['save'])) {
@@ -35,7 +35,7 @@ if (isset($_POST['save'])) {
     if (isset($_GET['id']) && !empty($_GET['id'])) {
         $id = $_GET['id'];
         $id = encryptor('decrypt', $id);
-        echo $id;
+        //echo $id;
         $eid = encryptor('encrypt', $id);
 
 
@@ -89,10 +89,10 @@ if (isset($_POST['save'])) {
                 $sql = "insert into files(file_name,file_size,purchase_id)
             values('$filename','$totalfileSize','$id')";
                 if (mysqli_query($conn, $sql)) {
-                    echo "<br>File uploaded successfully";
+                    //echo "<br>File uploaded successfully";
 
                 } else {
-                    echo "Failed to upload file";
+                    //echo "Failed to upload file";
                 }
 
                 // Create HTML Link option to download zip
