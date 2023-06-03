@@ -1,7 +1,7 @@
 <?php
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
-echo "production mailer";
+
 require 'connection.php';
 require 'config.php';
 require 'PHPMailer/src/Exception.php';
@@ -11,7 +11,7 @@ require 'PHPMailer/src/SMTP.php';
 
 $authorName = $_POST['authorName'];
 $authorMail = $_POST['authorEmail'];
-$category = $_POST['category'];
+$category = '';
 $bookSubtitle = $_POST['bookSubTitle'];
 $isbn = $_POST['isbn'];
 $coverType = $_POST['coverType'];
@@ -36,6 +36,9 @@ if (isset($_POST['save'])) {
         $id = $_GET['id'];
         $id = encryptor('decrypt', $id);
         //echo $id;
+        $fetch_data = mysqli_query($conn, "select * from services where id='$id'");
+        $result = mysqli_fetch_array($fetch_data);
+        $category=$result['category'];
         $eid = encryptor('encrypt', $id);
 
 
@@ -155,7 +158,7 @@ if (isset($_POST['save'])) {
         $mail->isHTML(true); //Set email format to HTML
         $mail->Subject = 'Starting your cover design project';
         $mail->Body = ' <p>Dear Team,</p>
-    <p>The Below services are scheduled.</p>
+    <p>The below services are scheduled.</p>
     <table style="border: 1px solid black;border-collapse: collapse; text-align:left;padding:10px;">
         <tr>
             <th style="border: 1px solid black;border-collapse: collapse; text-align:left;padding:10px;">Project Id</th>

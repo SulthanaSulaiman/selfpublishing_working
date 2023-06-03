@@ -33,7 +33,7 @@ require 'connection.php';
             if (!empty($id)) {
                 $fetch_data = mysqli_query($conn, "select * from services where id='$id'");
                 $result = mysqli_fetch_array($fetch_data);
-                $submit = 1;
+               
                 //$requestedServices = explode(' ', $result['requestedServices']);
     
                 //$requestedServices[]=$result['requestedServices'];
