@@ -167,8 +167,8 @@ require 'connection.php';
                     </div>
 
                     <div class="col-md-6 mt-md-0 mt-3">
-                        <label>Price to Create Barcode <span class="text-danger">*</span></label>
-                        <input type="text" name="priceBarcode" class="form-control" value="<?php if ((!empty($result['priceBarcode']))) {
+                        <label>Price to Create Barcode in dollers($)<span class="text-danger">*</span></label>
+                        <input type="number" step="any" min="0" name="priceBarcode" class="form-control" value="<?php if ((!empty($result['priceBarcode']))) {
                             echo $result['priceBarcode'];
                         } ?>" required <?php if ((!empty($result['priceBarcode']))) {
                              echo 'readonly="readonly"';
@@ -246,7 +246,7 @@ require 'connection.php';
                                     </svg></sup>
                             </div>
                         </label>
-                        <input type="number" name="paperWeight" id="paperWeight" class="form-control" value="<?php if ((!empty($result['paperWeight']))) {
+                        <input type="number"  min="0" step="any" name="paperWeight" id="paperWeight" class="form-control" value="<?php if ((!empty($result['paperWeight']))) {
                             echo $result['paperWeight'];
                         } ?>" required <?php if ((!empty($result['paperWeight']))) {
                              echo 'readonly="readonly"';
@@ -431,7 +431,7 @@ require 'connection.php';
                         </div>
                         <div class="text-danger" id="authorImageErr"></div>
                         <br>
-                        <label>Art Image <span class="text-danger">*</span>
+                        <label>Art Image? <span class="text-danger">*</span>
                             <div style="display: inline-block;" data-toggle="tooltip" data-placement="top"
                                 title="Do you have original art for the cover? (If you have original art which you intend to use as part of your cover design, you may do so. Make sure you have permission to reprint the art, and credit the artist by listing their name with copyright. Resolution of original image should be 300 dpi or more.)">
                                 <sup> <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="18" height="18"
@@ -508,6 +508,7 @@ require 'connection.php';
                               } ?>">
                             </input>
                         </label>
+                        <div class="text-danger" id="coverImageIdErr"></div>
 
 
                         <div <?php if ((!empty($result['template_id']))) {
@@ -632,7 +633,7 @@ require 'connection.php';
                                             href="uploads/<?php echo $result['fileName'] ?>"><span><i
                                                     class="fa fa-cloud-download text-centre text-primary fa-5x"></i></span>
                                             <p class="text-centre text-primary" id="noOfFiles">Download Manuscript
-                                                file(s)
+                                                file
                                             </p>
                                         </a>
 

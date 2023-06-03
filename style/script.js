@@ -60,10 +60,12 @@ function validateForm() {
     var authorImage = document.authorForm.authorImage.value;
 
     var visionDesign = document.authorForm.visionDesign.value;
+    var coverImageId = document.authorForm.coverImageId.value;
+
     var file=document.getElementById("fileUpload").value;
 
     // Defining error variables with a default value
-    var paperWeightErr = coverTypeErr = priceBarcodeErr = trimSizeErr = dimenSpecificationErr = servicesErr = artImageErr = authorImageErr = visionDesignErr=fileErr= true;
+    var paperWeightErr = coverTypeErr = priceBarcodeErr = trimSizeErr = dimenSpecificationErr = servicesErr = artImageErr = authorImageErr = visionDesignErr=fileErr=coverImageIdErr= true;
 
     // Validate paperWeight
     if (paperWeight == "") {
@@ -145,8 +147,16 @@ function validateForm() {
         printError("fileErr", "");
         fileErr = false;
     }
+      // Validate Cover image template id
+      if (coverImageId == "") {
+        printError("coverImageIdErr", "Please select the template.");
+    } else {
+
+        printError("coverImageIdErr", "");
+        coverImageIdErr = false;
+    }
    
- if ((paperWeightErr || coverTypeErr || priceBarcodeErr || trimSizeErr || dimenSpecificationErr || servicesErr||artImageErr || authorImageErr || visionDesignErr||fileErr) == true) {
+ if ((paperWeightErr || coverTypeErr || priceBarcodeErr || trimSizeErr || dimenSpecificationErr || servicesErr||artImageErr || authorImageErr || visionDesignErr||fileErr||coverImageIdErr) == true) {
     console.log("paperWeightErr:"+paperWeightErr);
     console.log("coverTypeErr:"+coverTypeErr);
     console.log("priceBarcodeErr:"+priceBarcodeErr);
@@ -157,6 +167,7 @@ function validateForm() {
     console.log("authorImageErr:"+authorImageErr);
     console.log("visionDesignErr:"+visionDesignErr);
     console.log("fileErr:"+fileErr);
+    console.log("coverImageIdErr:"+coverImageIdErr);
     
 
     return false;
@@ -172,7 +183,7 @@ function validateForm() {
         console.log("authorImageErr:"+authorImageErr);
         console.log("visionDesignErr:"+visionDesignErr);
         console.log("fileErr:"+fileErr);
-        
+        console.log("coverImageIdErr:"+coverImageIdErr);
         return true;
     }
     }catch(err)
