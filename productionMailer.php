@@ -18,7 +18,7 @@ $coverType = $_POST['coverType'];
 $priceBarcode = $_POST['priceBarcode'];
 $trimSize = $_POST['trimSize'];
 $paperWeight = $_POST['paperWeight'];
-$requestedServices = $_POST['services[]'];
+$requestedServices = implode(',', $_POST['requestedServices']);
 $dimenSpecification = $_POST['dimenSpecification'];
 $bookCoverFront = $_POST['cfrontText'];
 $spine = $_POST['spineText'];
@@ -29,6 +29,7 @@ $artImage = $_POST['artImage'];
 $visionDesign = $_POST['visionDesign'];
 $template_id = $_POST['coverImageId'];
 $submitCount=1;
+
 if (isset($_POST['save'])) {
     /* Update the entries in table*/
     if (isset($_GET['id']) && !empty($_GET['id'])) {

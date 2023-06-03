@@ -34,7 +34,14 @@ require 'connection.php';
                 $fetch_data = mysqli_query($conn, "select * from services where id='$id'");
                 $result = mysqli_fetch_array($fetch_data);
                 $submit = 1;
-                //echo $result;
+                //$requestedServices = explode(' ', $result['requestedServices']);
+               
+                 //$requestedServices[]=$result['requestedServices'];
+                // in_array('CopyEditing',$result['requestedServices']) ? 'checked="checked"' : '';
+                //echo in_array('Copyediting',(explode(',', $result['requestedServices'])))?"test":"false";
+               
+               // echo implode(',',explode(',',$result['requestedServices']));
+                
             }
         } catch (Exception $e) {
 
@@ -242,13 +249,15 @@ require 'connection.php';
                          } ?>>
                         <div class="text-danger" id="paperWeightErr"></div>
                         <br>
-
+                       
                         <label>Requested Services<span class="text-danger">*</span></label>
                         <div class=" align-items-center mt-2">
-                            <label class="option1"><input type="checkbox" name="services[]"
-                                    value="Copyediting">Copyediting<span class="checkmark"></span></label>
-                            <label class="option1"><input type="checkbox" name="services[]"
-                                    value="Indexing">Indexing<span class="checkmark"></span></label>
+                            <label class="option1"><input type="checkbox"  name="requestedServices[]"
+                                    value="Copyediting" <?php if ((!empty($result['requestedServices']))) {
+                             echo in_array('Copyediting',(explode(',', $result['requestedServices'])))?'checked="checked"':'';}?> >Copyediting<span class="checkmark"></span></label>
+                            <label class="option1"><input type="checkbox" name="requestedServices[]"
+                                    value="Indexing" <?php if ((!empty($result['requestedServices']))) {
+                             echo in_array('Indexing',(explode(',', $result['requestedServices'])))?'checked="checked"':'';}?>>Indexing<span class="checkmark"></span></label>
                         </div>
                         <div class="text-danger" id="servicesErr"></div>
                     </div>

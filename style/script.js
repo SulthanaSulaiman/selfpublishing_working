@@ -46,12 +46,12 @@ function validateForm() {
     var priceBarcode = document.authorForm.priceBarcode.value;
     var trimSize = document.authorForm.trimSize.value;
     var dimenSpecification = document.authorForm.dimenSpecification.value;
-    var services = [];
-    var checkboxes = document.getElementsByName("services[]");
+    var requestedServices = [];
+    var checkboxes = document.getElementsByName("requestedServices[]");
     for (var i = 0; i < checkboxes.length; i++) {
         if (checkboxes[i].checked) {
             // Populate hobbies array with selected values
-            services.push(checkboxes[i].value);
+            requestedServices.push(checkboxes[i].value);
         }
     }
     
@@ -107,8 +107,8 @@ function validateForm() {
         dimenSpecificationErr = false;
     }
 
-    // Validate services
-    if (services.length == 0) {
+    // Validate requestedServices
+    if (requestedServices.length == 0) {
         printError("servicesErr", "Please choose any one service.");
     } else {
         printError("servicesErr", "");
