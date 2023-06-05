@@ -183,7 +183,7 @@ if (isset($_POST['save'])) {
         </tr>
         <tr>
             <th style="border: 1px solid black;border-collapse: collapse; text-align:left;padding:10px;">URL</th>
-            <td style="border: 1px solid black;border-collapse: collapse; text-align:left;padding:10px;"><a href="http://10.1.6.32/selfpublishing/full_services.php?id=' . $eid . '">[Click Here]</a>
+            <td style="border: 1px solid black;border-collapse: collapse; text-align:left;padding:10px;"><a href="http://10.1.6.32/selfpublishing/full_servicesP.php?id=' . $eid . '">[Click Here]</a>
             </td>
         </tr>
 
