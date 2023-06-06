@@ -8,32 +8,103 @@ require 'PHPMailer/src/Exception.php';
 require 'PHPMailer/src/PHPMailer.php';
 require 'PHPMailer/src/SMTP.php';
 
+function cleanStr($string)
+{
+    $result = strtolower(preg_replace('/[^a-zA-Z0-9-_\.]/', '_', $string));
 
+    return $result;
+}
 $authorName = $_POST['authorName'];
 $authorMail = $_POST['authorEmail'];
 $category = '';
 $bookSubtitle = $_POST['bookSubTitle'];
 $isbn = $_POST['isbn'];
-$coverType = $_POST['coverType'];
-$priceBarcode = $_POST['priceBarcode'];
-$trimSize = $_POST['trimSize'];
-$paperWeight = $_POST['paperWeight'];
-if(!empty($_POST['requestedServices']))
+
+
+$coverType =null;
+$priceBarcode =null;
+$trimSize =null;
+$paperWeight =null;
+$requestedServices =null;
+$dimenSpecification =null;
+$bookCoverFront =null;
+$spine = null;
+$bookCoverBack =null;
+$priceBarcode = null;
+$authorImage = null;
+$artImage = null;
+$visionDesign = null;
+$template_id = null;
+
+
+if(isset($_POST['coverType']))
+{
+    $coverType = $_POST['coverType'];
+}
+if(isset($_POST['priceBarcode']))
+{
+    $priceBarcode = $_POST['priceBarcode'];
+}
+if(isset($_POST['trimSize']))
+{
+    $trimSize = $_POST['trimSize'];
+  
+}
+if(isset($_POST['paperWeight']))
+{
+    $paperWeight = $_POST['paperWeight'];
+}
+if(isset($_POST['requestedServices']))
+{
+    if(!empty($_POST['requestedServices']))
 {
     $requestedServices = implode(',',($_POST['requestedServices']));
 }
 else{
     $requestedServices="";
 }
-$dimenSpecification = $_POST['dimenSpecification'];
-$bookCoverFront = $_POST['cfrontText'];
-$spine = $_POST['spineText'];
-$bookCoverBack = $_POST['cbackText'];
-$priceBarcode = $_POST['priceBarcode'];
-$authorImage = $_POST['authorImage'];
-$artImage = $_POST['artImage'];
-$visionDesign = $_POST['visionDesign'];
-$template_id = trim($_POST['coverImageId']);
+}
+if(isset($_POST['dimenSpecification']))
+{
+    $dimenSpecification = $_POST['dimenSpecification'];
+}
+if(isset($_POST['cfrontText']))
+{
+    $bookCoverFront = $_POST['cfrontText'];
+}
+if(isset($_POST['spineText']))
+{
+    $spine = $_POST['spineText'];
+}
+if(isset($_POST['cbackText']))
+{
+    $bookCoverBack = $_POST['cbackText'];
+}
+if(isset($_POST['priceBarcode']))
+{
+    $priceBarcode = $_POST['priceBarcode'];
+}
+if(isset($_POST['authorImage']))
+{
+    $authorImage = $_POST['authorImage'];
+}
+if(isset($_POST['artImage']))
+{
+    $artImage = $_POST['artImage'];
+}
+if(isset($_POST['visionDesign']))
+{
+    $visionDesign = $_POST['visionDesign'];
+}
+if(isset($_POST['coverImageId']))
+{
+    $template_id = trim($_POST['coverImageId']);
+}
+
+
+
+
+
 $submitCount=1;
 
 if (isset($_POST['save'])) {
@@ -45,6 +116,7 @@ if (isset($_POST['save'])) {
         $fetch_data = mysqli_query($conn, "select * from services where id='$id'");
         $result = mysqli_fetch_array($fetch_data);
         $category=$result['category'];
+        $categoryName = cleanStr($category);
         $eid = encryptor('encrypt', $id);
 
 
@@ -149,7 +221,7 @@ if (isset($_POST['save'])) {
         $mail->Port = 465; //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
     
         //Recipients
-        $mail->setFrom('sulthanaofficial111@gmail.com', 'S4C Cover Design Job');
+        $mail->setFrom('sulthanaofficial111@gmail.com', 'S4C Cover Design');
         //$mail->addAddress('joe@gmail.net', 'Joe User');     //Add a recipient
         $mail->addAddress($mailId); //Name is optional
         // $mail->addReplyTo('info@gmail.com', 'Information');
@@ -189,7 +261,7 @@ if (isset($_POST['save'])) {
         </tr>
         <tr>
             <th style="border: 1px solid black;border-collapse: collapse; text-align:left;padding:10px;">URL</th>
-            <td style="border: 1px solid black;border-collapse: collapse; text-align:left;padding:10px;"><a href="http://10.1.6.32/selfpublishing/full_servicesP.php?id=' . $eid . '">[Click Here]</a>
+            <td style="border: 1px solid black;border-collapse: collapse; text-align:left;padding:10px;"><a href="http://10.1.6.32/selfpublishing/' . $categoryName . 'P.php?id=' . $eid . '">[Click Here]</a>
             </td>
         </tr>
 

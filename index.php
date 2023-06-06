@@ -112,7 +112,7 @@
         method="post">
        <input type="submit" value="Production, Cover, and Index">
       <!-- <?php $data=$url;
-    echo "<br><b>Befor Decode:</b> <br>$data";
+    echo "<br><b>Before Decode:</b> <br>$data";
     $value =urldecode($data);
      echo "<br><b>After Decode:</b><br>$value";?> -->
     </form>
@@ -123,7 +123,7 @@
         method="post">
        <input type="submit" value="Production, Cover, and Editorial">
      <?php $data=$url;
-    echo "<br><b>Befor Decode:</b> <br>$data";
+   echo "<br><b>Before Decode:</b> <br>$data";
     $value =urldecode($data);
      echo "<br><b>After Decode:</b><br>$value";?> 
 </body>

@@ -112,7 +112,18 @@ if($category=="Full Services")
 {
     $id = substr($authorName, 0, 4) . time() ."fs";
 }
-
+else if($category=="Cover Design")
+{
+    $id = substr($authorName, 0, 4) . time() ."cd";
+}
+else if($category=="Production and Index")
+{
+    $id = substr($authorName, 0, 4) . time() ."p&i";
+}
+else
+{
+    $id = substr($authorName, 0, 4) . time();
+}
 //echo "<br>Project Id:" . $id;
 $eid = encryptor('encrypt', $id);
 //echo "<br>$id";

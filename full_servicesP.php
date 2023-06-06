@@ -468,7 +468,7 @@ require 'connection.php';
                             } else {
                                 echo 'style="display:none;"';
                             } ?>>
-                                <label>Download Manuscript File<span class="text-danger">*</span></label>
+                                <label> Download Manuscript File<span class="text-danger">*</span></label>
                                 <div class="text-center">
                                     <label class="form-control upload_label">
                                         <a download="<?php echo $result['fileName']; ?>"
