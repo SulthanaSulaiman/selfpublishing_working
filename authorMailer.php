@@ -118,7 +118,7 @@ else if($category=="Cover Design")
 }
 else if($category=="Production and Index")
 {
-    $id = substr($authorName, 0, 4) . time() ."p&i";
+    $id = substr($authorName, 0, 4) . time() ."pi";
 }
 else
 {

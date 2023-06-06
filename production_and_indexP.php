@@ -19,11 +19,6 @@ require 'connection.php';
     <link rel="stylesheet" href="style/style.css">
     <script>
            
-
-
-
-
-
    // Defining a function to display error message
    function printError(elemId, hintMsg) {
     try{
@@ -113,6 +108,11 @@ window.addEventListener("load", () => {
 
 <body>
     <?php
+    
+    function encodeValue ($s) {
+        return htmlentities($s, ENT_COMPAT|ENT_QUOTES,'ISO-8859-1', true); 
+    }
+    
     if (isset($_GET['id']) && !empty($_GET['id'])) {
         $id = $_GET['id'];
         $id = encryptor('decrypt', $id);
@@ -159,14 +159,14 @@ window.addEventListener("load", () => {
                     <div class="col-md-6 mt-md-0 mt-3">
                         <label>Author name</label>
                         <input type="text" class="form-control required" value="<?php if ((!empty($result['authorName']))) {
-                            echo $result['authorName'];
+                           echo encodeValue($result['authorName']);
                         } ?>" name="authorName" id="authorName" required readonly="readonly">
 
                     </div>
                     <div class="col-md-6 mt-md-0 mt-3">
                         <label>Email</label>
                         <input type="text" class="form-control required" value="<?php if ((!empty($result['authorEmail']))) {
-                            echo $result['authorEmail'];
+                           echo encodeValue($result['authorEmail']);
                         } ?>" name="authorEmail" id="authorEmail" required readonly="readonly">
 
                     </div>
@@ -176,7 +176,7 @@ window.addEventListener("load", () => {
                     <div class="col-md-6 mt-md-0 mt-3">
                         <label>Book title</label>
                         <input type="text" class="form-control required" value="<?php if ((!empty($result['bookTitle']))) {
-                            echo $result['bookTitle'];
+                           echo encodeValue($result['bookTitle']);
                         } ?>" name="bookTitle" id="bookTitle" required readonly="readonly">
 
                     </div>
@@ -184,7 +184,7 @@ window.addEventListener("load", () => {
                     <div class="col-md-6 mt-md-0 mt-3">
                         <label>Book subtitle</label>
                         <input type="text" class="form-control" name="bookSubTitle" id="bookSubTitle" value="<?php if ((!empty($result['bookSubtitle']))) {
-                            echo $result['bookSubtitle'];
+                           echo encodeValue($result['bookSubtitle']);
                         } ?>" readonly="readonly">
                     </div>
                 </div>
@@ -193,13 +193,13 @@ window.addEventListener("load", () => {
                     <div class="col-md-6 mt-md-0 mt-3">
                         <label>Interior design</label>
                         <input type="text" class="form-control" name="interiorDesign" id="interiorDesign" value="<?php if ((!empty($result['interiorDesign']))) {
-                            echo $result['interiorDesign'];
+                           echo encodeValue($result['interiorDesign']);
                         } ?>" required readonly="readonly">
                     </div>
                     <div class="col-md-6 mt-md-0 mt-3">
                         <label>Editorial complexity</label>
                         <input type="text" class="form-control" name="editorialCompexity" id="editorialCompexity" value="<?php if ((!empty($result['editorialComplexity']))) {
-                            echo $result['editorialComplexity'];
+                           echo encodeValue($result['editorialComplexity']);
                         } ?>" required readonly="readonly">
                     </div>
                 </div>
@@ -215,7 +215,7 @@ window.addEventListener("load", () => {
                     <div class="col-md-6 mt-md-0 mt-3">
                         <label>ISBN</label>
                         <input type="text" class="form-control" name="isbn" id="isbn" value="<?php if ((!empty($result['isbn']))) {
-                            echo $result['isbn'];
+                           echo encodeValue($result['isbn']);
                         } ?>" readonly="readonly">
 
                     </div>
@@ -227,7 +227,7 @@ window.addEventListener("load", () => {
                         <label>Trim size<span class="text-danger">*</span></label>
 
                         <input type="text" class="form-control" name="isbn" id="isbn" value="<?php if ((!empty($result['trimSize']))) {
-                            echo $result['trimSize'];
+                            echo encodeValue($result['trimSize']);
                         } ?>" readonly="readonly">
                         <div class="text-danger" id="trimSizeErr"></div>
 
@@ -317,7 +317,7 @@ window.addEventListener("load", () => {
                                 echo 'readonly="readonly"';
                             } ?>   data-toggle="tooltip" data-placement="top"
                                 title="Complete this information as you wish to have it appear on Spine."><?php if ((!empty($result['visionDesign']))) {
-                                    echo $result['visionDesign'];
+                                   echo encodeValue($result['visionDesign']);
                                 } ?></textarea>
 
                     </div>

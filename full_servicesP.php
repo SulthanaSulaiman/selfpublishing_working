@@ -24,6 +24,9 @@ require 'connection.php';
 
 <body>
     <?php
+     function encodeValue ($s) {
+        return htmlentities($s, ENT_COMPAT|ENT_QUOTES,'ISO-8859-1', true); 
+    }
     if (isset($_GET['id']) && !empty($_GET['id'])) {
         $id = $_GET['id'];
         $id = encryptor('decrypt', $id);
@@ -78,14 +81,14 @@ require 'connection.php';
                     <div class="col-md-6 mt-md-0 mt-3">
                         <label>Author name</label>
                         <input type="text" class="form-control required" value="<?php if ((!empty($result['authorName']))) {
-                            echo $result['authorName'];
+                            echo encodeValue($result['authorName']);
                         } ?>" name="authorName" id="authorName" required readonly="readonly">
 
                     </div>
                     <div class="col-md-6 mt-md-0 mt-3">
                         <label>Email</label>
                         <input type="text" class="form-control required" value="<?php if ((!empty($result['authorEmail']))) {
-                            echo $result['authorEmail'];
+                            echo encodeValue($result['authorEmail']);
                         } ?>" name="authorEmail" id="authorEmail" required readonly="readonly">
 
                     </div>
@@ -95,7 +98,7 @@ require 'connection.php';
                     <div class="col-md-6 mt-md-0 mt-3">
                         <label>Book title</label>
                         <input type="text" class="form-control required" value="<?php if ((!empty($result['bookTitle']))) {
-                            echo $result['bookTitle'];
+                            echo encodeValue($result['bookTitle']);
                         } ?>" name="bookTitle" id="bookTitle" required readonly="readonly">
 
                     </div>
@@ -103,7 +106,7 @@ require 'connection.php';
                     <div class="col-md-6 mt-md-0 mt-3">
                         <label>Book subtitle</label>
                         <input type="text" class="form-control" name="bookSubTitle" id="bookSubTitle" value="<?php if ((!empty($result['bookSubtitle']))) {
-                            echo $result['bookSubtitle'];
+                            echo encodeValue($result['bookSubtitle']);
                         } ?>" readonly="readonly">
                     </div>
                 </div>
@@ -112,13 +115,13 @@ require 'connection.php';
                     <div class="col-md-6 mt-md-0 mt-3">
                         <label>Interior design</label>
                         <input type="text" class="form-control" name="interiorDesign" id="interiorDesign" value="<?php if ((!empty($result['interiorDesign']))) {
-                            echo $result['interiorDesign'];
+                            echo encodeValue($result['interiorDesign']);
                         } ?>" required readonly="readonly">
                     </div>
                     <div class="col-md-6 mt-md-0 mt-3">
                         <label>Editorial Complexity</label>
                         <input type="text" class="form-control" name="editorialCompexity" id="editorialCompexity" value="<?php if ((!empty($result['editorialComplexity']))) {
-                            echo $result['editorialComplexity'];
+                            echo encodeValue($result['editorialComplexity']);
                         } ?>" required readonly="readonly">
                     </div>
                 </div>
@@ -134,7 +137,7 @@ require 'connection.php';
                     <div class="col-md-6 mt-md-0 mt-3">
                         <label>ISBN</label>
                         <input type="text" class="form-control" name="isbn" id="isbn" value="<?php if ((!empty($result['isbn']))) {
-                            echo $result['isbn'];
+                            echo encodeValue($result['isbn']);
                         } ?>" readonly="readonly">
 
                     </div>
@@ -145,7 +148,7 @@ require 'connection.php';
 
                         <label>Cover type<span class="text-danger">*</span></label>
                         <input type="text" class="form-control" name="coverType" id="coverType" value="<?php if ((!empty($result['coverType']))) {
-                            echo $result['coverType'];
+                            echo encodeValue($result['coverType']);
                         } ?>" readonly="readonly">
 
                         <div class="text-danger" id="coverTypeErr"></div>
@@ -165,7 +168,7 @@ require 'connection.php';
                         <label>Trim size<span class="text-danger">*</span></label>
 
                         <input type="text" class="form-control" name="isbn" id="isbn" value="<?php if ((!empty($result['trimSize']))) {
-                            echo $result['trimSize'];
+                            echo encodeValue($result['trimSize']);
                         } ?>" readonly="readonly">
                         <div class="text-danger" id="trimSizeErr"></div>
 
@@ -201,7 +204,7 @@ require 'connection.php';
                     <div class="col-md-6 mt-md-0 mt-3">
                     <label>Requested services<span class="text-danger">*</span></label>
                         <input type="text" class="form-control" name="isbn" id="isbn" value="<?php if ((!empty($result['requestedServices']))) {
-                            echo $result['requestedServices'];
+                            echo encodeValue($result['requestedServices']);
                         } ?>" readonly="readonly">
 
                         <div class="text-danger" id="servicesErr"></div>
@@ -223,7 +226,7 @@ require 'connection.php';
                             </div>
                         </label>
                         <input type="text" class="form-control" name="dimenSpecification" id="dimenSpecification" value="<?php if ((!empty($result['dimenSpecification']))) {
-                            echo $result['dimenSpecification'];
+                            echo encodeValue($result['dimenSpecification']);
                         } ?>" readonly="readonly">
 
                         <div class="text-danger" id="dimenSpecificationErr"></div>
@@ -253,10 +256,10 @@ require 'connection.php';
                         </label>
 
                         <textarea class="form-control" id="cfrontText" name="cfrontText" rows="3" value="<?php if ((!empty($result['bookCoverFront']))) {
-                            echo $result['bookCoverFront'];
+                            echo encodeValue($result['bookCoverFront']);
                         } ?>" readonly="readonly" data-toggle="tooltip" data-placement="top"
                             title="Complete this information as you wish to have it appear on Book cover-front."><?php if ((!empty($result['bookCoverFront']))) {
-                                echo $result['bookCoverFront'];
+                                echo encodeValue($result['bookCoverFront']);
                             } ?></textarea>
 
 
@@ -278,10 +281,10 @@ require 'connection.php';
 
 
                         <textarea class="form-control" id="cbackText" name="cbackText" rows="3" value="<?php if ((!empty($result['bookCoverBack']))) {
-                            echo $result['bookCoverBack'];
+                            echo encodeValue($result['bookCoverBack']);
                         } ?>" readonly="readonly" data-toggle="tooltip" data-placement="top"
                             title="Complete this information as you wish to have it appear on Book cover-front."><?php if ((!empty($result['bookCoverBack']))) {
-                                echo $result['bookCoverBack'];
+                                echo encodeValue($result['bookCoverBack']);
                             } ?></textarea>
 
 
@@ -305,7 +308,7 @@ require 'connection.php';
                         <textarea class="form-control" id="spineText" name="spineText" rows="3" readonly="readonly"
                             data-toggle="tooltip" data-placement="top"
                             title="Complete this information as you wish to have it appear on Spine."><?php if ((!empty($result['spine']))) {
-                                echo $result['spine'];
+                                echo encodeValue($result['spine']);
                             } ?></textarea>
 
                     </div>
@@ -421,7 +424,7 @@ require 'connection.php';
                                 echo 'readonly="readonly"';
                             } ?>   data-toggle="tooltip" data-placement="top"
                                 title="Complete this information as you wish to have it appear on Spine."><?php if ((!empty($result['visionDesign']))) {
-                                    echo $result['visionDesign'];
+                                    echo encodeValue($result['visionDesign']);
                                 } ?></textarea>
                             <!--<div class="text-danger" id="visionDesignErr"></div>-->
 
