@@ -263,7 +263,7 @@ require 'connection.php';
                                     } ?>>Copyediting<span class="checkmark"></span></label>-->
                             <label class="option1"><input type="checkbox" name="requestedServices[]" value="Indexing"
                                     <?php if ((!empty($result['requestedServices']))) {
-                                        echo in_array('Indexing', (explode(',', $result['requestedServices']))) ? 'checked="checked"' : '';
+                                        echo in_array('Indexing', (explode(',',($result['requestedServices'])))) ? 'checked="checked"' : '';
                                     } ?>>Indexing<span class="checkmark"></span></label>
                         </div>
                         <!--<div class="text-danger" id="servicesErr"></div>-->

@@ -18,7 +18,13 @@ $coverType = $_POST['coverType'];
 $priceBarcode = $_POST['priceBarcode'];
 $trimSize = $_POST['trimSize'];
 $paperWeight = $_POST['paperWeight'];
-$requestedServices = implode(',', $_POST['requestedServices']);
+if(!empty($_POST['requestedServices']))
+{
+    $requestedServices = implode(',',($_POST['requestedServices']));
+}
+else{
+    $requestedServices="";
+}
 $dimenSpecification = $_POST['dimenSpecification'];
 $bookCoverFront = $_POST['cfrontText'];
 $spine = $_POST['spineText'];
