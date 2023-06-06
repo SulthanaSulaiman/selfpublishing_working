@@ -166,7 +166,7 @@ function validateForm() {
     }*/
     // Validate manuscript file
     if (file == "") {
-        printError("fileErr", "Please select the menuscript file(s).");
+        printError("fileErr", "Please select file(s).");
     } else {
 
         printError("fileErr", "");
