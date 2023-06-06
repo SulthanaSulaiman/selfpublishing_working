@@ -69,15 +69,15 @@ require 'connection.php';
                 action="http://10.1.6.32/selfpublishing/productionMailer.php?id=<?php echo $eid; ?>" method="post"
                 enctype="multipart/form-data" class="form" novalidate>
 
-                <h5 class="text-danger text-center">
+                <!--<h5 class="text-danger text-center">
                     <?php if (($result['submitCount'])) {
                         echo "If any query, please contact <span class='text-primary'><u>selfpublish@s4carlisle.com</u></span>.";
                     } ?>
-                </h5>
+                </h5> -->
                 <div class="row">
 
                     <div class="col-md-6 mt-md-0 mt-3">
-                        <label>Author Name</label>
+                        <label>Author name</label>
                         <input type="text" class="form-control required" value="<?php if ((!empty($result['authorName']))) {
                             echo $result['authorName'];
                         } ?>" name="authorName" id="authorName" required readonly="readonly">
@@ -94,7 +94,7 @@ require 'connection.php';
 
                 <div class="row">
                     <div class="col-md-6 mt-md-0 mt-3">
-                        <label>Book Title</label>
+                        <label>Book title</label>
                         <input type="text" class="form-control required" value="<?php if ((!empty($result['bookTitle']))) {
                             echo $result['bookTitle'];
                         } ?>" name="bookTitle" id="bookTitle" required readonly="readonly">
@@ -102,7 +102,7 @@ require 'connection.php';
                     </div>
 
                     <div class="col-md-6 mt-md-0 mt-3">
-                        <label>Book Subtitle</label>
+                        <label>Book subtitle</label>
                         <input type="text" class="form-control" name="bookSubTitle" id="bookSubTitle" value="<?php if ((!empty($result['bookSubtitle']))) {
                             echo $result['bookSubtitle'];
                         } ?>" <?php if ((!empty($result['bookSubtitle']))) {
@@ -113,13 +113,13 @@ require 'connection.php';
 
                 <div class="row">
                     <div class="col-md-6 mt-md-0 mt-3">
-                        <label>Interior Design</label>
+                        <label>Interior design</label>
                         <input type="text" class="form-control" name="interiorDesign" id="interiorDesign" value="<?php if ((!empty($result['interiorDesign']))) {
                             echo $result['interiorDesign'];
                         } ?>" required readonly="readonly">
                     </div>
                     <div class="col-md-6 mt-md-0 mt-3">
-                        <label>Editorial Complexity</label>
+                        <label>Editorial complexity</label>
                         <input type="text" class="form-control" name="editorialCompexity" id="editorialCompexity" value="<?php if ((!empty($result['editorialComplexity']))) {
                             echo $result['editorialComplexity'];
                         } ?>" required readonly="readonly">
@@ -128,7 +128,7 @@ require 'connection.php';
 
                 <div class="row">
                     <div class="col-md-6 mt-md-0 mt-3">
-                        <label>Number of Manuscript Pages</label>
+                        <label>Number of manuscript pages</label>
                         <input type="text" class="form-control" name="numberOfMenuscriptPages"
                             id="numberOfMenuscriptPages" value="<?php if ((!empty($result['nuberOfMenuscriptPages']))) {
                                 echo $result['nuberOfMenuscriptPages'];
@@ -148,7 +148,7 @@ require 'connection.php';
                 <div class="row">
                     <div class="col-md-6 mt-md-0 mt-3">
 
-                        <label>Cover Type<span class="text-danger">*</span></label>
+                        <label>Cover type<span class="text-danger">*</span></label>
 
                         <select class="form-control" name="coverType" id="coverType" required <?php if ((!empty($result['coverType']))) {
                             echo 'readonly="readonly"';
@@ -167,8 +167,8 @@ require 'connection.php';
                     </div>
 
                     <div class="col-md-6 mt-md-0 mt-3">
-                        <label>Price to Create Barcode in dollars($)<span class="text-danger">*</span></label>
-                        <input type="number" step="any" min="0" name="priceBarcode" class="form-control" value="<?php if ((!empty($result['priceBarcode']))) {
+                        <label>Price to create barcode in dollars<span class="text-danger">*</span></label>
+                        <input type="number" step="0.5" min="0" name="priceBarcode" class="form-control" value="<?php if ((!empty($result['priceBarcode']))) {
                             echo $result['priceBarcode'];
                         } ?>" required <?php if ((!empty($result['priceBarcode']))) {
                              echo 'readonly="readonly"';
@@ -179,7 +179,7 @@ require 'connection.php';
 
                 <div class="row">
                     <div class="col-md-6 mt-md-0 mt-3">
-                        <label>Trim Size <span class="text-danger">*</span></label>
+                        <label>Trim size<span class="text-danger">*</span></label>
 
                         <div class="align-items-center">
                             <label class="option ">
@@ -232,7 +232,7 @@ require 'connection.php';
 
                     </div>
                     <div class="col-md-6 mt-md-0 mt-3">
-                        <label>Paper Weight<span class="text-danger">*</span>
+                        <label>Paper weight<span class="text-danger">*</span>
                             <div style="display: inline-block;" data-toggle="tooltip" data-placement="top"
                                 title="Paper Weignt in Grams per Square Millimeter">
                                 <sup> <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="18" height="18"
@@ -246,7 +246,7 @@ require 'connection.php';
                                     </svg></sup>
                             </div>
                         </label>
-                        <input type="number" min="0" step="any" name="paperWeight" id="paperWeight" class="form-control"
+                        <input type="number" min="0" step="0.5" name="paperWeight" id="paperWeight" class="form-control"
                             value="<?php if ((!empty($result['paperWeight']))) {
                                 echo $result['paperWeight'];
                             } ?>" required <?php if ((!empty($result['paperWeight']))) {
@@ -255,18 +255,18 @@ require 'connection.php';
                         <div class="text-danger" id="paperWeightErr"></div>
                         <br>
 
-                        <label>Requested Services<span class="text-danger">*</span></label>
+                        <label>Requested services<!--<span class="text-danger">*</span>--></label>
                         <div class=" align-items-center mt-2">
-                            <label class="option1"><input type="checkbox" name="requestedServices[]" value="Copyediting"
+                           <!-- <label class="option1"><input type="checkbox" name="requestedServices[]" value="Copyediting"
                                     <?php if ((!empty($result['requestedServices']))) {
                                         echo in_array('Copyediting', (explode(',', $result['requestedServices']))) ? 'checked="checked"' : '';
-                                    } ?>>Copyediting<span class="checkmark"></span></label>
+                                    } ?>>Copyediting<span class="checkmark"></span></label>-->
                             <label class="option1"><input type="checkbox" name="requestedServices[]" value="Indexing"
                                     <?php if ((!empty($result['requestedServices']))) {
                                         echo in_array('Indexing', (explode(',', $result['requestedServices']))) ? 'checked="checked"' : '';
                                     } ?>>Indexing<span class="checkmark"></span></label>
                         </div>
-                        <div class="text-danger" id="servicesErr"></div>
+                        <!--<div class="text-danger" id="servicesErr"></div>-->
                     </div>
 
                 </div>
@@ -276,7 +276,7 @@ require 'connection.php';
 
                     <div div class="col-md-6 mt-md-0 mt-3">
 
-                        <label>Book Cover-Front Content?
+                        <label>Content for book front cover
 
                             <div style="display: inline-block;" data-toggle="tooltip" data-placement="top"
                                 title="Do you have information you'd like to appear on Book cover - front?">
@@ -318,7 +318,7 @@ require 'connection.php';
 
 
                         <br>
-                        <label>Book Cover-Back Content?
+                        <label>Content for book back cover
                             <div style="display: inline-block;" data-toggle="tooltip" data-placement="top"
                                 title="Do you have information you'd like to appear on Book cover - back?">
                                 <sup> <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="18" height="18"
@@ -361,7 +361,7 @@ require 'connection.php';
 
                         <br>
 
-                        <label>Spine Content?
+                        <label>Content for spine
                             <div style="display: inline-block;" data-toggle="tooltip" data-placement="top"
                                 title="Do you have information you'd like to appear on Spine?">
                                 <sup> <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="18" height="18"
@@ -401,7 +401,7 @@ require 'connection.php';
 
                         <br>
 
-                        <label>Author Image? <span class="text-danger">*</span>
+                        <label>Author image provided with manuscript?<span class="text-danger">*</span>
                             <div style="display: inline-block;" data-toggle="tooltip" data-placement="top"
                                 title="Will you be supplying an author photo for the cover?">
                                 <sup> <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="18" height="18"
@@ -432,7 +432,7 @@ require 'connection.php';
                         </div>
                         <div class="text-danger" id="authorImageErr"></div>
                         <br>
-                        <label>Art Image? <span class="text-danger">*</span>
+                        <label>Art image provided with manuscript?<span class="text-danger">*</span>
                             <div style="display: inline-block;" data-toggle="tooltip" data-placement="top"
                                 title="Do you have original art for the cover? (If you have original art which you intend to use as part of your cover design, you may do so. Make sure you have permission to reprint the art, and credit the artist by listing their name with copyright. Resolution of original image should be 300 dpi or more.)">
                                 <sup> <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="18" height="18"
@@ -468,7 +468,7 @@ require 'connection.php';
 
                     <div class="col-md-6 mt-md-0 mt-3">
 
-                        <label>Confirmed Dimension Specifications?<span class="text-danger">*</span>
+                        <label>Do you have confirmed dimension specifications?<span class="text-danger">*</span>
                             <div style="display: inline-block;" data-toggle="tooltip" data-placement="top"
                                 title="I have confirmed the above dimension specifications with my printer/publisher.">
                                 <sup> <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="18" height="18"
@@ -558,7 +558,7 @@ require 'connection.php';
 
                                 $result2 = mysqli_fetch_array($fetch_data1);
                                 ?>
-                                <p class="text-center">Selected Template</p>
+                                <p class="text-center">Selected template</p>
                                 <img src="images/<?php if ((!empty($result2['cover_image']))) {
                                     echo $result2['cover_image'];
                                 } ?>" alt="<?php if ((!empty($result2['cover_image']))) {
@@ -573,7 +573,7 @@ require 'connection.php';
                 </div>
                     <div class="row">
                         <div class="col-md-6 mt-md-0 mt-3">
-                            <label>Your vision for your Design <span class="text-danger">*</span>
+                            <label>Your vision for your design<span class="text-danger">*</span>
                                 <div style="display: inline-block;" data-toggle="tooltip" data-placement="top"
                                     title="The more information you provide, the better able we are to provide you with a cover projecting the image you wish to portray. And in the end, this will save you money. If we have a better idea what you want up front, we won't need to make changes later.">
                                     <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="18" height="18"
@@ -603,7 +603,19 @@ require 'connection.php';
                             } else {
                                 echo 'style="display:block;"';
                             } ?>>
-                                <label> Upload Manuscript File(s)<span class="text-danger">*</span>
+                                <label>Upload your manuscript and other files?<span class="text-danger">*</span>
+                                <div style="display: inline-block;" data-toggle="tooltip" data-placement="top"
+                                    title="You can upload your files as either one zip file and multiple files.">
+                                    <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="18" height="18"
+                                        viewBox="0 0 512 512">
+                                        <path fill="#25B7D3"
+                                            d="M504.1,256C504.1,119,393,7.9,256,7.9C119,7.9,7.9,119,7.9,256C7.9,393,119,504.1,256,504.1C393,504.1,504.1,393,504.1,256z">
+                                        </path>
+                                        <path fill="#FFF"
+                                            d="M323.2 367.5c-1.4-2-4-2.8-6.3-1.7-24.6 11.6-52.5 23.9-58 25-.1-.1-.4-.3-.6-.7-.7-1-1.1-2.3-1.1-4 0-13.9 10.5-56.2 31.2-125.7 17.5-58.4 19.5-70.5 19.5-74.5 0-6.2-2.4-11.4-6.9-15.1-4.3-3.5-10.2-5.3-17.7-5.3-12.5 0-26.9 4.7-44.1 14.5-16.7 9.4-35.4 25.4-55.4 47.5-1.6 1.7-1.7 4.3-.4 6.2 1.3 1.9 3.8 2.6 6 1.8 7-2.9 42.4-17.4 47.6-20.6 4.2-2.6 7.9-4 10.9-4 .1 0 .2 0 .3 0 0 .2.1.5.1.9 0 3-.6 6.7-1.9 10.7-30.1 97.6-44.8 157.5-44.8 183 0 9 2.5 16.2 7.4 21.5 5 5.4 11.8 8.1 20.1 8.1 8.9 0 19.7-3.7 33.1-11.4 12.9-7.4 32.7-23.7 60.4-49.7C324.3 372.2 324.6 369.5 323.2 367.5zM322.2 84.6c-4.9-5-11.2-7.6-18.7-7.6-9.3 0-17.5 3.7-24.2 11-6.6 7.2-9.9 15.9-9.9 26.1 0 8 2.5 14.7 7.3 19.8 4.9 5.2 11.1 7.8 18.5 7.8 9 0 17-3.9 24-11.6 6.9-7.6 10.4-16.4 10.4-26.4C329.6 96 327.1 89.6 322.2 84.6z">
+                                        </path>
+                                    </svg>
+                                </div>
                                     <div style="display:inline;" class="text-danger" id="fileErr"></div>
                                 </label>
                                 <div class="text-center">
@@ -626,13 +638,13 @@ require 'connection.php';
                             } else {
                                 echo 'style="display:none;"';
                             } ?>>
-                                <label> Download Manuscript File<span class="text-danger">*</span></label>
+                                <label> Download manuscript file<span class="text-danger">*</span></label>
                                 <div class="text-center">
                                     <label class="form-control upload_label">
                                         <a download="<?php echo $result['fileName']; ?>"
                                             href="uploads/<?php echo $result['fileName'] ?>"><span><i
                                                     class="fa fa-cloud-download text-centre text-primary fa-5x"></i></span>
-                                            <p class="text-centre text-primary" id="noOfFiles">Download Manuscript
+                                            <p class="text-centre text-primary" id="noOfFiles">Download manuscript
                                                 file
                                             </p>
                                         </a>
@@ -658,11 +670,17 @@ require 'connection.php';
                     </div>
                     <div class="row">
                         <div class="col-md-12 mt-md-0 mt-3 text-center">
-                            <h5 class="text-danger text-center">
+                            <p class="text-danger text-center">
                                 <?php if (($result['submitCount'])) {
-                                    echo "Form already submited, please contact <span class='text-primary'><u>selfpublish@s4carlisle.com</u></span> for updates.";
-                                } ?>
-                            </h5>
+                                     
+                                    echo 'Form already submitted, please contact <a href="mailto:selfpublish@s4carlisle.com" target="_blank" >selfpublish@s4carlisle.com</a> for updates.';
+                                   
+                                } 
+                                else
+                                { 
+                                    echo 'If any query, please contact <a href="mailto:selfpublish@s4carlisle.com" target="_blank">selfpublish@s4carlisle.com</a>.';
+                                }?>
+                            </p>
                         </div>
                     </div>
             </form>
@@ -674,7 +692,7 @@ require 'connection.php';
     <div class="footer-copyright text-center py-3"><span class="text-white">©
             <script>
                 document.write((new Date().getFullYear()).toString());
-            </script> Copyright: <a style="color:white" href="https://www.s4carlisle.com/">S4Carlisle Publishing
+            </script> Copyright: <a style="color:white" href="https://www.s4carlisle.com/" target="_blank">S4Carlisle Publishing
                 Services Pvt.
                 Ltd.
             </a>

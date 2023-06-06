@@ -46,15 +46,15 @@ function validateForm() {
     var priceBarcode = document.authorForm.priceBarcode.value;
     var trimSize = document.authorForm.trimSize.value;
     var dimenSpecification = document.authorForm.dimenSpecification.value;
-     /*var requestedServices = [];
-   var checkboxes = document.getElementsByName("requestedServices[]");
+    var requestedServices = [];
+    var checkboxes = document.getElementsByName("requestedServices[]");
     for (var i = 0; i < checkboxes.length; i++) {
         if (checkboxes[i].checked) {
             // Populate hobbies array with selected values
             requestedServices.push(checkboxes[i].value);
         }
     }
-    */
+    
 
     var artImage = document.authorForm.artImage.value;
     var authorImage = document.authorForm.authorImage.value;
@@ -65,7 +65,7 @@ function validateForm() {
     var file=document.getElementById("fileUpload").value;
 
     // Defining error variables with a default value
-    var paperWeightErr = coverTypeErr = priceBarcodeErr = trimSizeErr = dimenSpecificationErr /*= servicesErr*/ = artImageErr = authorImageErr = visionDesignErr=fileErr=coverImageIdErr= true;
+    var paperWeightErr = coverTypeErr = priceBarcodeErr = trimSizeErr = dimenSpecificationErr = servicesErr = artImageErr = authorImageErr = visionDesignErr=fileErr=coverImageIdErr= true;
 
     // Validate paperWeight
     if (paperWeight == "") {
@@ -109,13 +109,13 @@ function validateForm() {
         dimenSpecificationErr = false;
     }
 
-    /*// Validate requestedServices
+    // Validate requestedServices
     if (requestedServices.length == 0) {
         printError("servicesErr", "Please choose any one service.");
     } else {
         printError("servicesErr", "");
         servicesErr = false;
-    }*/
+    }
     // Validate authorImage
     if (authorImage == "") {
         printError("authorImageErr", "Please select Yes or No.");
@@ -156,13 +156,13 @@ function validateForm() {
         coverImageIdErr = false;
     }
    
- if ((paperWeightErr || coverTypeErr || priceBarcodeErr || trimSizeErr || dimenSpecificationErr /*|| servicesErr*/||artImageErr || authorImageErr || visionDesignErr||fileErr||coverImageIdErr) == true) {
+ if ((paperWeightErr || coverTypeErr || priceBarcodeErr || trimSizeErr || dimenSpecificationErr || servicesErr||artImageErr || authorImageErr || visionDesignErr||fileErr||coverImageIdErr) == true) {
     console.log("paperWeightErr:"+paperWeightErr);
     console.log("coverTypeErr:"+coverTypeErr);
     console.log("priceBarcodeErr:"+priceBarcodeErr);
     console.log("trimSizeErr:"+trimSizeErr);
     console.log("dimenSpecificationErr:"+dimenSpecificationErr);
-   /* console.log("servicesErr:"+servicesErr);*/
+    console.log("servicesErr:"+servicesErr);
     console.log("artImageErr:"+artImageErr);
     console.log("authorImageErr:"+authorImageErr);
     console.log("visionDesignErr:"+visionDesignErr);
@@ -178,7 +178,7 @@ function validateForm() {
         console.log("priceBarcodeErr:"+priceBarcodeErr);
         console.log("trimSizeErr:"+trimSizeErr);
         console.log("dimenSpecificationErr:"+dimenSpecificationErr);
-       /* console.log("servicesErr:"+servicesErr);*/
+        console.log("servicesErr:"+servicesErr);
         console.log("artImageErr:"+artImageErr);
         console.log("authorImageErr:"+authorImageErr);
         console.log("visionDesignErr:"+visionDesignErr);
