@@ -175,7 +175,7 @@ VALUES ('" . $id . "','" . $authorName . "','" . $authorEmail . "','" . $categor
     <p>Just <a href="http://10.1.6.32/selfpublishing/' . $categoryName . '.php?id=' . $eid . '">[Click Here]</a> to begin. Please feel free to contact us if you have any questions at <a href="mailto:selfpublish@s4carlisle.com" target="_blank" >selfpublish@s4carlisle.com</a></p>
     <p>Regards,<br>S4Carlisle Design Team</p>
     ';
-        $mail->AltBody = "'.$category.'";
+        $mail->AltBody = $category;
         $mail->send(); ?>
         <script>alert('Link has been sent to author. Please check.');</script>
     <?php

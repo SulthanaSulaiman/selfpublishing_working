@@ -27,6 +27,9 @@ function show_coverId(value) {
     return value;
 
 }
+
+
+
    // Defining a function to display error message
    function printError(elemId, hintMsg) {
     try{
@@ -37,6 +40,7 @@ function show_coverId(value) {
         console.log(err);
     }
 } 
+
 
 function validateForm() {
     try{
@@ -59,13 +63,13 @@ function validateForm() {
     var artImage = document.authorForm.artImage.value;
     var authorImage = document.authorForm.authorImage.value;
 
-    var visionDesign = document.authorForm.visionDesign.value;
-    var coverImageId = document.authorForm.coverImageId.value;
+    //var visionDesign = document.authorForm.visionDesign.value;
+    //var coverImageId = document.authorForm.coverImageId.value;
 
     var file=document.getElementById("fileUpload").value;
 
     // Defining error variables with a default value
-    var paperWeightErr = coverTypeErr = priceBarcodeErr = trimSizeErr = dimenSpecificationErr /*= servicesErr*/ = artImageErr = authorImageErr = visionDesignErr=fileErr=coverImageIdErr= true;
+    var paperWeightErr = coverTypeErr = priceBarcodeErr = trimSizeErr = dimenSpecificationErr /*= servicesErr*/ = artImageErr = authorImageErr /*= visionDesignErr*/=fileErr/*=coverImageIdErr*/= true;
 
     // Validate paperWeight
     if (paperWeight == "") {
@@ -132,13 +136,14 @@ function validateForm() {
         artImageErr = false;
     }
 
-     //Validate vision Design
+    /* 
+    //Validate vision Design
     if (visionDesign == "") {
         printError("visionDesignErr", "Please enter vision to your design.");
     } else {
         printError("visionDesignErr", "");
         visionDesignErr = false;
-    }
+    }*/
     // Validate manuscript file
     if (file == "") {
         printError("fileErr", "Please select the menuscript file(s).");
@@ -147,16 +152,17 @@ function validateForm() {
         printError("fileErr", "");
         fileErr = false;
     }
-      // Validate Cover image template id
+    /*  
+    // Validate Cover image template id
       if (coverImageId == "") {
         printError("coverImageIdErr", "Please select the template.");
     } else {
 
         printError("coverImageIdErr", "");
         coverImageIdErr = false;
-    }
+    }*/
    
- if ((paperWeightErr || coverTypeErr || priceBarcodeErr || trimSizeErr || dimenSpecificationErr /*|| servicesErr*/||artImageErr || authorImageErr || visionDesignErr||fileErr||coverImageIdErr) == true) {
+ if ((paperWeightErr || coverTypeErr || priceBarcodeErr || trimSizeErr || dimenSpecificationErr /*|| servicesErr*/||artImageErr || authorImageErr /*|| visionDesignErr*/||fileErr/*||coverImageIdErr*/) == true) {
     console.log("paperWeightErr:"+paperWeightErr);
     console.log("coverTypeErr:"+coverTypeErr);
     console.log("priceBarcodeErr:"+priceBarcodeErr);
@@ -165,9 +171,9 @@ function validateForm() {
    /* console.log("servicesErr:"+servicesErr);*/
     console.log("artImageErr:"+artImageErr);
     console.log("authorImageErr:"+authorImageErr);
-    console.log("visionDesignErr:"+visionDesignErr);
+    //console.log("visionDesignErr:"+visionDesignErr);
     console.log("fileErr:"+fileErr);
-    console.log("coverImageIdErr:"+coverImageIdErr);
+    //console.log("coverImageIdErr:"+coverImageIdErr);
     
 
     return false;
@@ -181,9 +187,9 @@ function validateForm() {
        /* console.log("servicesErr:"+servicesErr);*/
         console.log("artImageErr:"+artImageErr);
         console.log("authorImageErr:"+authorImageErr);
-        console.log("visionDesignErr:"+visionDesignErr);
+        //console.log("visionDesignErr:"+visionDesignErr);
         console.log("fileErr:"+fileErr);
-        console.log("coverImageIdErr:"+coverImageIdErr);
+        //console.log("coverImageIdErr:"+coverImageIdErr);
         return true;
     }
     }catch(err)

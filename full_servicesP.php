@@ -236,10 +236,10 @@ require 'connection.php';
                 <div class="row">
                     <div class="col-md-6 mt-md-0 mt-3">
                         
-                        <label>Content for book front cover
+                        <label>Do you have content for front cover?
 
                             <div style="display: inline-block;" data-toggle="tooltip" data-placement="top"
-                                title="Do you have information you'd like to appear on Book cover - front?">
+                                title="Appears on the front cover of the book.">
                                 <sup> <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="18" height="18"
                                         viewBox="0 0 512 512">
                                         <path fill="#25B7D3"
@@ -261,9 +261,9 @@ require 'connection.php';
 
 
                         <br>
-                        <label>Content for book back cover
+                        <label>Do you have content for back cover?
                             <div style="display: inline-block;" data-toggle="tooltip" data-placement="top"
-                                title="Do you have information you'd like to appear on Book cover - back?">
+                                title="Appears on the back cover of the book.">
                                 <sup> <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="18" height="18"
                                         viewBox="0 0 512 512">
                                         <path fill="#25B7D3"
@@ -287,9 +287,9 @@ require 'connection.php';
 
                         <br>
 
-                        <label>Content for spine
+                        <label>Do you have content for spine?
                             <div style="display: inline-block;" data-toggle="tooltip" data-placement="top"
-                                title="Do you have information you'd like to appear on Spine?">
+                                title=" Appears on the spine of the book.">
                                 <sup> <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="18" height="18"
                                         viewBox="0 0 512 512">
                                         <path fill="#25B7D3"
@@ -314,7 +314,7 @@ require 'connection.php';
                     <div class="col-md-6 mt-md-0 mt-3">
 
 
-                        <label>Author Selected Template<span class="text-danger">* </span>
+                        <label>Author Selected Template<!--<span class="text-danger">* </span>-->
                             <input type="text" id="coverImageId" name="coverImageId" class="text-primary" <?php if ((!empty($result['template_id']))) {
                                 echo 'style="display:inline;font-weight: bold;  border:none;" readonly="readonly"';
                             } else {
@@ -324,7 +324,7 @@ require 'connection.php';
                               } ?>">
                             </input>
                         </label>
-                        <div class="text-danger" id="coverImageIdErr"></div>
+                        <!--<div class="text-danger" id="coverImageIdErr"></div>-->
 
                         <div class="border" <?php if ((!empty($result['template_id']))) {
                             echo 'style="display:block;"';
@@ -357,7 +357,7 @@ require 'connection.php';
                         <div class="col-md-6 mt-md-0 mt-3">
                             <label>Author image provided with manuscript?<span class="text-danger">*</span>
                                 <div style="display: inline-block;" data-toggle="tooltip" data-placement="top"
-                                    title="Will you be supplying an author photo for the cover?">
+                                    title="Author photo for the book cover.">
                                     <sup> <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="18" height="18"
                                             viewBox="0 0 512 512">
                                             <path fill="#25B7D3"
@@ -378,7 +378,7 @@ require 'connection.php';
 
                         </div>
                         <div class="col-md-6 mt-md-0 mt-3">
-                            <label>Art image provided with manuscript?<span class="text-danger">*</span>
+                            <label>Cover image provided with manuscript?<span class="text-danger">*</span>
                                 <div style="display: inline-block;" data-toggle="tooltip" data-placement="top"
                                     title="Do you have original art for the cover? (If you have original art which you intend to use as part of your cover design, you may do so. Make sure you have permission to reprint the art, and credit the artist by listing their name with copyright. Resolution of original image should be 300 dpi or more.)">
                                     <sup> <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="18" height="18"
@@ -403,7 +403,7 @@ require 'connection.php';
 
                     <div class="row">
                         <div class="col-md-6 mt-md-0 mt-3">
-                            <label>Your vision for your design<span class="text-danger">*</span>
+                            <label>Your vision for your design.<!--<span class="text-danger">*</span>-->
                                 <div style="display: inline-block;" data-toggle="tooltip" data-placement="top"
                                     title="The more information you provide, the better able we are to provide you with a cover projecting the image you wish to portray. And in the end, this will save you money. If we have a better idea what you want up front, we won't need to make changes later.">
                                     <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="18" height="18"
@@ -423,7 +423,7 @@ require 'connection.php';
                                 title="Complete this information as you wish to have it appear on Spine."><?php if ((!empty($result['visionDesign']))) {
                                     echo $result['visionDesign'];
                                 } ?></textarea>
-                            <div class="text-danger" id="visionDesignErr"></div>
+                            <!--<div class="text-danger" id="visionDesignErr"></div>-->
 
                         </div>
                         <div class="col-md-6 mt-md-0 mt-3">
@@ -468,7 +468,7 @@ require 'connection.php';
                             } else {
                                 echo 'style="display:none;"';
                             } ?>>
-                                <label> Download Manuscript File<span class="text-danger">*</span></label>
+                                <label>Download Manuscript File<span class="text-danger">*</span></label>
                                 <div class="text-center">
                                     <label class="form-control upload_label">
                                         <a download="<?php echo $result['fileName']; ?>"
