@@ -9,7 +9,7 @@ require 'connection.php';
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cover and Production</title>
+    <title>Full Services</title>
 
     <link href="style/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 
@@ -17,9 +17,7 @@ require 'connection.php';
     <script src="style/jquery.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="style/style.css">
-    <script>
-
-    </script>
+    
 </head>
 
 <body>
@@ -60,7 +58,7 @@ require 'connection.php';
 
 
             <div class="col-lg-6">
-                <h3 class="text-center p-2 " style="color:white; margin-top: 10px;">COVER AND PRODUCTION</h3>
+                <h3 class="text-center p-2 " style="color:white; margin-top: 10px;">FULL SERVICES</h3>
             </div>
 
         </div>
@@ -165,16 +163,30 @@ require 'connection.php';
 
                 <div class="row">
                     <div class="col-md-6 mt-md-0 mt-3">
-                        <label>Trim size<span class="text-danger">*</span></label>
+                        <label>Trim size width in inches<span class="text-danger">*</span></label>
 
-                        <input type="text" class="form-control" name="isbn" id="isbn" value="<?php if ((!empty($result['trimSize']))) {
-                            echo encodeValue($result['trimSize']);
+                        <input type="text" class="form-control" name="trimSizeWidth" id="trimSizeWidth" value="<?php if ((!empty($result['trimSizeWidth']))) {
+                            echo encodeValue($result['trimSizeWidth']);
                         } ?>" readonly="readonly">
-                        <div class="text-danger" id="trimSizeErr"></div>
+                        
 
                     </div>
                     <div class="col-md-6 mt-md-0 mt-3">
-                        <label>Paper weight<span class="text-danger">*</span>
+                        <label>Trim size height in inches<span class="text-danger">*</span></label>
+
+                        <input type="text" class="form-control" name="trimSizeHeight" id="trimSizeHeight" value="<?php if ((!empty($result['trimSizeHeight']))) {
+                        echo encodeValue($result['trimSizeHeight']);
+                        } ?>" readonly="readonly">
+
+
+                    </div>
+
+                </div>
+
+
+                <div class="row">
+                    <div class="col-md-6 mt-md-0 mt-3">
+                    <label>Paper weight in GSM<span class="text-danger">*</span>
                             <div style="display: inline-block;" data-toggle="tooltip" data-placement="top"
                                 title="Paper Weignt in Grams per Square Millimeter">
                                 <sup> <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="18" height="18"
@@ -193,23 +205,6 @@ require 'connection.php';
                                 echo $result['paperWeight'];
                             } ?>" required readonly="readonly">
                         <div class="text-danger" id="paperWeightErr"></div>
-
-
-                    </div>
-
-                </div>
-
-
-                <div class="row">
-                    <div class="col-md-6 mt-md-0 mt-3">
-                            <label>Your vision for your interior design.<!--<span class="text-danger">*</span>-->
-                               
-                            </label>
-                            <textarea class="form-control" name="visonInteriorDesign" id="visonInteriorDesign" rows="1" readonly="readonly"
-                            data-toggle="tooltip" data-placement="top"
-                                title="Your vision for your interior design."><?php if ((!empty($result['visonInteriorDesign']))) {
-                                    echo encodeValue($result['visonInteriorDesign']);
-                                } ?></textarea>
 
                     </div>
                     <div class="col-md-6 mt-md-0 mt-3">
@@ -433,9 +428,8 @@ require 'connection.php';
                                     </svg>
                                 </div>
                             </label>
-                            <textarea class="form-control" name="visionDesign" id="visionDesign" rows="5" <?php if ((!empty($result['visionDesign']))) {
-                                echo 'readonly="readonly"';
-                            } ?>   data-toggle="tooltip" data-placement="top"
+                            <textarea class="form-control" name="visionDesign" id="visionDesign" rows="5" readonly="readonly";
+                             data-toggle="tooltip" data-placement="top"
                                 title="The more information you provide, the better able we are to provide you with a cover projecting the image you wish to portray. And in the end, this will save you money. If we have a better idea what you want up front, we won't need to make changes later."><?php if ((!empty($result['visionDesign']))) {
                                     echo encodeValue($result['visionDesign']);
                                 } ?></textarea>
@@ -443,6 +437,8 @@ require 'connection.php';
 
                         </div>
                         <div class="col-md-6 mt-md-0 mt-3">
+
+                            
                             <div>
                                 <label> Download Manuscript File<span class="text-danger">*</span></label>
                                 <div class="text-center">

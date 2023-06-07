@@ -306,7 +306,7 @@ window.addEventListener("load", () => {
 
 
                                             <span><i class="fa fa-cloud-upload text-centre text-primary fa-5x"></i></span>
-                                            <p class="text-centre text-primary" id="noOfFiles">Drag & Drop to Upload File
+                                            <p class="text-centre text-primary" id="noOfFiles">Drag & Drop to upload your file(s) here!
                                             </p>
 
                                         </label>
@@ -359,7 +359,7 @@ window.addEventListener("load", () => {
                             <textarea class="form-control" name="visionDesign" id="visionDesign" rows="3" <?php if ((!empty($result['visionDesign']))) {
                                 echo 'readonly="readonly"';
                             } ?>   data-toggle="tooltip" data-placement="top"
-                                title="Complete this information as you wish to have it appear on Spine."><?php if ((!empty($result['visionDesign']))) {
+                                title="The more information you provide, the better able we are to provide you with a cover projecting the image you wish to portray. And in the end, this will save you money. If we have a better idea what you want up front, we won't need to make changes later."><?php if ((!empty($result['visionDesign']))) {
                                     echo $result['visionDesign'];
                                 } ?></textarea>
 
