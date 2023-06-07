@@ -122,9 +122,9 @@
     <form action="<?php echo $url;?>" 
         method="post">
        <input type="submit" value="Production, Cover, and Editorial">
-     <!-- <<?php $data=$url;
+     <?php $data=$url;
    echo "<br><b>Before Decode:</b> <br>$data";
     $value =urldecode($data);
-     echo "<br><b>After Decode:</b><br>$value";?> -->
+     echo "<br><b>After Decode:</b><br>$value";?>
 </body>
 </html>

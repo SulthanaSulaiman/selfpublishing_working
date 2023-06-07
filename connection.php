@@ -1,6 +1,6 @@
 <?php
 try{
-$conn=new mysqli("localhost","root","","s4c");
+$conn=new mysqli("localhost","root","","selfpublish");
 if($conn->connect_error){
     die("Connection Failed!".$conn->connect_error);
 }

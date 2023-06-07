@@ -22,18 +22,17 @@ $isbn = $_POST['isbn'];
 
 
 $coverType =null;
-$priceBarcode =null;
-$trimSize =null;
-$trimSizeWidth =null;
-$trimSizeHeight =null;
-$paperWeight =null;
+$priceBarcode =0;
+$trimSize =0;
+$trimSizeWidth =0;
+$trimSizeHeight =0;
+$paperWeight =0;
 $requestedServices =null;
 $visonInteriorDesign=null;
 $dimenSpecification =null;
 $bookCoverFront =null;
 $spine = null;
 $bookCoverBack =null;
-$priceBarcode = null;
 $authorImage = null;
 $artImage = null;
 $visionDesign = null;
