@@ -195,7 +195,7 @@ function validateForm() {
     console.log("fileErr:"+fileErr);
     //console.log("coverImageIdErr:"+coverImageIdErr);
     
-
+    alert("Please fill the mandatory fileds.");
     return false;
     }
     else {

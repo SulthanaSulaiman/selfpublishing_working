@@ -17,9 +17,7 @@ require 'connection.php';
     <script src="style/jquery.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="style/style.css">
-    <script>
-
-    </script>
+    
 </head>
 
 <body>
@@ -351,6 +349,17 @@ require 'connection.php';
                                 } ?>" alt="<?php if ((!empty($result2['cover_image']))) {
                                      echo $result2['cover_image'];
                                  } ?>" />
+
+                            </div>
+                        </div>
+                        <div class="border" <?php if ((!empty($result['template_id']))) {
+                            echo 'style="display:none;"';
+                        } else {
+                            echo 'style="display:block;"';
+                        } ?>>
+
+                            <div class="row" id="result">
+                                <img src="images/empty_000.jpg" alt="No template selected" />
 
                             </div>
                         </div>

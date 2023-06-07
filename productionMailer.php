@@ -169,7 +169,8 @@ if (isset($_POST['save'])) {
         } catch (Exception $e) {
             echo "Error:" . $e . "<br>Please contact Development team.";
         }
-                $sql = "insert into files(file_name,file_size,purchase_id)
+              
+        $sql = "insert into files(file_name,file_size,purchase_id)
             values('$filename','$totalfileSize','$id')";
                 if (mysqli_query($conn, $sql)) {
                     //echo "<br>File uploaded successfully";

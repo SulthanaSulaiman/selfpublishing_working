@@ -66,6 +66,7 @@ function validateForm() {
  if ((trimSizeErr||fileErr) == true) {  
     console.log("trimSizeErr:"+trimSizeErr); 
     console.log("fileErr:"+fileErr);
+    alert("Please fill the mandatory fileds.");
     
     return false;
     }
