@@ -80,6 +80,10 @@ if (!empty($bookDetails->categoryName)) {
 } else {
     $category =null;
 }
+if($category=="Index")
+{
+    $category="Index Services";
+}
 $categoryName = cleanStr($category);
 
 if (!empty($bookDetails->bookName)) {
@@ -136,9 +140,25 @@ else if($category=="Production Services")
 {
     $id = substr($authorName, 0, 4) . time() ."ps";
 }
-else if($category=="Index")
+else if($category=="Index Services")
 {
+    
     $id = substr($authorName, 0, 4) . time() ."i";
+}
+else if($category=="Editorial Services")
+{
+    
+    $id = substr($authorName, 0, 4) . time() ."es";
+}
+else if($category=="Production, Editorial, and Index")
+{
+    
+    $id = substr($authorName, 0, 4) . time() ."pei";
+}
+else if($category=="Production, Cover, and Index")
+{
+    
+    $id = substr($authorName, 0, 4) . time() ."pci";
 }
 else
 {

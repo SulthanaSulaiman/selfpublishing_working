@@ -38,6 +38,7 @@ $authorImage = null;
 $artImage = null;
 $visionDesign = null;
 $template_id = null;
+$other = null;
 
 
 if(isset($_POST['coverType']))
@@ -116,6 +117,10 @@ if(isset($_POST['trimSizeHeight']))
 {
     $trimSizeHeight = $_POST['trimSizeHeight'];
 }
+if(isset($_POST['other']))
+{
+    $other = $_POST['other'];
+}
 
 $submitCount=1;
 
@@ -173,7 +178,7 @@ if (isset($_POST['save'])) {
             priceBarcode='$priceBarcode',trimSize='$trimSize',visonInteriorDesign='$visonInteriorDesign',paperWeight='$paperWeight',requestedServices='$requestedServices',
             dimenSpecification='$dimenSpecification',bookCoverFront='$bookCoverFront',
             spine='$spine',bookCoverBack='$bookCoverBack',priceBarcode='$priceBarcode',
-            authorImage='$authorImage',artImage='$artImage',visionDesign='$visionDesign',template_id='$template_id',fileName='$filename',submitCount='$submitCount',trimSizeWidth='$trimSizeWidth',trimSizeHeight='$trimSizeHeight'
+            authorImage='$authorImage',artImage='$artImage',visionDesign='$visionDesign',template_id='$template_id',fileName='$filename',submitCount='$submitCount',trimSizeWidth='$trimSizeWidth',trimSizeHeight='$trimSizeHeight',other='$other'
             where id='$id'";
             mysqli_query($conn, $sql1);
         } catch (Exception $e) {

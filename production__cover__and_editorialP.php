@@ -441,7 +441,7 @@ require 'connection.php';
 
                         </div>
                         <div class="col-md-6 mt-md-0 mt-3">
-                        <div>
+                            <div>
                                 <label> Download Manuscript File<span class="text-danger">*</span></label>
                                 <div class="text-center">
                                     <label class="form-control upload_label">
@@ -466,7 +466,7 @@ require 'connection.php';
 
                     <div class="row">
                         <div class="col-md-12 mt-md-0 mt-3 text-center">
-                            <button type="submit" class="btn btn-primary btn-lg" name="export">Export to Excel</button>
+                            <button type="submit" class="btn btn-primary btn-lg" name="export" disabled="disabled">Export to Excel</button>
                         </div>
                     </div>
             </form>
