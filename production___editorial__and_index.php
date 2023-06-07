@@ -9,7 +9,7 @@ require 'connection.php';
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Production Services</title>
+    <title>Production, Editorial, and Index</title>
 
     <link href="style/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 
@@ -156,7 +156,7 @@ window.addEventListener("load", () => {
 
 
             <div class="col-lg-6">
-                <h3 class="text-center p-2 " style="color:white; margin-top: 10px;">PRODUCTION SERVICES</h3>
+                <h3 class="text-center p-2 " style="color:white; margin-top: 10px;">PRODUCTION, EDITORIAL, AND INDEX</h3>
             </div>
 
         </div>

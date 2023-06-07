@@ -60,7 +60,7 @@ require 'connection.php';
 
 
             <div class="col-lg-6">
-                <h3 class="text-center p-2 " style="color:white; margin-top: 10px;">COVER AND PRODUCTION</h3>
+                <h3 class="text-center p-2 " style="color:white; margin-top: 10px;">PRODUCTION, COVER, AND INDEX</h3>
             </div>
 
         </div>

@@ -9,7 +9,7 @@ require 'connection.php';
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Full Services</title>
+    <title>Cover Design</title>
 
     <link href="style/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 
@@ -58,7 +58,7 @@ require 'connection.php';
 
 
             <div class="col-lg-6">
-                <h3 class="text-center p-2 " style="color:white; margin-top: 10px;">FULL SERVICES</h3>
+                <h3 class="text-center p-2 " style="color:white; margin-top: 10px;">COVER DESIGN</h3>
             </div>
 
         </div>

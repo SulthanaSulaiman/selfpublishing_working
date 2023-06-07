@@ -9,7 +9,7 @@ require 'connection.php';
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cover design</title>
+    <title>Cover Design</title>
 
     <link href="style/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 
