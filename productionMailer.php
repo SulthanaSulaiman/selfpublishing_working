@@ -26,6 +26,7 @@ $priceBarcode =null;
 $trimSize =null;
 $paperWeight =null;
 $requestedServices =null;
+$visonInteriorDesign=null;
 $dimenSpecification =null;
 $bookCoverFront =null;
 $spine = null;
@@ -64,6 +65,10 @@ else{
     $requestedServices="";
 }
 }
+if(isset($_POST['visonInteriorDesign']))
+{
+    $visonInteriorDesign = trim($_POST['visonInteriorDesign']);
+}
 if(isset($_POST['dimenSpecification']))
 {
     $dimenSpecification = $_POST['dimenSpecification'];
@@ -100,9 +105,6 @@ if(isset($_POST['coverImageId']))
 {
     $template_id = trim($_POST['coverImageId']);
 }
-
-
-
 
 
 $submitCount=1;
@@ -158,7 +160,7 @@ if (isset($_POST['save'])) {
         try {
 
             $sql1 = "update services set bookSubtitle='$bookSubtitle',isbn='$isbn',coverType='$coverType',
-            priceBarcode='$priceBarcode',trimSize='$trimSize',paperWeight='$paperWeight',requestedServices='$requestedServices',
+            priceBarcode='$priceBarcode',trimSize='$trimSize',visonInteriorDesign='$visonInteriorDesign',paperWeight='$paperWeight',requestedServices='$requestedServices',
             dimenSpecification='$dimenSpecification',bookCoverFront='$bookCoverFront',
             spine='$spine',bookCoverBack='$bookCoverBack',priceBarcode='$priceBarcode',
             authorImage='$authorImage',artImage='$artImage',visionDesign='$visionDesign',template_id='$template_id',fileName='$filename',submitCount='$submitCount'
@@ -198,7 +200,7 @@ if (isset($_POST['save'])) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FULL SERVICES</title>
+    <title>Production Mailer</title>
 </head>
 
 <body>
@@ -267,7 +269,7 @@ if (isset($_POST['save'])) {
 
     </table>
     <p>Regards,<br>
-        S4Carlisle Design Team
+        S4Carlisle Design Team.
 
     </p>';
 

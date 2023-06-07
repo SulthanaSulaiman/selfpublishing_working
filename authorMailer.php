@@ -120,6 +120,14 @@ else if($category=="Production and Index")
 {
     $id = substr($authorName, 0, 4) . time() ."pi";
 }
+else if($category=="Cover and Production")
+{
+    $id = substr($authorName, 0, 4) . time() ."cp";
+}
+else if($category=="Production, Cover, and Editorial")
+{
+    $id = substr($authorName, 0, 4) . time() ."pce";
+}
 else
 {
     $id = substr($authorName, 0, 4) . time();
