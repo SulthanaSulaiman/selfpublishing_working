@@ -34,8 +34,8 @@
      background: linear-gradient(315deg, hsla(26, 83%, 47%, 1) 5%, hsla(60, 22%, 96%, 1) 100%);
       background: linear-gradient(315deg, hsla(212, 80%, 31%, 1) 76%, hsla(0, 0%, 96%, 1) 88%);
       */
-     
-    
+
+
      /* background: linear-gradient(315deg, hsla(212, 95%, 40%, 1) 44%, hsla(0, 0%, 96%, 1) 92%); 
      background: linear-gradient(315deg, hsla(212, 95%, 40%, 1) 70%, hsla(0, 0%, 96%, 1) 86%);
       background: linear-gradient(315deg, hsla(212, 95%, 40%, 1) 70%, hsla(0, 0%, 96%, 1) 86%);
@@ -55,8 +55,8 @@ background: linear-gradient(0deg, rgba(5,96,199,1) 94%, rgba(233,237,241,0.24413
 background: rgb(5,96,199);
 background: linear-gradient(0deg, rgba(5,96,199,1) 94%, rgba(162,198,235,0.7819502801120448) 97%, rgba(233,237,241,0.9220063025210083) 99%);
 color: #d32717;*/
-background: linear-gradient(315deg, hsla(212, 95%, 40%, 1) 70%, hsla(0, 0%, 96%, 1) 86%);
-}
+     background: linear-gradient(315deg, hsla(212, 95%, 40%, 1) 70%, hsla(0, 0%, 96%, 1) 86%);
+ }
 
 
  body::-webkit-scrollbar {
@@ -230,23 +230,23 @@ background: linear-gradient(315deg, hsla(212, 95%, 40%, 1) 70%, hsla(0, 0%, 96%,
  }
 
  .upload_label {
-    position: absolute;
-    width: auto;
-    height:auto;
-    border: 2px dashed #139CFF;
-    text-align: center;
-    border-radius: 8px;
-  
+     position: absolute;
+     width: auto;
+     height: auto;
+     border: 2px dashed #139CFF;
+     text-align: center;
+     border-radius: 8px;
+
  }
 
  /* Chrome, Safari, Edge, Opera */
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
+ input::-webkit-outer-spin-button,
+ input::-webkit-inner-spin-button {
+     -webkit-appearance: none;
+     margin: 0;
+ }
 
-/* Firefox */
-input[type=number] {
-  -moz-appearance: textfield;
-}
+ /* Firefox */
+ input[type=number] {
+     -moz-appearance: textfield;
+ }
