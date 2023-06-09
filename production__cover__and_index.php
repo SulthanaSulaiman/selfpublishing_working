@@ -11,11 +11,12 @@ require 'connection.php';
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Production, Cover, and Index</title>
 
+    <script src="style/jquery-2.1.3.min.js"></script> 
     <link href="style/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-
-    <script src="style/bootstrap.bundle.min.js"></script>
+    <!--<script src="style/bootstrap.bundle.min.js"></script>-->
     <script src="style/jquery.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="style/jquery.bootpag.min.js"></script>
     <link rel="stylesheet" href="style/style.css">
     <script>
         function Show_cfrontText(value) {
@@ -37,7 +38,7 @@ function Show_cbackText(value) {
 function show_coverId(value) {
 
     if (value != null) {
-        document.getElementById('coverImageId').value =" "+ value;
+        document.getElementById('coverImageId').value =" "+ value.value;
         document.getElementById('coverImageId').style.display = 'inline';
     }
 
@@ -243,6 +244,66 @@ window.addEventListener("load", () => {
         //  filewrapper.append(showfileboxElem);
     }
 })
+
+$(document).ready(function () {
+
+    $.ajax({
+        type: 'POST',
+        url: 'getcovers.php',
+        dataType: 'json',
+        cache: false,
+        beforeSend: function () {
+            $("div.list-users").html('<h4>Chargement en cours...</h4>');
+        }
+    })
+        .done(function (data) {
+            $.each(data, function (idx, obj) {
+                if (idx >= 6) return;
+                $('div.covers').append('<div class="col-sm-4 p-1"><button type="button" id="' + obj.cover_id + '" onclick="show_coverId('+ obj.cover_id +')" value="'+ obj.cover_id +'"><img class="img-fluid" src="images/' + obj.cover_image + '" alt="' + obj.cover_image + '" border="0" /></button></div>');
+                // $('div.card').append('<button style="border:0;" type="submit" id="' + obj.cover_id + '"><img  class="card-img-top" src="images/' + obj.cover_image + '" alt="' + obj.cover_image + '" border="0" /></button>');
+                /*$('div.allusers').append('<div class="user">' + obj.cover_id + '<p class="name"></p><p class="email">' + obj.cover_image + '</p></div>');*/
+            });
+            $('#page-selection').bootpag({
+                total: Math.ceil(data.length / 6)
+            }).on("page", function (event, /* page number here */ num) {
+                $('div.covers').html('');
+                GetresultPaginate(num)
+            });
+
+        })
+
+        .fail(function (jqXHR, textStatus, errorThrown) {
+            alert(errorThrown)
+        });
+    function GetresultPaginate(currentnum) {
+
+        $.ajax({
+            type: 'POST',
+            url: 'getcoversPage.php',
+            dataType: 'json',
+            data: {
+                num: currentnum
+            },
+            cache: false,
+            beforeSend: function () {
+                $("div.list-users").html('<h4>Chargement en cours...</h4>');
+            }
+        })
+            .done(function (data) {
+
+                $.each(data, function (idx, obj) {
+                    $('div.covers').append('<div class="col-sm-4 p-1"><button type="button" id="' + obj.cover_id + '" onclick="show_coverId('+ obj.cover_id +')"value="'+ obj.cover_id +'"><img class="img-fluid" src="images/' + obj.cover_image + '" alt="' + obj.cover_image + '" border="0" /></button></div>');
+                    // $('div.card').append('<button style="border:0;" type="submit" id="' + obj.cover_id + '"><img class="card-img-top" src="images/' + obj.cover_image + '" alt="' + obj.cover_image + '" border="0" /></button>');
+                    /*$('div.allusers').append('<div class="user">' + obj.cover_id + '<p class="name"></p><p class="email">' + obj.cover_image + '</p></div>');*/
+                });
+
+            })
+            .fail(function (jqXHR, textStatus, errorThrown) {
+                alert(errorThrown)
+            });
+
+    }
+});
 
     </script>
 </head>
@@ -734,7 +795,7 @@ window.addEventListener("load", () => {
                         <!--<div class="text-danger" id="coverImageIdErr"></div>-->
 
 
-                        <div <?php if ((!empty($result['template_id']))) {
+                        <!--<div <?php if ((!empty($result['template_id']))) {
                             echo 'style="display:none;"';
                         } else {
                             echo 'style="display:block;"';
@@ -762,6 +823,13 @@ window.addEventListener("load", () => {
                                     <?php } ?>
                                 </div>
                             </div>
+                        </div> -->
+                        
+                        <div <?php if ((!empty($result['template_id']))) {echo 'style="display:none;"';} else {echo 'style="display:block;"';} ?>>
+
+                            <div class="row covers   p-1"></div>   
+                            <div class="text-center" id="page-selection"></div>               
+                        
                         </div>
                         <div class="border p-2" <?php if ((!empty($result['template_id']))) {
                             echo 'style="display:block;"';

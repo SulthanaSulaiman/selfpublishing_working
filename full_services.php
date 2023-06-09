@@ -11,12 +11,14 @@ require 'connection.php';
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Full Services</title>
 
+    <script src="style/jquery-2.1.3.min.js"></script> 
     <link href="style/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-
-    <script src="style/bootstrap.bundle.min.js"></script>
+    <!--<script src="style/bootstrap.bundle.min.js"></script>-->
     <script src="style/jquery.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="style/jquery.bootpag.min.js"></script>
     <link rel="stylesheet" href="style/style.css">
+
     <script>
         function Show_cfrontText(value) {
     if (value == 1) { document.getElementById('cfrontText').style.display = 'block'; }
@@ -37,7 +39,7 @@ function Show_cbackText(value) {
 function show_coverId(value) {
 
     if (value != null) {
-        document.getElementById('coverImageId').value =" "+ value;
+        document.getElementById('coverImageId').value =" "+ value.value;
         document.getElementById('coverImageId').style.display = 'inline';
     }
 
@@ -244,6 +246,66 @@ window.addEventListener("load", () => {
     }
 })
 
+/* covers slide show*/
+$(document).ready(function () {
+
+        $.ajax({
+            type: 'POST',
+            url: 'getcovers.php',
+            dataType: 'json',
+            cache: false,
+            beforeSend: function () {
+                $("div.list-users").html('<h4>Chargement en cours...</h4>');
+            }
+        })
+            .done(function (data) {
+                $.each(data, function (idx, obj) {
+                    if (idx >= 6) return;
+                    $('div.covers').append('<div class="col-sm-4 p-1"><button type="button" id="' + obj.cover_id + '" onclick="show_coverId('+ obj.cover_id +')" value="'+ obj.cover_id +'"><img class="img-fluid" src="images/' + obj.cover_image + '" alt="' + obj.cover_image + '" border="0" /></button></div>');
+                    // $('div.card').append('<button style="border:0;" type="submit" id="' + obj.cover_id + '"><img  class="card-img-top" src="images/' + obj.cover_image + '" alt="' + obj.cover_image + '" border="0" /></button>');
+                    /*$('div.allusers').append('<div class="user">' + obj.cover_id + '<p class="name"></p><p class="email">' + obj.cover_image + '</p></div>');*/
+                });
+                $('#page-selection').bootpag({
+                    total: Math.ceil(data.length / 6)
+                }).on("page", function (event, /* page number here */ num) {
+                    $('div.covers').html('');
+                    GetresultPaginate(num)
+                });
+
+            })
+
+            .fail(function (jqXHR, textStatus, errorThrown) {
+                alert(errorThrown)
+            });
+        function GetresultPaginate(currentnum) {
+
+            $.ajax({
+                type: 'POST',
+                url: 'getcoversPage.php',
+                dataType: 'json',
+                data: {
+                    num: currentnum
+                },
+                cache: false,
+                beforeSend: function () {
+                    $("div.list-users").html('<h4>Chargement en cours...</h4>');
+                }
+            })
+                .done(function (data) {
+
+                    $.each(data, function (idx, obj) {
+                        $('div.covers').append('<div class="col-sm-4 p-1"><button type="button" id="' + obj.cover_id + '" onclick="show_coverId('+ obj.cover_id +')"value="'+ obj.cover_id +'"><img class="img-fluid" src="images/' + obj.cover_image + '" alt="' + obj.cover_image + '" border="0" /></button></div>');
+                        // $('div.card').append('<button style="border:0;" type="submit" id="' + obj.cover_id + '"><img class="card-img-top" src="images/' + obj.cover_image + '" alt="' + obj.cover_image + '" border="0" /></button>');
+                        /*$('div.allusers').append('<div class="user">' + obj.cover_id + '<p class="name"></p><p class="email">' + obj.cover_image + '</p></div>');*/
+                    });
+
+                })
+                .fail(function (jqXHR, textStatus, errorThrown) {
+                    alert(errorThrown)
+                });
+
+        }
+});
     </script>
 </head>
 
@@ -294,11 +356,6 @@ window.addEventListener("load", () => {
                 action="http://10.1.6.32/selfpublishing/productionMailer.php?id=<?php echo $eid; ?>" method="post"
                 enctype="multipart/form-data" class="form" novalidate>
 
-                <!--<h5 class="text-danger text-center">
-                    <?php if (($result['submitCount'])) {
-                        echo "If any query, please contact <span class='text-primary'><u>selfpublish@s4carlisle.com</u></span>.";
-                    } ?>
-                </h5> -->
                 <div class="row">
 
                     <div class="col-md-6 mt-md-0 mt-3">
@@ -478,6 +535,7 @@ window.addEventListener("load", () => {
                                  echo 'readonly="readonly"';
                              } ?>>
                         <div class="text-danger" id="paperWeightErr"></div>
+                        
                         <br>
 
                         <label>Requested services<!--<span class="text-danger">*</span>--></label>
@@ -581,7 +639,8 @@ window.addEventListener("load", () => {
                            } ?>   data-toggle="tooltip" data-placement="top"
                             title="Complete this information as you wish to have it appear on Book cover-back."><?php if ((!empty($result['bookCoverBack']))) {
                                 echo $result['bookCoverBack'];
-                            } ?></textarea>
+                            } ?>
+                        </textarea>
 
 
                         <br>
@@ -622,7 +681,8 @@ window.addEventListener("load", () => {
                             data-placement="top"
                             title="Complete this information as you wish to have it appear on Spine."><?php if ((!empty($result['spine']))) {
                                 echo $result['spine'];
-                            } ?></textarea>
+                            } ?>
+                        </textarea>
 
                         <br>
 
@@ -684,7 +744,7 @@ window.addEventListener("load", () => {
                                 } ?> value="No">No
                                 <span class="checkmark"></span>
                             </label>
-                            <div class="text-danger" id="artrImageErr"></div>
+                            
                         </div>
                         <div class="text-danger" id="artImageErr"></div>
 
@@ -736,35 +796,11 @@ window.addEventListener("load", () => {
                         </label>
                         <!--<div class="text-danger" id="coverImageIdErr"></div>-->
 
+                        <div <?php if ((!empty($result['template_id']))) {echo 'style="display:none;"';} else {echo 'style="display:block;"';} ?>>
 
-                        <div <?php if ((!empty($result['template_id']))) {
-                            echo 'style="display:none;"';
-                        } else {
-                            echo 'style="display:block;"';
-                        } ?>>
-
-                            <div class="col-lg-12 border p-2">
-                                <div class="row" id="result">
-                                    <?php
-                                    $sql = "SELECT * FROM covers";
-                                    $result1 = $conn->query($sql);
-                                    while ($row = $result1->fetch_assoc()) {
-                                        ?>
-                                        <div class="col-md-3 mb-2" id="<?= $row['cover_id']; ?>"
-                                            value="<?= $row['cover_id']; ?>">
-
-                                            <button type="button" id="<?= $row['cover_id']; ?>"
-                                                onclick="show_coverId('<?= $row['cover_id']; ?>')"
-                                                value="<?= $row['cover_id']; ?>">
-                                                <img class="card-img-top" src="images/<?= $row['cover_image']; ?>"
-                                                    alt="<?= $row['cover_image']; ?>" />
-                                            </button>
-
-                                        </div>
-
-                                    <?php } ?>
-                                </div>
-                            </div>
+                            <div class="row covers   p-1"></div>   
+                            <div class="text-center" id="page-selection"></div>               
+                        
                         </div>
                         <div class="border p-2" <?php if ((!empty($result['template_id']))) {
                             echo 'style="display:block;"';
@@ -796,8 +832,8 @@ window.addEventListener("load", () => {
                     </div>
 
                 </div>
-                    <div class="row">
-                        <div class="col-md-6 mt-md-0 mt-3">
+                <div class="row">
+                    <div class="col-md-6 mt-md-0 mt-3">
                             <label>Your vision for your design.<!--<span class="text-danger">*</span>-->
                                 <div style="display: inline-block;" data-toggle="tooltip" data-placement="top"
                                     title="The more information you provide, the better able we are to provide you with a cover projecting the image you wish to portray. And in the end, this will save you money. If we have a better idea what you want up front, we won't need to make changes later.">
@@ -820,8 +856,8 @@ window.addEventListener("load", () => {
                                 } ?></textarea>
                             <!--<div class="text-danger" id="visionDesignErr"></div>-->
 
-                        </div>
-                        <div class="col-md-6 mt-md-0 mt-3">
+                    </div>
+                    <div class="col-md-6 mt-md-0 mt-3">
 
                             <div <?php if ((!empty($result['fileName']))) {
                                 echo 'style="display:none;"';
@@ -881,19 +917,19 @@ window.addEventListener("load", () => {
                             </div>
 
 
-                        </div>
-
                     </div>
 
+                </div>
 
-                    <div class="row">
+
+                <div class="row">
                         <div class="col-md-12 mt-md-0 mt-3 text-center">
                             <button type="submit" class="btn btn-primary btn-lg" name="save" <?php if (($result['submitCount'])) {
                                 echo 'disabled="disabled"';
                             } ?>>Submit</button>
                         </div>
-                    </div>
-                    <div class="row">
+                </div>
+                <div class="row">
                         <div class="col-md-12 mt-md-0 mt-3 text-center">
                             <p class="text-danger text-center">
                                 <?php if (($result['submitCount'])) {
@@ -907,7 +943,7 @@ window.addEventListener("load", () => {
                                 }?>
                             </p>
                         </div>
-                    </div>
+                </div>
             </form>
         </div>
     </div>

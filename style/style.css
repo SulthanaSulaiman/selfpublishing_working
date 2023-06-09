@@ -26,26 +26,24 @@
  }
 
  body {
-     /*background: linear-gradient(45deg, #ce1e53, #8f00c7);
-     min-height: 100vh;*/
-     /*background: linear-gradient(to bottom left, #003399 20%, #99ccff 80%);
-     background: linear-gradient(to bottom left, #003399 20%, #00ffff 85%);
-     background: linear-gradient(to bottom left, #003399 11%, #00ccff 90%);
-     background: linear-gradient(315deg, hsla(26, 83%, 47%, 1) 5%, hsla(60, 22%, 96%, 1) 100%);
-      background: linear-gradient(315deg, hsla(212, 80%, 31%, 1) 76%, hsla(0, 0%, 96%, 1) 88%);
-      */
+
+     /*min-height: 100vh;
+     background: linear-gradient(to bottom left, #003399 20%, #99ccff 80%);*/
 
 
-     /* background: linear-gradient(315deg, hsla(212, 95%, 40%, 1) 44%, hsla(0, 0%, 96%, 1) 92%); 
-     background: linear-gradient(315deg, hsla(212, 95%, 40%, 1) 70%, hsla(0, 0%, 96%, 1) 86%);
-      background: linear-gradient(315deg, hsla(212, 95%, 40%, 1) 70%, hsla(0, 0%, 96%, 1) 86%);
+     /*background: linear-gradient(315deg, hsla(26, 83%, 47%, 1) 5%, hsla(60, 22%, 96%, 1) 100%);
     
-     background: linear-gradient(315deg, hsla(212, 95%, 40%, 1) 88%, hsla(212, 54%, 82%, 1) 97%, hsla(0, 0%, 96%, 1) 100%);
-     background: linear-gradient(315deg, hsla(212, 95%, 40%, 1) 88%, hsla(212, 54%, 82%, 1) 90%, hsla(0, 0%, 96%, 1) 94%);
-     background: linear-gradient(315deg, hsla(212, 95%, 40%, 1) 83%, hsla(212, 54%, 82%, 1) 90%, hsla(0, 0%, 96%, 1) 100%);*/
-     /*background: linear-gradient(315deg, hsla(212, 95%, 40%, 1) 70%, hsla(0, 0%, 96%, 1) 86%);
-     background: linear-gradient(315deg, #0560c7 83%, #e3e8ee 95%, hsla(0, 0%, 96%, 1) 100%);
-     background: rgb(5,96,199);
+      
+
+    
+      /*background: linear-gradient(315deg, hsla(212, 95%, 40%, 1) 70%, hsla(0, 0%, 96%, 1) 86%);
+    
+    
+    /* background: linear-gradient(315deg, hsla(212, 95%, 40%, 1) 88%, hsla(212, 54%, 82%, 1) 90%, hsla(0, 0%, 96%, 1) 94%);
+     background: linear-gradient(315deg, hsla(212, 95%, 40%, 1) 83%, hsla(212, 54%, 82%, 1) 90%, hsla(0, 0%, 96%, 1) 100%);
+     background: linear-gradient(315deg, hsla(212, 95%, 40%, 1) 70%, hsla(0, 0%, 96%, 1) 86%);
+     /*background: linear-gradient(315deg, #0560c7 83%, #e3e8ee 95%, hsla(0, 0%, 96%, 1) 100%);*/
+     /*  background: #0560c7;
 background: linear-gradient(0deg, rgba(5,96,199,1) 93%, rgba(183,217,255,0.7819502801120448) 96%, rgba(209,229,251,0.8519782913165266) 100%);
 background: rgb(5,96,199);
 background: linear-gradient(0deg, rgba(5,96,199,1) 94%, rgba(233,237,241,0.7819502801120448) 97%, rgba(162,198,235,0.7819502801120448) 100%);
@@ -53,8 +51,8 @@ background: rgb(5,96,199);
 background: linear-gradient(0deg, rgba(5,96,199,1) 94%, rgba(233,237,241,0.24413515406162467) 97%, rgba(162,198,235,0.7819502801120448) 100%);
 
 background: rgb(5,96,199);
-background: linear-gradient(0deg, rgba(5,96,199,1) 94%, rgba(162,198,235,0.7819502801120448) 97%, rgba(233,237,241,0.9220063025210083) 99%);
-color: #d32717;*/
+background: linear-gradient(0deg, rgba(5,96,199,1) 94%, rgba(162,198,235,0.7819502801120448) 97%, rgba(233,237,241,0.9220063025210083) 99%);*/
+
      background: linear-gradient(315deg, hsla(212, 95%, 40%, 1) 70%, hsla(0, 0%, 96%, 1) 86%);
  }
 
@@ -138,7 +136,8 @@ color: #d32717;*/
      width: 10px;
      height: 10px;
      display: block;
-     background: linear-gradient(45deg, #ce1e53, #8f00c7);
+     /*background: linear-gradient(45deg, #ce1e53, #8f00c7);*/
+     background: #f7642d;
      position: absolute;
      top: 50%;
      left: 50%;
@@ -160,7 +159,8 @@ color: #d32717;*/
      width: 10px;
      height: 10px;
      display: block;
-     background: linear-gradient(45deg, #ce1e53, #8f00c7);
+     /*background: linear-gradient(45deg, #ce1e53, #8f00c7);*/
+     background: #f7642d;
      position: absolute;
      top: 50%;
      left: 50%;
@@ -249,4 +249,117 @@ color: #d32717;*/
  /* Firefox */
  input[type=number] {
      -moz-appearance: textfield;
+ }
+
+ .covers {
+     float: left;
+ }
+
+
+ /*pagination*/
+ .pagination {
+     display: inline-block;
+     padding-left: 0;
+     margin: 20px 0;
+     border-radius: 4px
+ }
+
+ .pagination>li {
+     display: inline
+ }
+
+ .pagination>li>a,
+ .pagination>li>span {
+     position: relative;
+     float: left;
+     padding: 6px 12px;
+     margin-left: -1px;
+     line-height: 1.42857143;
+     color: #337ab7;
+     text-decoration: none;
+     background-color: #fff;
+     border: 1px solid #ddd
+ }
+
+ .pagination>li:first-child>a,
+ .pagination>li:first-child>span {
+     margin-left: 0;
+     border-top-left-radius: 4px;
+     border-bottom-left-radius: 4px
+ }
+
+ .pagination>li:last-child>a,
+ .pagination>li:last-child>span {
+     border-top-right-radius: 4px;
+     border-bottom-right-radius: 4px
+ }
+
+ .pagination>li>a:focus,
+ .pagination>li>a:hover,
+ .pagination>li>span:focus,
+ .pagination>li>span:hover {
+     color: #23527c;
+     background-color: #eee;
+     border-color: #ddd
+ }
+
+ .pagination>.active>a,
+ .pagination>.active>a:focus,
+ .pagination>.active>a:hover,
+ .pagination>.active>span,
+ .pagination>.active>span:focus,
+ .pagination>.active>span:hover {
+     /*z-index: 2;*/
+     color: #fff;
+     cursor: default;
+     background-color: #337ab7;
+     border-color: #337ab7
+ }
+
+ .pagination>.disabled>a,
+ .pagination>.disabled>a:focus,
+ .pagination>.disabled>a:hover,
+ .pagination>.disabled>span,
+ .pagination>.disabled>span:focus,
+ .pagination>.disabled>span:hover {
+     color: #777;
+     cursor: not-allowed;
+     background-color: #fff;
+     border-color: #ddd
+ }
+
+ .pagination-lg>li>a,
+ .pagination-lg>li>span {
+     padding: 10px 16px;
+     font-size: 18px
+ }
+
+ .pagination-lg>li:first-child>a,
+ .pagination-lg>li:first-child>span {
+     border-top-left-radius: 6px;
+     border-bottom-left-radius: 6px
+ }
+
+ .pagination-lg>li:last-child>a,
+ .pagination-lg>li:last-child>span {
+     border-top-right-radius: 6px;
+     border-bottom-right-radius: 6px
+ }
+
+ .pagination-sm>li>a,
+ .pagination-sm>li>span {
+     padding: 5px 10px;
+     font-size: 12px
+ }
+
+ .pagination-sm>li:first-child>a,
+ .pagination-sm>li:first-child>span {
+     border-top-left-radius: 3px;
+     border-bottom-left-radius: 3px
+ }
+
+ .pagination-sm>li:last-child>a,
+ .pagination-sm>li:last-child>span {
+     border-top-right-radius: 3px;
+     border-bottom-right-radius: 3px
  }

@@ -52,7 +52,7 @@
     </form>
 
      <!--Full Services-->
-     <?php $url= "http://10.1.6.32/selfpublishing/authormailer.php?companyId=11829044757&groupId=11829076861&bookInfo=%7B%22Author%20Name%22%3A%20%22John%20Doe%22%2C%22Email%22%3A%20%22JD%40gmail.com%22%2C%22ISBN%22%3A%20%22%22%2C%22Cover%22%3A%20%22Color%22%2C%22Editorial%20Complexity%22%3A%20%22Low%22%2C%22Number%20of%20Manuscript%20Pages%22%3A%20%22251%22%7D&redirectURL=https://www.pagemajik.com/&bookDetails=%7B%22categoryName%22%3A%22Full%20Servicess%22%2C%22bookName%22%3A%22%20Arbitration%20%26%20Conciliation%20%22%2C%22chapterCount%22%3A%222%22%2C%20%22isCoverDesignOnly%22%3A%22true%22%7D&userDetails=%7B%22firstName%22%3A%20%22Sulthana%22%2C%22surName%22%3A%20%22S%22%2C%22mailId%22%3A%20%22sulthanas%40s4carlisle.com%22%20%7D"?>
+     <?php $url= "http://10.1.6.32/selfpublishing/authormailer.php?companyId=11829044757&groupId=11829076861&bookInfo=%7B%22Author%20Name%22%3A%20%22John%20Doe%22%2C%22Email%22%3A%20%22JD%40gmail.com%22%2C%22ISBN%22%3A%20%22%22%2C%22Cover%22%3A%20%22Color%22%2C%22Editorial%20Complexity%22%3A%20%22Low%22%2C%22Number%20of%20Manuscript%20Pages%22%3A%20%22251%22%7D&redirectURL=https://www.pagemajik.com/&bookDetails=%7B%22categoryName%22%3A%22Full%20Services%22%2C%22bookName%22%3A%22%20Arbitration%20%26%20Conciliation%20%22%2C%22chapterCount%22%3A%222%22%2C%20%22isCoverDesignOnly%22%3A%22true%22%7D&userDetails=%7B%22firstName%22%3A%20%22Sulthana%22%2C%22surName%22%3A%20%22S%22%2C%22mailId%22%3A%20%22sulthanas%40s4carlisle.com%22%20%7D"?>
     <form action="<?php echo $url;?>" 
         method="post">
        <input type="submit" value="Full Services">
