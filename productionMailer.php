@@ -134,9 +134,20 @@ if (isset($_POST['save'])) {
         $category=$result['category'];
         $categoryName = cleanStr($category);
         $eid = encryptor('encrypt', $id);
+        try {
 
+            $sql1 = "update services set bookSubtitle='$bookSubtitle',isbn='$isbn',coverType='$coverType',
+            priceBarcode='$priceBarcode',trimSize='$trimSize',visonInteriorDesign='$visonInteriorDesign',paperWeight='$paperWeight',requestedServices='$requestedServices',
+            dimenSpecification='$dimenSpecification',bookCoverFront='$bookCoverFront',
+            spine='$spine',bookCoverBack='$bookCoverBack',priceBarcode='$priceBarcode',
+            authorImage='$authorImage',artImage='$artImage',visionDesign='$visionDesign',template_id='$template_id',submitCount='$submitCount',trimSizeWidth='$trimSizeWidth',trimSizeHeight='$trimSizeHeight',other='$other'
+            where id='$id'";
+            mysqli_query($conn, $sql1);
+        } catch (Exception $e) {
+            echo "Error:" . $e . "<br>Please contact Development team.";
+        }
 
-    /* File upload*/
+    /* File upload
     if ($_FILES && $_FILES['myfile']) {
         try {
             if (!empty($_FILES['myfile']['name'][0])) {
@@ -171,18 +182,7 @@ if (isset($_POST['save'])) {
                 $zip->close();
 
                 
-        try {
-
-            $sql1 = "update services set bookSubtitle='$bookSubtitle',isbn='$isbn',coverType='$coverType',
-            priceBarcode='$priceBarcode',trimSize='$trimSize',visonInteriorDesign='$visonInteriorDesign',paperWeight='$paperWeight',requestedServices='$requestedServices',
-            dimenSpecification='$dimenSpecification',bookCoverFront='$bookCoverFront',
-            spine='$spine',bookCoverBack='$bookCoverBack',priceBarcode='$priceBarcode',
-            authorImage='$authorImage',artImage='$artImage',visionDesign='$visionDesign',template_id='$template_id',fileName='$filename',submitCount='$submitCount',trimSizeWidth='$trimSizeWidth',trimSizeHeight='$trimSizeHeight',other='$other'
-            where id='$id'";
-            mysqli_query($conn, $sql1);
-        } catch (Exception $e) {
-            echo "Error:" . $e . "<br>Please contact Development team.";
-        }
+       
               
         $sql = "insert into files(file_name,file_size,purchase_id)
             values('$filename','$totalfileSize','$id')";
@@ -202,7 +202,7 @@ if (isset($_POST['save'])) {
             echo "Error" . $e;
         }
 
-    }
+    }*/
 }
 }
 
@@ -292,12 +292,13 @@ if (isset($_POST['save'])) {
 
         $mail->send(); ?>
 
-        <script>alert('Mail has been sent to Production team. Please check.');</script>
+        <script>alert('\n\u2139 Mail has been sent to Production team. Please check.');</script>
         <?php
          echo $mail->Body;
-    } catch (Exception $e) { 
-        echo $e;
-    echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+    } catch (Exception $e) { ?>
+        <script>alert('\n\u2139 Message could not be sent.');</script>
+      <?php // echo $e;
+    //echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
     
     }
 

@@ -51,7 +51,7 @@ require 'connection.php';
 
 
             <div class="col-lg-6">
-                <h3 class="text-center p-2 " style="color:white; margin-top: 10px;">PRODUCTION AND EDITORIAL</h3>
+                <h3 class="text-center p-2 heading">PRODUCTION AND EDITORIAL</h3>
             </div>
 
         </div>
@@ -155,14 +155,13 @@ require 'connection.php';
                     </div>
                     <div class="col-md-6 mt-md-0 mt-3">
                         <div>
-                                <label> Download Manuscript File<span class="text-danger">*</span></label>
+                                <label>Download manuscript file(s)<span class="text-danger">*</span></label>
                                 <div class="text-center">
-                                    <label class="form-control upload_label">
+                                    <label class="form-control dropzone1">
                                         <a download="<?php if(!empty($result['fileName'])){echo $result['fileName'];}else{ echo 'fileNotUploaded';} ?>"
                                             href="uploads/<?php if(!empty($result['fileName'])){echo $result['fileName'];}else{ echo 'fileNotUploaded';} ?>"><span><i
                                                     class="fa fa-cloud-download text-centre text-primary fa-5x"></i></span>
-                                            <p class="text-centre text-primary" id="noOfFiles">Download Manuscript
-                                                file
+                                            <p class="text-centre text-primary" id="noOfFiles">Download manuscript file(s)
                                             </p>
                                         </a>
 
@@ -175,11 +174,11 @@ require 'connection.php';
                 </div>
                
 
-                <div class="row">
+                <!--<div class="row">
                         <div class="col-md-12 mt-md-0 mt-3 text-center">
                             <button type="submit" class="btn btn-primary btn-lg" name="export" disabled="diabled">Export to Excel</button>
                         </div>
-                    </div>
+                    </div>-->
             </form>
         </div>
     </div>

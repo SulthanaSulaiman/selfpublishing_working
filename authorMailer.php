@@ -47,7 +47,7 @@ if(isset($_GET['bookInfo']))
 
 }
 
-echo("test".$bookInfo["Editorial Complexity"]);
+//echo("test".$bookInfo["Editorial Complexity"]);
 
 if (!empty($bookInfo["Author Name"])) {
     $authorName = $bookInfo["Author Name"];
@@ -119,7 +119,7 @@ if (!empty($userDetails["mailId"])) {
 
 
 
-echo "Author Name:".$authorName."<br>Author Mail:".$authorEmail."<br>ISBN:".$isbn."<br>Interior Design:".$interiorDesign."<br>Editorial Complexity".$editorialComplexity."
+/*echo "Author Name:".$authorName."<br>Author Mail:".$authorEmail."<br>ISBN:".$isbn."<br>Interior Design:".$interiorDesign."<br>Editorial Complexity".$editorialComplexity."
 <br>Number of Menuscript Pages:".$nuberOfMenuscriptPages."<br>Category:".$category."<br>Book Title:".$bookTitle."<br>User Name:".$userName."<br>User Mail:".$userMail;
 
 /*Project Id */
@@ -240,11 +240,11 @@ VALUES ('" . $id . "','" . $authorName . "','" . $authorEmail . "','" . $categor
     ';
         $mail->AltBody = $category;
         $mail->send(); ?>
-        <script>alert('Link has been sent to author. Please check.');</script>
+        <script>alert('\n\u2139 Link has been sent to author. Please check.');</script>
     <?php
     } catch (Exception $e) {
         ?>
-        <script>alert('Message could not be sent');</script>
+        <script>alert('\n\u26A0 Message could not be sent');</script>
     <?php
     }
     echo $mail->Body;

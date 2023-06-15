@@ -75,7 +75,7 @@ require 'connection.php';
                 var artImage = document.authorForm.artImage.value;
                 var authorImage = document.authorForm.authorImage.value;
 
-                var file = document.getElementById("fileUpload").value;
+                var file = document.getElementById("fileLength").value;
 
                 // Defining error variables with a default value
                 var paperWeightErr = coverTypeErr = priceBarcodeErr = trimSizeWidthErr = trimSizeHeightErr = dimenSpecificationErr = artImageErr = authorImageErr /*= visionDesignErr*/ = fileErr/*=coverImageIdErr*/ = true;
@@ -168,7 +168,7 @@ require 'connection.php';
                     console.log("fileErr:" + fileErr);
                     //console.log("coverImageIdErr:"+coverImageIdErr);
 
-                    alert("Please fill the mandatory fileds.");
+                    alert("\n\u26A0\uFE0F Please fill the mandatory fileds.");
                     return false;
                 }
                 else {
@@ -192,7 +192,7 @@ require 'connection.php';
 
         };
 
-        /*Files upload*/
+        /*Files upload
         window.addEventListener("load", () => {
             const input = document.getElementById("fileUpload");
             // const filewrapper=document.getElementById("filewrapper");
@@ -215,7 +215,7 @@ require 'connection.php';
                 // console.log(showfileboxElem);
                 //  filewrapper.append(showfileboxElem);
             }
-        })
+        })*/
 
 
         /* covers slide show*/
@@ -308,7 +308,7 @@ $(document).ready(function () {
 
 
             <div class="col-lg-6">
-                <h3 class="text-center p-2 " style="color:white; margin-top: 10px;">COVER DESIGN</h3>
+                <h3 class="text-center p-2 heading">COVER DESIGN</h3>
             </div>
 
         </div>
@@ -818,14 +818,14 @@ $(document).ready(function () {
                     </div>
                     <div class="col-md-6 mt-md-0 mt-3">
 
-                        <div <?php if ((!empty($result['fileName']))) {
+                        <div <?php if ((!empty($result['fileName']))&&(($result['submitCount']))) {
                             echo 'style="display:none;"';
                         } else {
                             echo 'style="display:block;"';
                         } ?>>
-                            <label>Upload your manuscript and other files?<span class="text-danger">*</span>
+                            <label>Upload your manuscript and other files<span class="text-danger">*</span>
                                 <div style="display: inline-block;" data-toggle="tooltip" data-placement="top"
-                                    title="You can upload your files as either one zip file and multiple files.">
+                                    title="You can upload your files as either one zip file or multiple files. Allowed file types are Image, Text, Pdf, Word, Excel, PowerPoint and Zip. Overall maximum file size limit is 500 MB.">
                                     <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="18" height="18"
                                         viewBox="0 0 512 512">
                                         <path fill="#25B7D3"
@@ -838,34 +838,201 @@ $(document).ready(function () {
                                 </div>
                                 <div style="display:inline;" class="text-danger" id="fileErr"></div>
                             </label>
-                            <div class="text-center">
-                                <label class="form-control upload_label">
-                                    <input type="file" class="form-control upload_hide" id="fileUpload" name="myfile[]"
-                                        multiple required>
+                            <!--<div class="text-center">
+                                    <label class="form-control upload_label">
+                                        <input type="file" class="form-control upload_hide" id="fileInput"
+                                            name="myfile[]" multiple required>
 
 
-                                    <span><i class="fa fa-cloud-upload text-centre text-primary fa-5x"></i></span>
-                                    <p class="text-centre text-primary" id="noOfFiles">Drag & Drop to upload your file(s) here!
-                                    </p>
+                                        <span><i class="fa fa-cloud-upload text-centre text-primary fa-5x"></i></span>
+                                        <p class="text-centre text-primary" id="noOfFiles">Drag & Drop to upload your file(s) here!
+                                        </p>
 
-                                </label>
+                                    </label>
+
+                                </div>-->
+                            <div class="border p-2">
+                                <div class="dropZone text-primary" id="dropZone">
+                                <span style="display:block"><i class="fa fa-cloud-upload text-centre text-primary fa-5x"></i></span>
+                                    Drag & Drop to upload your file(s) here!
+                                   
+                                </div>
+                                <div class="msg text-primary" style="display: none;" id="msg">
+                                File(s) uploaded successfully!
+                                    <input type="text" id="fileLength" style="display: none;" name="fileLength" readonly="readonly"/>
+                                    
+                                </div>
+                                <div class="file-list" id="fileList">
+                                    <!-- File items will be dynamically added here -->
+                                </div>
+                                <div class="text-center"><button class="upload-button" type="button" id="uploadButton"
+                                        disabled>Upload</button></div>
 
                             </div>
+                            <script>
+                                 // file Upload
+
+                                    var fileList = [];
+                                    var totalFileSize = 0;
+                                    var maxFileSize = 500 * 1024 * 1024; // 500MB limit
+
+                                    // Function to handle file drop
+                                    function handleDrop(e) {
+                                        e.preventDefault();
+                                        var files = e.dataTransfer.files;
+                                        for (var i = 0; i < files.length; i++) {
+                                            var file = files[i];
+                                            if (isValidFile(file)) {
+                                                addFileToList(file);
+                                                totalFileSize += file.size;
+                                            } else {
+                                               // alert('Invalid file format or size exceeded. \n\nAllowed file types (Image, Text, Pdf, Word, Excel, PowerPoint, Zip) \nOverall maximum file size limit is 500 MB.');
+                                               alert('\n\u26A0\uFE0F Invalid file format or size exceeded. \n\nAllowed file types are Image, Text, Pdf, Word, Excel, PowerPoint and Zip. \nOverall maximum file size limit is 500 MB.');
+
+
+                                            }
+                                        }
+                                        document.getElementById('uploadButton').disabled = !canUpload();
+                                    }
+
+                                    // Function to handle file drag over
+                                    function handleDragOver(e) {
+                                        e.preventDefault();
+                                    }
+
+                                    // Function to check if file is valid
+                                    function isValidFile(file) {
+                                        var fileType = file.type.toLowerCase();
+                                        var validExtensions = [ 'image/jpeg',
+                                                                'image/png',
+                                                                'application/msword',
+                                                                'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+                                                                'application/pdf',
+                                                                'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+                                                                'application/zip',
+                                                                'application/x-zip-compressed',
+                                                                'application/x-7z-compressed',
+                                                                'application/x-rar-compressed',
+                                                                'text/plain',
+                                                                'application/xml',
+                                                                'application/vnd.ms-powerpoint',
+                                                                'application/vnd.openxmlformats-officedocument.presentationml.presentation'];
+                                        var maxFileSizeExceeded = file.size > maxFileSize;
+
+                                        return validExtensions.includes(fileType) && !maxFileSizeExceeded;
+                                    }
+
+                                    // Function to add file to the file list
+                                    function addFileToList(file) {
+                                        var fileItem = document.createElement('div');
+                                        fileItem.className = 'file-item';
+
+                                        var fileName = document.createElement('span');
+                                        fileName.className = 'file-name';
+                                        fileName.textContent = file.name;
+                                        fileItem.appendChild(fileName);
+
+                                        var deleteButton = document.createElement('span');
+                                        deleteButton.className = 'delete-button';
+                                        deleteButton.textContent = 'Delete';
+                                        deleteButton.addEventListener('click', function () {
+                                            deleteFile(file);
+                                            fileItem.remove();
+                                        });
+                                        fileItem.appendChild(deleteButton);
+
+                                        fileList.push(file);
+                                        document.getElementById('fileList').appendChild(fileItem);
+                                    }
+
+                                    // Function to delete file from the file list
+                                    function deleteFile(file) {
+                                        var index = fileList.indexOf(file);
+                                        if (index !== -1) {
+                                            fileList.splice(index, 1);
+                                            totalFileSize -= file.size;
+                                        }
+                                    }
+
+                                    // Function to check if files can be uploaded
+                                    function canUpload() {
+                                        return fileList.length > 0 && totalFileSize <= maxFileSize;
+                                    }
+
+                                    // Function to upload the files to the server
+                                    function uploadFiles() {
+                                        var formData = new FormData();
+                                        for (var i = 0; i < fileList.length; i++) {
+                                            var file = fileList[i];
+                                            document.getElementById("fileLength").value=fileList.length;
+                                            formData.append('files[]', file);
+                                        }
+
+                                        var xhr = new XMLHttpRequest();
+                                        xhr.open('POST', 'zip_files.php?id=<?php echo $eid; ?>', true);
+                                        xhr.onreadystatechange = function () {
+                                            if (xhr.readyState === 4 && xhr.status === 200) {
+                                                var response = JSON.parse(xhr.responseText);
+                                                //console.log(response);
+                                                //var fileUploadresponse = JSON.parse(xhr.responseText);
+
+                                                /*if (fileUploadresponse.success) {
+                                                    alert('Files were uploaded in mysql');
+                                                    resetFileList();
+                                                    dropZone.style.display = 'none';
+                                                    msg.style.display = 'block';
+                                                } else {
+                                                    alert('An error occurred while zipping the files.');
+                                                }*/
+
+                                                if (response.success) {
+                                                    alert('\n\u2714 File(s) uploaded successfully!');
+                                                    resetFileList();
+                                                    dropZone.style.display = 'none';
+                                                    upload.style.display = 'none';
+                                                    msg.style.display = 'block';
+                                                } else {
+                                                    alert('\n\u26A0 An error occurred while uploading the files.');
+                                                }
+                                            }
+                                        };
+                                        xhr.send(formData);
+                                    }
+
+                                    // Function to reset the file list
+                                    function resetFileList() {
+                                        fileList = [];
+                                        totalFileSize = 0;
+                                        document.getElementById('fileList').innerHTML = '';
+                                        document.getElementById('uploadButton').disabled = true;
+                                    }
+
+                                    // Attach event listeners to the drop zone
+                                    var dropZone = document.getElementById('dropZone');
+                                    var msg = document.getElementById('msg');
+                                    var upload = document.getElementById('uploadButton');
+                                    dropZone.addEventListener('dragover', handleDragOver);
+                                    dropZone.addEventListener('drop', handleDrop);
+
+                                    // Attach event listener to the upload button
+                                    var uploadButton = document.getElementById('uploadButton');
+                                    uploadButton.addEventListener('click', uploadFiles);
+                            </script>
 
                         </div>
-                        <div <?php if ((!empty($result['fileName']))) {
+                        <div <?php if ((!empty($result['fileName']))&&(($result['submitCount']))) {
                             echo 'style="display:block;"';
                         } else {
                             echo 'style="display:none;"';
                         } ?>>
-                            <label> Download manuscript file<span class="text-danger">*</span></label>
+                            <label> Download manuscript file(s)<span class="text-danger">*</span></label>
                             <div class="text-center">
-                                <label class="form-control upload_label">
+                                <label class="form-control dropzone1">
                                     <a download="<?php echo $result['fileName']; ?>"
                                         href="uploads/<?php echo $result['fileName'] ?>"><span><i
                                                 class="fa fa-cloud-download text-centre text-primary fa-5x"></i></span>
                                         <p class="text-centre text-primary" id="noOfFiles">Download manuscript
-                                            file
+                                            file(s)
                                         </p>
                                     </a>
 

@@ -52,7 +52,7 @@ require 'connection.php';
 
 
             <div class="col-lg-6">
-                <h3 class="text-center p-2 " style="color:white; margin-top: 10px;">PRODUCTION AND INDEX</h3>
+                <h3 class="text-center p-2 heading">PRODUCTION AND INDEX</h3>
             </div>
 
         </div>
@@ -144,34 +144,8 @@ require 'connection.php';
                             echo encodeValue($result['trimSize']);
                         } ?>" readonly="readonly">
                         <div class="text-danger" id="trimSizeErr"></div>
-
-                     </div>
-                     <div class="col-md-6 mt-md-0 mt-3">
-
-                            <div>
-                                <label> Download Manuscript File<span class="text-danger">*</span></label>
-                                <div class="text-center">
-                                    <label class="form-control upload_label">
-                                        <a download="<?php if(!empty($result['fileName'])){echo $result['fileName'];}else{ echo 'fileNotUploaded';} ?>"
-                                            href="uploads/<?php if(!empty($result['fileName'])){echo $result['fileName'];}else{ echo 'fileNotUploaded';} ?>"><span><i
-                                                    class="fa fa-cloud-download text-centre text-primary fa-5x"></i></span>
-                                            <p class="text-centre text-primary" id="noOfFiles">Download Manuscript
-                                                file
-                                            </p>
-                                        </a>
-
-                                    </label>
-
-                                </div>
-
-                            </div>
-
-                    </div>
-
-                 </div>
-                <div class="row">
-                     <div class="col-md-6 mt-md-0 mt-3">
-                            <label>Your vision for your design.
+                        <br>
+                        <label>Your vision for your design.
                                 <div style="display: inline-block;" data-toggle="tooltip" data-placement="top"
                                     title="The more information you provide, the better able we are to provide you with a cover projecting the image you wish to portray. And in the end, this will save you money. If we have a better idea what you want up front, we won't need to make changes later.">
                                     <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="18" height="18"
@@ -185,24 +159,43 @@ require 'connection.php';
                                     </svg>
                                 </div>
                             </label>
-                            <textarea class="form-control" name="visionDesign" id="visionDesign" rows="3" <?php if ((!empty($result['visionDesign']))) {
+                            <textarea class="form-control" name="visionDesign" id="visionDesign" rows="2" <?php if ((!empty($result['visionDesign']))) {
                                 echo 'readonly="readonly"';
                             } ?>   data-toggle="tooltip" data-placement="top"
                                 title="The more information you provide, the better able we are to provide you with a cover projecting the image you wish to portray. And in the end, this will save you money. If we have a better idea what you want up front, we won't need to make changes later."><?php if ((!empty($result['visionDesign']))) {
                                    echo encodeValue($result['visionDesign']);
                                 } ?></textarea>
 
-                    </div>
-                       
 
-                    
+                    </div>
+                    <div class="col-md-6 mt-md-0 mt-3">
+
+                            <div>
+                                <label>Download manuscript file(s)<span class="text-danger">*</span></label>
+                                <div class="text-center">
+                                    <label class="form-control dropzone1">
+                                        <a download="<?php if(!empty($result['fileName'])){echo $result['fileName'];}else{ echo 'fileNotUploaded';} ?>"
+                                            href="uploads/<?php if(!empty($result['fileName'])){echo $result['fileName'];}else{ echo 'fileNotUploaded';} ?>"><span><i
+                                                    class="fa fa-cloud-download text-centre text-primary fa-5x"></i></span>
+                                            <p class="text-centre text-primary" id="noOfFiles">Download manuscript file(s)
+                                            </p>
+                                        </a>
+
+                                    </label>
+
+                                </div>
+
+                            </div>
+
+                    </div>
+
                 </div>
 
-                <div class="row">
+                <!--<div class="row">
                         <div class="col-md-12 mt-md-0 mt-3 text-center">
                             <button type="submit" class="btn btn-primary btn-lg" name="export" disabled="disabled">Export to Excel</button>
                         </div>
-                </div>
+                </div>-->
                 
             </form>
         </div>
