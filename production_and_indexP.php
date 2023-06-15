@@ -66,7 +66,7 @@ require 'connection.php';
 
                 <h5 style="text-align:right;" class="text-primary">
                     Project Id:
-                    <?php echo $id; ?>
+                    <?php if(!empty($id))echo $id; ?>
                 </h5>
                 <div class="row">
 

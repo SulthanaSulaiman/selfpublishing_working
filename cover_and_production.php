@@ -255,7 +255,7 @@ $(document).ready(function () {
             dataType: 'json',
             cache: false,
             beforeSend: function () {
-                $("div.list-users").html('<h4>Chargement en cours...</h4>');
+                $("div.list-users").html('<h4>Selfpublish</h4>');
             }
         })
             .done(function (data) {
@@ -288,7 +288,7 @@ $(document).ready(function () {
                 },
                 cache: false,
                 beforeSend: function () {
-                    $("div.list-users").html('<h4>Chargement en cours...</h4>');
+                    $("div.list-users").html('<h4>Selfpublish</h4>');
                 }
             })
                 .done(function (data) {
@@ -357,7 +357,7 @@ $(document).ready(function () {
                 enctype="multipart/form-data" class="form" novalidate>
 
                 <!--<h5 class="text-danger text-center">
-                    <?php if (($result['submitCount'])) {
+                    <?php if (!empty($result['submitCount'])) {
                         echo "If any query, please contact <span class='text-primary'><u>selfpublish@s4carlisle.com</u></span>.";
                     } ?>
                 </h5> -->
@@ -1121,7 +1121,7 @@ $(document).ready(function () {
 
                     <div class="row">
                         <div class="col-md-12 mt-md-0 mt-3 text-center">
-                            <button type="submit" class="btn btn-primary btn-lg" name="save" <?php if (($result['submitCount'])) {
+                            <button type="submit" class="btn btn-primary btn-lg" name="save" <?php if (!empty($result['submitCount'])) {
                                 echo 'disabled="disabled"';
                             } ?>>Submit</button>
                         </div>
@@ -1129,7 +1129,7 @@ $(document).ready(function () {
                     <div class="row">
                         <div class="col-md-12 mt-md-0 mt-3 text-center">
                             <p class="text-danger text-center">
-                                <?php if (($result['submitCount'])) {
+                                <?php if (!empty($result['submitCount'])) {
                                      
                                     echo 'Form already submitted, please contact <a href="mailto:selfpublish@s4carlisle.com" target="_blank" >selfpublish@s4carlisle.com</a> for updates.';
                                    

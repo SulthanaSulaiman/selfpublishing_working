@@ -540,7 +540,7 @@ window.addEventListener("load", () => {
 
                 <div class="row">
                         <div class="col-md-12 mt-md-0 mt-3 text-center">
-                            <button type="submit" class="btn btn-primary btn-lg" name="save" <?php if (($result['submitCount'])) {
+                            <button type="submit" class="btn btn-primary btn-lg" name="save" <?php if (!empty($result['submitCount'])) {
                                 echo 'disabled="disabled"';
                             } ?>>Submit</button>
                         </div>
@@ -548,7 +548,7 @@ window.addEventListener("load", () => {
                 <div class="row">
                         <div class="col-md-12 mt-md-0 mt-3 text-center">
                             <p class="text-danger text-center">
-                                <?php if (($result['submitCount'])) {
+                                <?php if (!empty($result['submitCount'])) {
                                      
                                     echo 'Form already submitted, please contact <a href="mailto:selfpublish@s4carlisle.com" target="_blank" >selfpublish@s4carlisle.com</a> for updates.';
                                    

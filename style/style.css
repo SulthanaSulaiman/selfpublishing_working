@@ -198,9 +198,13 @@
 
      }
  }
-
-
-
+ @media(max-width: 767px) {
+    .heading{
+        color:red;
+      }
+    
+}
+ 
  .upload_hide {
      width: 100%;
      height: 100%;

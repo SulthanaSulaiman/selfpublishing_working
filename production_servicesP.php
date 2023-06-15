@@ -66,7 +66,7 @@ require 'connection.php';
 
                 <h5 style="text-align:right;" class="text-primary">
                     Project Id:
-                    <?php echo $id; ?>
+                    <?php if(!empty($id))echo $id; ?>
                 </h5>
                 <div class="row">
 
@@ -182,7 +182,7 @@ require 'connection.php';
     </div>
 
 
-    <script src="style/script.js"></script>
+    
     <div class="footer-copyright text-center py-3"><span class="text-white">©
             <script>
                 document.write((new Date().getFullYear()).toString());

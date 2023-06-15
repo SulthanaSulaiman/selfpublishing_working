@@ -261,7 +261,7 @@ require 'connection.php';
                 dataType: 'json',
                 cache: false,
                 beforeSend: function () {
-                    $("div.list-users").html('<h4>Chargement en cours...</h4>');
+                    $("div.list-users").html('<h4>Selfpublish</h4>');
                 }
             })
                 .done(function (data) {
@@ -294,7 +294,7 @@ require 'connection.php';
                     },
                     cache: false,
                     beforeSend: function () {
-                        $("div.list-users").html('<h4>Chargement en cours...</h4>');
+                        $("div.list-users").html('<h4>Selfpublish</h4>');
                     }
                 })
                     .done(function (data) {
@@ -1106,7 +1106,7 @@ require 'connection.php';
 
                 <div class="row">
                     <div class="col-md-12 mt-md-0 mt-3 text-center">
-                        <button type="submit" onclick="return validateForm()" class="btn btn-primary btn-lg" name="save"  <?php if (($result['submitCount'])) {
+                        <button type="submit" onclick="return validateForm()" class="btn btn-primary btn-lg" name="save"  <?php if (!empty($result['submitCount'])) {
                             echo 'disabled="disabled"';
                         } ?>>Submit</button>
                     </div>
@@ -1114,7 +1114,7 @@ require 'connection.php';
                 <div class="row">
                     <div class="col-md-12 mt-md-0 mt-3 text-center">
                         <p class="text-danger text-center">
-                            <?php if (($result['submitCount'])) {
+                            <?php if (!empty($result['submitCount'])) {
 
                                 echo 'Form already submitted, please contact <a href="mailto:selfpublish@s4carlisle.com" target="_blank" >selfpublish@s4carlisle.com</a> for updates.';
 
