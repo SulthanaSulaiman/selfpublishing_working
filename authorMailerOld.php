@@ -15,68 +15,80 @@ function cleanStr($string)
 }
 
 /* details extracts from link 
-http://10.1.6.32/selfpublishing/authorMailer.php?
+http://10.1.6.32/selfpublishing/get_method.php?companyId=11829044757&groupId=11829076861
 
-companyId=11829044757&groupId=11829076861&
+& bookInfo={"Author Name": "John Doe","Email": "JD@gmail.com","ISBN": "","Cover": "Color","Editorial Complexity": "Low",
+    "Number of Manuscript Pages": "251"}
+    
+    &redirectURL=https://www.pagemajik.com/
+    
+    &bookDetails={"categoryName":"Cover Design","bookName":" Arbitration & Conciliation ","chapterCount":"2", "isCoverDesignOnly":"true"}
+    
+    &userDetails={"firstName": "Sulthana","surName": "S","mailId": "sulthanas@s4carlisle.com" }
 
-bookInfo={"AuthorName": "John Doe","Email": "JD@gmail.com","ISBN": "","Cover": "Color","Editorial Complexity": "Low","NumberofManuscriptPages": "251"}
-&redirectURL=https://www.pagemajik.com/&
 
-bookDetails={"categoryName":"Production, Cover, and Editorial","bookName":" Arbitration & Conciliation ","chapterCount":"2",
-     "isCoverDesignOnly":"true"}&
-
-     userDetails={"firstName": "Sulthana","surName": "S","mailId": "sulthanas@s4carlisle.com" }
 */
-try {
+$bookInfo=null;
+$bookDetails=null;
+$userDetails=null;
+if(isset($_GET['bookInfo']))
+{
     $bookInfo = json_decode($_GET['bookInfo'],true);
-    $bookDetails = json_decode($_GET['bookDetails']);
-    $userDetails = json_decode($_GET['userDetails']);
 
-} catch (Exception $e) {
-    echo "Cannot read the Book details or Book Info from api" + $e;
 }
-echo("test".$bookInfo["Editorial Complexity"]);
+if(isset($_GET['bookDetails']))
+{
+    $bookDetails = json_decode($_GET['bookDetails'],true);
 
-if (!empty($bookInfo->AuthorName)) {
-    $authorName = $bookInfo->AuthorName;
+}
+if(isset($_GET['bookInfo']))
+{
+    $userDetails = json_decode($_GET['userDetails'],true);
+
+}
+
+//echo("test".$bookInfo["Editorial Complexity"]);
+
+if (!empty($bookInfo["Author Name"])) {
+    $authorName = $bookInfo["Author Name"];
 } else {
     $authorName = null;
 }
 
-if (!empty($bookInfo->Email)) {
-    $authorEmail = $bookInfo->Email;
+if (!empty($bookInfo["Email"])) {
+    $authorEmail = $bookInfo["Email"];
 } else {
     $authorEmail= null;
 }
 
-if (!empty($bookInfo->ISBN)) {
-    $isbn = $bookInfo->ISBN;
+if (!empty($bookInfo["ISBN"])) {
+    $isbn = $bookInfo["ISBN"];
 } else {
     $isbn = null;
 }
 
-if (!empty($bookInfo->Cover)) {
-    $interiorDesign = $bookInfo->Cover;
+if (!empty($bookInfo["Cover"])) {
+    $interiorDesign = $bookInfo["Cover"];
 } else {
     $interiorDesign = null;
 }
 
-if (!empty($bookInfo->Cover)) {
-    $interiorDesign = $bookInfo->Cover;
+if (!empty($bookInfo["Editorial Complexity"])) {
+    $editorialComplexity = $bookInfo["Editorial Complexity"];
 } else {
-    $interiorDesign = null;
+    $editorialComplexity = null;
 }
 
-$editorialComplexity = "Low";
 
-if (!empty($bookInfo->NumberofManuscriptPages)) {
-    $nuberOfMenuscriptPages = $bookInfo->NumberofManuscriptPages;
+
+if (!empty($bookInfo["Number of Manuscript Pages"])) {
+    $nuberOfMenuscriptPages = $bookInfo["Number of Manuscript Pages"];
 } else {
     $nuberOfMenuscriptPages = null;
 }
 
-if (!empty($bookDetails->categoryName)) {
-    $category = $bookDetails->categoryName;
+if (!empty($bookDetails["categoryName"])) {
+    $category = $bookDetails["categoryName"];
 } else {
     $category =null;
 }
@@ -86,20 +98,20 @@ if($category=="Index")
 }
 $categoryName = cleanStr($category);
 
-if (!empty($bookDetails->bookName)) {
-    $bookTitle = $bookDetails->bookName;
+if (!empty($bookDetails["bookName"])) {
+    $bookTitle = $bookDetails["bookName"];
 } else {
     $bookTitle = null;
 }
 
-if (!empty($userDetails->firstName . " " . $userDetails->surName)) {
-    $userName = $userDetails->firstName . " " . $userDetails->surName;
+if (!empty($userDetails["firstName"] . " " . $userDetails["surName"])) {
+    $userName = $userDetails["firstName"] . " " .$userDetails["surName"];
 } else {
     $userName = null;
 }
 
-if (!empty($userDetails->mailId)) {
-    $userMail = $userDetails->mailId;
+if (!empty($userDetails["mailId"])) {
+    $userMail = $userDetails["mailId"];
 } else {
     $userMail = null;
 }
@@ -109,24 +121,24 @@ if (!empty($userDetails->mailId)) {
 
 /*echo "Author Name:".$authorName."<br>Author Mail:".$authorEmail."<br>ISBN:".$isbn."<br>Interior Design:".$interiorDesign."<br>Editorial Complexity".$editorialComplexity."
 <br>Number of Menuscript Pages:".$nuberOfMenuscriptPages."<br>Category:".$category."<br>Book Title:".$bookTitle."<br>User Name:".$userName."<br>User Mail:".$userMail;
-*/
+
 /*Project Id */
 //$id = substr($authorName, 0, 4) . time() . substr($category, 0, 4);
 if($category=="Full Services")
 {
-    $id = substr($authorName, 0, 4) . time() ."fs";
+    $id = substr($authorName, 0, 4) . time().rand(0,9) ."fs";
 }
 else if($category=="Cover Design")
 {
-    $id = substr($authorName, 0, 4) . time() ."cd";
+    $id = substr($authorName, 0, 4) . time().rand(0,9) ."cd";
 }
 else if($category=="Production and Index")
 {
-    $id = substr($authorName, 0, 4) . time() ."pi";
+    $id = substr($authorName, 0, 4) . time().rand(0,9) ."pi";
 }
 else if($category=="Cover and Production")
 {
-    $id = substr($authorName, 0, 4) . time() ."cp";
+    $id = substr($authorName, 0, 4) . time().rand(0,9) ."cp";
 }
 else if($category=="Production, Cover, and Editorial")
 {
@@ -134,35 +146,35 @@ else if($category=="Production, Cover, and Editorial")
 }
 else if($category=="Production and Editorial")
 {
-    $id = substr($authorName, 0, 4) . time() ."pe";
+    $id = substr($authorName, 0, 4) . time().rand(0,9) ."pe";
 }
 else if($category=="Production Services")
 {
-    $id = substr($authorName, 0, 4) . time() ."ps";
+    $id = substr($authorName, 0, 4) . time().rand(0,9) ."ps";
 }
 else if($category=="Index Services")
 {
     
-    $id = substr($authorName, 0, 4) . time() ."i";
+    $id = substr($authorName, 0, 4) . time().rand(0,9) ."i";
 }
 else if($category=="Editorial Services")
 {
     
-    $id = substr($authorName, 0, 4) . time() ."es";
+    $id = substr($authorName, 0, 4) . time().rand(0,9) ."es";
 }
-else if($category=="Production, Editorial, and Index")
+else if($category=="Production, Editorial, and Index")
 {
     
-    $id = substr($authorName, 0, 4) . time() ."pei";
+    $id = substr($authorName, 0, 4) . time().rand(0,9) ."pei";
 }
 else if($category=="Production, Cover, and Index")
 {
     
-    $id = substr($authorName, 0, 4) . time() ."pci";
+    $id = substr($authorName, 0, 4) . time().rand(0,9) ."pci";
 }
 else
 {
-    $id = substr($authorName, 0, 4) . time();
+    $id = substr($authorName, 0, 4) . time().rand(0,9);
 }
 //echo "<br>Project Id:" . $id;
 $eid = encryptor('encrypt', $id);
@@ -228,11 +240,11 @@ VALUES ('" . $id . "','" . $authorName . "','" . $authorEmail . "','" . $categor
     ';
         $mail->AltBody = $category;
         $mail->send(); ?>
-        <script>alert('Link has been sent to author. Please check.');</script>
+        <script>alert('\n\u2139 Link has been sent to author. Please check.');</script>
     <?php
     } catch (Exception $e) {
         ?>
-        <script>alert('Message could not be sent');</script>
+        <script>alert('\n\u26A0 Message could not be sent');</script>
     <?php
     }
     echo $mail->Body;
