@@ -14,14 +14,13 @@ function cleanStr($string)
 
     return $result;
 }
-$authorName = $_POST['authorName'];
-$authorMail = $_POST['authorEmail'];
+
+
+
 $category = '';
-$bookSubtitle = $_POST['bookSubTitle'];
-$isbn = $_POST['isbn'];
 
 
-$coverType =null;
+/*$coverType =null;
 $priceBarcode =0;
 $trimSize =0;
 $trimSizeWidth =0;
@@ -37,104 +36,231 @@ $authorImage = null;
 $artImage = null;
 $visionDesign = null;
 $template_id = null;
-$other = null;
+$other = null;*/
+
+$error_count = 0;
+$resp = array();
 
 
-if(isset($_POST['coverType']))
-{
+/*if (isset($_POST['authorName'])) {
+    $authorName = $_POST['authorName'];
+} else {
+    $authorName = null;
+    $resp[] = array(
+        'StatusCode' => 'JSON001',
+        'Status' => 'authorName is not found.'
+    );
+    $error_count += 1;
+
+}
+
+if (isset($_GET['authorEmail'])) {
+    $authorMail = $_GET['authorEmail'];
+} else {
+    $authorMail = null;
+    $resp[] = array(
+        'StatusCode' => 'JSON001',
+        'Status' => 'authorEmail is not found.'
+    );
+    $error_count += 1;
+
+}
+*/
+if (isset($_POST['bookSubTitle'])) {
+    $bookSubtitle = $_POST['bookSubTitle'];
+} else {
+    $bookSubtitle = null;
+}
+
+if (isset($_POST['isbn'])) {
+    $isbn = $_POST['isbn'];
+} else {
+    $isbn = null;
+}
+
+if (isset($_POST['coverType'])) {
     $coverType = $_POST['coverType'];
+} else {
+    $coverType = null;
 }
-if(isset($_POST['priceBarcode']))
-{
+
+if (isset($_POST['priceBarcode'])) {
     $priceBarcode = $_POST['priceBarcode'];
+} else {
+    $priceBarcode = 0;
 }
-if(isset($_POST['trimSize']))
-{
+
+if (isset($_POST['trimSize'])) {
     $trimSize = $_POST['trimSize'];
-  
+
+} else {
+    $trimSize = 0;
 }
-if(isset($_POST['paperWeight']))
-{
+
+
+if (isset($_POST['paperWeight'])) {
     $paperWeight = $_POST['paperWeight'];
+} else {
+    $paperWeight = 0;
 }
-if(isset($_POST['requestedServices']))
+
+if (isset($_POST['requestedServices'])) {
+    if (!empty($_POST['requestedServices'])) {
+        $requestedServices = implode(',', ($_POST['requestedServices']));
+    } else {
+        $requestedServices = "";
+    }
+}
+else
 {
-    if(!empty($_POST['requestedServices']))
-{
-    $requestedServices = implode(',',($_POST['requestedServices']));
+    $requestedServices = null;
 }
-else{
-    $requestedServices="";
-}
-}
-if(isset($_POST['visonInteriorDesign']))
-{
+
+if (isset($_POST['visonInteriorDesign'])) {
     $visonInteriorDesign = trim($_POST['visonInteriorDesign']);
+} else {
+    $visonInteriorDesign = null;
 }
-if(isset($_POST['dimenSpecification']))
-{
+
+if (isset($_POST['dimenSpecification'])) {
     $dimenSpecification = $_POST['dimenSpecification'];
+} else {
+    $dimenSpecification = null;
 }
-if(isset($_POST['cfrontText']))
-{
+
+
+if (isset($_POST['cfrontText'])) {
     $bookCoverFront = $_POST['cfrontText'];
+} else {
+    $bookCoverFront = null;
 }
-if(isset($_POST['spineText']))
-{
+
+
+if (isset($_POST['spineText'])) {
     $spine = $_POST['spineText'];
+} else {
+    $spine = null;
 }
-if(isset($_POST['cbackText']))
-{
+
+if (isset($_POST['cbackText'])) {
     $bookCoverBack = $_POST['cbackText'];
+} else {
+    $bookCoverBack = null;
 }
-if(isset($_POST['priceBarcode']))
-{
-    $priceBarcode = $_POST['priceBarcode'];
-}
-if(isset($_POST['authorImage']))
-{
+
+
+if (isset($_POST['authorImage'])) {
     $authorImage = $_POST['authorImage'];
+} else {
+    $authorImage = null;
 }
-if(isset($_POST['artImage']))
-{
+
+
+if (isset($_POST['artImage'])) {
     $artImage = $_POST['artImage'];
+} else {
+    $artImage = null;
 }
-if(isset($_POST['visionDesign']))
-{
+
+
+if (isset($_POST['visionDesign'])) {
     $visionDesign = $_POST['visionDesign'];
+} else {
+    $visionDesign = null;
 }
-if(isset($_POST['coverImageId']))
-{
+
+
+if (isset($_POST['coverImageId'])) {
     $template_id = trim($_POST['coverImageId']);
+} else {
+    $template_id = null;
 }
 
-if(isset($_POST['trimSizeWidth']))
-{
+if (isset($_POST['trimSizeWidth'])) {
     $trimSizeWidth = $_POST['trimSizeWidth'];
+} else {
+    $trimSizeWidth = 0;
 }
-if(isset($_POST['trimSizeHeight']))
-{
+
+
+if (isset($_POST['trimSizeHeight'])) {
     $trimSizeHeight = $_POST['trimSizeHeight'];
+} else {
+    $trimSizeHeight = 0;
 }
-if(isset($_POST['other']))
-{
+
+if (isset($_POST['other'])) {
     $other = $_POST['other'];
+} else {
+    $other = null;
 }
 
-$submitCount=1;
+$submitCount = 1;
 
-if (isset($_POST['save'])) {
+//if (isset($_POST['save'])) {
     /* Update the entries in table*/
     if (isset($_GET['id']) && !empty($_GET['id'])) {
         $id = $_GET['id'];
         $id = encryptor('decrypt', $id);
         //echo $id;
-        $fetch_data = mysqli_query($conn, "select * from services where id='$id'");
-        $result = mysqli_fetch_array($fetch_data);
-        $category=$result['category'];
-        $categoryName = cleanStr($category);
-        $eid = encryptor('encrypt', $id);
-        try {
+        $sql="select * from services where id='$id'";
+        $query_run = mysqli_query($conn, $sql) or die(mysqli_error($conn));
+
+            if ($query_run == false) {
+
+                $resp[] = array(
+                    'StatusCode' => 'JSON004',
+                    'Status' => 'Mysql select query is failed.'
+                );
+                $error_count += 1;
+            }
+            else{
+                $fetch_data = mysqli_query($conn, $sql);
+                $result = mysqli_fetch_array($fetch_data);
+                if(!empty($result['category']))
+                {
+                    $category = $result['category'];
+                    $categoryName = cleanStr($category);
+                    $eid = encryptor('encrypt', $id);
+                }
+                else{
+                    $category='';
+                    $resp[] = array(
+                        'StatusCode' => 'JSON001',
+                        'Status' => 'category is not found.'
+                    );
+                    $error_count += 1;
+                }
+                if(!empty($result['authorName']))
+                {
+                    $authorName = $result['authorName'];
+                   
+                }
+                else{
+                    $authorName=null;
+                    $resp[] = array(
+                        'StatusCode' => 'JSON001',
+                        'Status' => 'category is not found.'
+                    );
+                    $error_count += 1;
+                }
+                if(!empty($result['authorEmail']))
+                {
+                    $authorMail = $result['authorEmail'];
+                   
+                }
+                else{
+                    $authorMail=null;
+                    $resp[] = array(
+                        'StatusCode' => 'JSON001',
+                        'Status' => 'category is not found.'
+                    );
+                    $error_count += 1;
+                }
+            
+              
+            }
+       
 
             $sql1 = "update services set bookSubtitle='$bookSubtitle',isbn='$isbn',coverType='$coverType',
             priceBarcode='$priceBarcode',trimSize='$trimSize',visonInteriorDesign='$visonInteriorDesign',paperWeight='$paperWeight',requestedServices='$requestedServices',
@@ -142,117 +268,36 @@ if (isset($_POST['save'])) {
             spine='$spine',bookCoverBack='$bookCoverBack',priceBarcode='$priceBarcode',
             authorImage='$authorImage',artImage='$artImage',visionDesign='$visionDesign',template_id='$template_id',submitCount='$submitCount',trimSizeWidth='$trimSizeWidth',trimSizeHeight='$trimSizeHeight',other='$other'
             where id='$id'";
-            mysqli_query($conn, $sql1);
-        } catch (Exception $e) {
-            echo "Error:" . $e . "<br>Please contact Development team.";
-        }
 
-    /* File upload
-    if ($_FILES && $_FILES['myfile']) {
-        try {
-            if (!empty($_FILES['myfile']['name'][0])) {
-                //echo  phpinfo();
-                // echo class_exists('ZipArchive');
-                $zip = new ZipArchive();
-                $zip_name = getcwd() . "/uploads/proj_" . $id . "_" . time() . ".zip";
-                $filename = "proj_" . $id . "_" . time() . ".zip";
-                // Create a zip target
-                if ($zip->open($zip_name, ZipArchive::CREATE) !== TRUE) {
-                    echo "Sorry ZIP creation is not working currently.<br/>";
-                }
+            $query_run = mysqli_query($conn, $sql1) or die(mysqli_error($conn));
 
-                $imageCount = count($_FILES['myfile']['name']);
-                $totalfileSize = array_sum($_FILES['myfile']['size']);
-                //  echo "<br>file size=".$totalfileSize;
-                for ($i = 0; $i < $imageCount; $i++) {
+            if ($query_run == false) {
 
-                    if ($_FILES['myfile']['tmp_name'][$i] == '') {
-                        continue;
-                    }
-                    // $newname = date('YmdHis', time()) . mt_rand() . '.jpg';
-
-                    // Moving files to zip.
-                    $zip->addFromString($_FILES['myfile']['name'][$i], file_get_contents($_FILES['myfile']['tmp_name'][$i]));
-
-                    // moving files to the target folder.
-                    //move_uploaded_file($_FILES['myfile']['tmp_name'][$i], './uploads/' .$_FILES['myfile']['name'][$i]);
-
-                }
-                $size = 10;
-                $zip->close();
-
-                
-       
-              
-        $sql = "insert into files(file_name,file_size,purchase_id)
-            values('$filename','$totalfileSize','$id')";
-                if (mysqli_query($conn, $sql)) {
-                    //echo "<br>File uploaded successfully";
-
-                } else {
-                    //echo "Failed to upload file";
-                }
-
-                // Create HTML Link option to download zip
-                // $success = basename($zip_name);
-            } else {
-                $error = '<strong>Error!! </strong> Please select a file.';
+                $resp[] = array(
+                    'StatusCode' => 'JSON004',
+                    'Status' => 'Mysql insert query is failed.'
+                );
+                $error_count += 1;
             }
-        } catch (Exception $e) {
-            echo "Error" . $e;
-        }
+            mysqli_close($conn);
 
-    }*/
 }
+else{
+    $resp[] = array(
+        'StatusCode' => 'JSON001',
+        'Status' => 'Project id is not found.'
+    );
+    $error_count += 1;
 }
+//}
 
+/* Mail to production team*/
 
-
-?>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Production Mailer</title>
-</head>
-
-<body>
-
-    <?php
-    /* Mail to production team*/
-
-    //Create an instance; passing `true` enables exceptions
+if($error_count==0)
+{
+     //Create an instance; passing `true` enables exceptions
     $mail = new PHPMailer(true);
-    $mailId = "sulthanas@s4carlisle.com";
-    try {
-        //Server settings
-        // $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      //Enable verbose debug output
-        $mail->isSMTP(); //Send using SMTP
-        $mail->Host = 'smtp.gmail.com'; //Set the SMTP server to send through
-        $mail->SMTPAuth = true; //Enable SMTP authentication
-        $mail->Username = 'sulthanaofficial111@gmail.com'; //SMTP username
-        $mail->Password = 'zrjqzsandnvphfnc'; //SMTP password
-        $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS; //Enable implicit TLS encryption
-        $mail->Port = 465; //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
-    
-        //Recipients
-        $mail->setFrom('sulthanaofficial111@gmail.com', 'S4C Cover Design');
-        //$mail->addAddress('joe@gmail.net', 'Joe User');     //Add a recipient
-        $mail->addAddress($mailId); //Name is optional
-        // $mail->addReplyTo('info@gmail.com', 'Information');
-        //$mail->addCC('cc@gmail.com');
-        // $mail->addBCC('bcc@gmail.com');
-    
-        //Attachments
-        //  $mail->addAttachment('/var/tmp/file.tar.gz');         //Add attachments
-        // $mail->addAttachment('/tmp/image.jpg', 'new.jpg');    //Optional name
-    
-        //Content
-        $mail->isHTML(true); //Set email format to HTML
-        $mail->Subject = 'Starting your cover design project';
-        $mail->Body = ' <p>Dear Team,</p>
+    $emailBody=' <p>Dear Team,</p>
     <p>The below services are scheduled.</p>
     <table style="border: 1px solid black;border-collapse: collapse; text-align:left;padding:10px;">
         <tr>
@@ -287,22 +332,68 @@ if (isset($_POST['save'])) {
         S4Carlisle Design Team.
 
     </p>';
+    $emailBody = mb_convert_encoding($emailBody, "HTML-ENTITIES", 'UTF-8');
+    $mailId = "sulthanas@s4carlisle.com";
+    try {
+        //Server settings
+        // $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      //Enable verbose debug output
+        $mail->isSMTP(); //Send using SMTP
+        $mail->Host = 'smtp.gmail.com'; //Set the SMTP server to send through
+        $mail->SMTPAuth = true; //Enable SMTP authentication
+        $mail->Username = 'sulthanaofficial111@gmail.com'; //SMTP username
+        $mail->Password = 'zrjqzsandnvphfnc'; //SMTP password
+        $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS; //Enable implicit TLS encryption
+        $mail->Port = 465; //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+    
+        //Recipients
+        $mail->setFrom('sulthanaofficial111@gmail.com', 'S4C Cover Design');
+        //$mail->addAddress('joe@gmail.net', 'Joe User');     //Add a recipient
+        $mail->addAddress($mailId); //Name is optional
+        // $mail->addReplyTo('info@gmail.com', 'Information');
+        //$mail->addCC('cc@gmail.com');
+        // $mail->addBCC('bcc@gmail.com');
+    
+        //Attachments
+        //  $mail->addAttachment('/var/tmp/file.tar.gz');         //Add attachments
+        // $mail->addAttachment('/tmp/image.jpg', 'new.jpg');    //Optional name
+    
+        //Content
+        $mail->isHTML(true); //Set email format to HTML
+        $mail->Subject = 'Starting your cover design project';
+        $mail->Body = $emailBody;
 
         $mail->AltBody = $category;
 
-        $mail->send(); ?>
-
-        <script>alert('\n\u2139 Mail has been sent to Production team. Please check.');</script>
-        <?php
-         echo $mail->Body;
-    } catch (Exception $e) { ?>
-        <script>alert('\n\u2139 Message could not be sent.');</script>
-      <?php // echo $e;
-    //echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+        $mail->send(); 
+        $resp = array(
+            'StatusCode' => 'JSON200',
+            'Status' => 'Mail sent successfully.'
+        );
+        header('Content-Type: application/json; charset=utf-8');
+        echo json_encode($resp);
+    }catch (Exception $e) { 
+        //<script>alert('\n\u2139 Message could not be sent.');</script>-->
+        $resp = array(
+            'StatusCode' => 'JSON005',
+            'Status' => 'Mail not sent.'
+        );
+        header('Content-Type: application/json; charset=utf-8');
+        echo json_encode($resp);
     
     }
+}
+else{
+    $resp[] = array(
+        'StatusCode' => 'JSON005',
+        'Status' => 'Mail not sent.'
+    );
+    header('Content-Type: application/json; charset=utf-8');
+    echo json_encode($resp);
+}
 
-    ?>
-</body>
-
-</html>
+    
+   
+    
+   
+        //<script>alert('\n\u2139 Mail has been sent to Production team. Please check.');</script>
+       

@@ -501,37 +501,42 @@ if ($error_count == 0) {
 
     //Email Body
     if ($category == "Full Services") {
-        $emailBody = '<p>Dear ' . $userName . '</p>,
+        $emailBody = '<p>Dear ' . $userName . ',</p>
         <p>Thank you for trusting our team to create a great-looking page layout for your book. We will handle all technical aspects of the project, ensure that your book will meet all standard print requirements, and deliver a high-quality, professional design. We’re confident you will be pleased with the results.</p>
         <p>In order to complete this project in a timely manner, you will need to upload your manuscript and provide specific pieces of information regarding color, dimensions, and other specifications as we work together to produce a finished work we will all be proud of. You wrote a great book – we’ll make it look great!</p>
         <p>Just <a href="http://10.1.6.32/selfpublishing/' . $categoryName . '.php?id=' . $eid . '">[Click Here]</a> to begin. Please feel free to contact us if you have any questions at <a href="mailto:selfpublish@s4carlisle.com" target="_blank" >selfpublish@s4carlisle.com</a></p>
-        <p>Regards,<br>S4Carlisle Design Team</p>';
+        <p>Regards,<br>S4Carlisle Design Team.</p>';
+        $emailBody = mb_convert_encoding($emailBody, "HTML-ENTITIES", 'UTF-8');
     } else if ($category == "Cover Design") {
-        $emailBody = '<p>Dear ' . $userName . '</p>,
+        $emailBody = '<p>Dear ' . $userName . ',</p>
         <p>Thank you for choosing to work with us to create your book cover design. Our professional design team stands ready to guide you through each step of the process. We will work closely with you to deliver an eye-catching cover design that will make readers take notice.</p>
         <p>We will be asking you to provide information and various elements we will need to complete this project, such as relevant specifications, text to appear on the cover, and any images (for which you own all rights and permissions) you would like us to use.</p>
         <p>Just <a href="http://10.1.6.32/selfpublishing/' . $categoryName . '.php?id=' . $eid . '">[Click Here]</a> to begin. Please feel free to contact us if you have any questions at <a href="mailto:selfpublish@s4carlisle.com" target="_blank" >selfpublish@s4carlisle.com</a></p>
-        <p>Regards,<br>S4Carlisle Design Team</p>';
+        <p>Regards,<br>S4Carlisle Design Team.</p>';
+        $emailBody = mb_convert_encoding($emailBody, "HTML-ENTITIES", 'UTF-8');
     } else if ($category == "Editorial Services") {
-        $emailBody = '<p>Dear ' . $userName . '</p>,
+        $emailBody = '<p>Dear ' . $userName . ',</p>
         <p>Thank you for trusting our team to create a great-looking page layout for your book. We will manage all technical aspects of the project, ensure that your book will meet all standard print requirements, and deliver a high-quality, professional design.</p>
         <p>Avail of our copy editing, proofreading and indexing services to give your manuscript a final polish that will give it an edge over others. We’re confident you will be pleased with the results.</p>
         <p>In order to complete this project in a timely manner, you will need to upload your manuscript and provide specific pieces of information regarding color, dimensions, and other specifications as we work together to produce a finished work we will all be proud of. You wrote a great book – we’ll make it look great!</p>
         <p>Just <a href="http://10.1.6.32/selfpublishing/' . $categoryName . '.php?id=' . $eid . '">[Click Here]</a> to begin. Please feel free to contact us if you have any questions at <a href="mailto:selfpublish@s4carlisle.com" target="_blank" >selfpublish@s4carlisle.com</a></p>
-        <p>Regards,<br>S4Carlisle Design Team</p>';
+        <p>Regards,<br>S4Carlisle Design Team.</p>';
+        $emailBody = mb_convert_encoding($emailBody, "HTML-ENTITIES", 'UTF-8');
     } else if (($category == "Index Services") || ($category == "Index")) {
-        $emailBody = '<p>Dear ' . $userName . '</p>,
+        $emailBody = '<p>Dear ' . $userName . ',</p>
         <p>Thank you for trusting our team to create a great-looking page layout for your book. We will manage all technical aspects of the project, ensure that your book will meet all standard print requirements, and deliver a high-quality, professional design.</p>
         <p>Avail of our copy editing, proofreading and indexing services to give your manuscript a final polish that will give it an edge over others. We’re confident you will be pleased with the results.</p>
         <p>In order to complete this project in a timely manner, you will need to upload your manuscript and provide specific pieces of information regarding color, dimensions, and other specifications as we work together to produce a finished work we will all be proud of. You wrote a great book – we’ll make it look great!</p>
         <p>Just <a href="http://10.1.6.32/selfpublishing/' . $categoryName . '.php?id=' . $eid . '">[Click Here]</a> to begin. Please feel free to contact us if you have any questions at <a href="mailto:selfpublish@s4carlisle.com" target="_blank" >selfpublish@s4carlisle.com</a></p>
-        <p>Regards,<br>S4Carlisle Design Team</p>';
+        <p>Regards,<br>S4Carlisle Design Team.</p>';
+        $emailBody = mb_convert_encoding($emailBody, "HTML-ENTITIES", 'UTF-8');
     } else {
-        $emailBody = '<p>Dear ' . $userName . '</p>,
+        $emailBody = '<p>Dear ' . $userName . ',</p>
         <p>Thank you for trusting our team to create a great-looking page layout for your book. We will handle all technical aspects of the project, ensure that your book will meet all standard print requirements, and deliver a high-quality, professional design. We’re confident you will be pleased with the results.</p>
         <p>In order to complete this project in a timely manner, you will need to upload your manuscript and provide specific pieces of information regarding color, dimensions, and other specifications as we work together to produce a finished work we will all be proud of. You wrote a great book – we’ll make it look great!</p>
         <p>Just <a href="http://10.1.6.32/selfpublishing/' . $categoryName . '.php?id=' . $eid . '">[Click Here]</a> to begin. Please feel free to contact us if you have any questions at <a href="mailto:selfpublish@s4carlisle.com" target="_blank" >selfpublish@s4carlisle.com</a></p>
-        <p>Regards,<br>S4Carlisle Design Team</p>';
+        <p>Regards,<br>S4Carlisle Design Team.</p>';
+        $emailBody = mb_convert_encoding($emailBody, "HTML-ENTITIES", 'UTF-8');
     }
 
 
