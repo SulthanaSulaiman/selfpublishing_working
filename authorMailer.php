@@ -349,7 +349,14 @@ if (isset($_GET['userDetails'])) {
             //header('Content-Type: application/json; charset=utf-8');
             //echo json_encode($resp);
         }
-        $userName = $firstName . " " . $surName;
+        if(!empty($surName))
+        {
+            $surName=" ".$surName;
+        }
+        else{
+            $surName=null;
+        }
+        $userName = $firstName.$surName;
 
 
         //user email
@@ -545,19 +552,19 @@ if ($error_count == 0) {
         //Server settings
         // $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      //Enable verbose debug output
         $mail->isSMTP(); //Send using SMTP
-        $mail->Host = 'smtp.gmail.com'; //Set the SMTP server to send through
+        $mail->Host = 'smtp.office365.com'; // smtp.gmail.com Set the SMTP server to send through
         $mail->SMTPAuth = true; //Enable SMTP authentication
-        $mail->Username = 'sulthanaofficial111@gmail.com'; //SMTP username
-        $mail->Password = 'zrjqzsandnvphfnc'; //SMTP password
-        $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS; //Enable implicit TLS encryption
-        $mail->Port = 465; //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+        $mail->Username = 'selfpublish@s4carlisle.com'; // sulthanaofficial111@gmail.com SMTP username
+        $mail->Password = 'Mad87652'; // zrjqzsandnvphfnc SMTP password
+        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS; //ENCRYPTION_SMTPS Enable implicit TLS encryption
+        $mail->Port = 587; //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
 
         //Recipients
-        $mail->setFrom('sulthanaofficial111@gmail.com', 'S4C Cover Design');
+        $mail->setFrom('selfpublish@s4carlisle.com', 'Self-Publish-S4C');
         //$mail->addAddress('joe@gmail.net', 'Joe User');     //Add a recipient
         $mail->addAddress($userMail); //Name is optional
         // $mail->addReplyTo('info@gmail.com', 'Information');
-        //$mail->addCC('cc@gmail.com');
+        $mail->addCC('selfpublish@s4carlisle.com');
         // $mail->addBCC('bcc@gmail.com');
 
         //Attachments
@@ -566,9 +573,9 @@ if ($error_count == 0) {
 
         //Content
         $mail->isHTML(true); //Set email format to HTML
-        $mail->Subject = 'Starting your cover design project';
+        $mail->Subject = 'Starting your '.strtolower($category).' project';
         $mail->Body = $emailBody;
-        $mail->AltBody = $category;
+        //$mail->AltBody = "Project:".$id;
         $mail->send();
 
         $resp[] = array(

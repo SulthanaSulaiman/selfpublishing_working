@@ -333,20 +333,22 @@ if($error_count==0)
 
     </p>';
     $emailBody = mb_convert_encoding($emailBody, "HTML-ENTITIES", 'UTF-8');
-    $mailId = "sulthanas@s4carlisle.com";
+    //$category = mb_convert_encoding($category, "HTML-ENTITIES", 'UTF-8');
+    $mailId = "selfpublish@s4carlisle.com";
     try {
         //Server settings
         // $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      //Enable verbose debug output
         $mail->isSMTP(); //Send using SMTP
-        $mail->Host = 'smtp.gmail.com'; //Set the SMTP server to send through
+        $mail->Host = 'smtp.office365.com'; // smtp.gmail.com Set the SMTP server to send through
         $mail->SMTPAuth = true; //Enable SMTP authentication
-        $mail->Username = 'sulthanaofficial111@gmail.com'; //SMTP username
-        $mail->Password = 'zrjqzsandnvphfnc'; //SMTP password
-        $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS; //Enable implicit TLS encryption
-        $mail->Port = 465; //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
-    
+        $mail->Username = 'selfpublish@s4carlisle.com'; // sulthanaofficial111@gmail.com SMTP username
+        $mail->Password = 'Mad87652'; // zrjqzsandnvphfnc SMTP password
+        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS; //ENCRYPTION_SMTPS Enable implicit TLS encryption
+        $mail->Port = 587; //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+
         //Recipients
-        $mail->setFrom('sulthanaofficial111@gmail.com', 'S4C Cover Design');
+        //$mail->setFrom('sulthanaofficial111@gmail.com', 'Self-Publish-S4C');
+        $mail->setFrom('selfpublish@s4carlisle.com', 'Self-Publish-S4C');
         //$mail->addAddress('joe@gmail.net', 'Joe User');     //Add a recipient
         $mail->addAddress($mailId); //Name is optional
         // $mail->addReplyTo('info@gmail.com', 'Information');
@@ -359,10 +361,11 @@ if($error_count==0)
     
         //Content
         $mail->isHTML(true); //Set email format to HTML
-        $mail->Subject = 'Starting your cover design project';
+        $mail->Subject = 'Starting your '.strtolower($category).' project';
         $mail->Body = $emailBody;
 
-        $mail->AltBody = $category;
+        //$mail->AltBody = $category;
+        //$mail->AltBody = "proj_".$id;
 
         $mail->send(); 
         $resp = array(
