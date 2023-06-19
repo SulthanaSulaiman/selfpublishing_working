@@ -316,8 +316,9 @@ $(document).ready(function () {
 
         <div class="wrapper rounded bg-white">
 
-            <form name="authorForm" onsubmit="return validateForm()"
-                action="http://10.1.6.32/selfpublishing/productionMailer.php?id=<?php echo $eid; ?>" method="post"
+            <form name="authorForm" id="authorForm"
+                 onsubmit="x=validateForm();if(x){sendRequest();}return x;"
+                action="#" method="post"
                 enctype="multipart/form-data" class="form" novalidate>
 
                 <!--<h5 class="text-danger text-center">
@@ -1084,6 +1085,51 @@ $(document).ready(function () {
             </a>
         </span>
     </div>
+    <script>
+        function handleResponse(response) {
+            if (typeof response === 'string') {
+                // Parse the response as a JSON string
+                var data = JSON.parse(response);
+                // Handle the individual JSON object
+                console.log(data);
+
+            } else if (typeof response === 'object') {
+                // Handle the response as an object directly
+                alert(response.Status);
+            } else {
+                // Handle other response formats accordingly
+                console.log("Unknown response format");
+            }
+        }
+        
+        function sendRequest()
+        {
+                $.ajax({
+                    method: "post",
+                    url:"http://10.1.6.32/selfpublishing/productionMailer.php?id=<?php echo $eid; ?>",
+                    dataType: "json",
+                    data:$('#authorForm').serialize(),
+                    async: false,
+                    success: function (response) {
+                        // Process the response(s)
+                        if (Array.isArray(response)) {
+                            // Handle multiple responses
+                            response.forEach(function (item) {
+                                handleResponse(item);
+                            });
+                        } else {
+                            // Handle a single response
+                            handleResponse(response);
+                        }
+                        location.reload();
+                    },
+                    error: function (xhr, status, error) {
+                        // Handle the error
+                        alert("\n\u26A0 An error occurred while submitting the form. Please contact s4carlisle.com.");
+                    }
+                });
+            }
+    </script>
 </body>
 
 </html>

@@ -265,7 +265,7 @@ $submitCount = 1;
             $sql1 = "update services set bookSubtitle='$bookSubtitle',isbn='$isbn',coverType='$coverType',
             priceBarcode='$priceBarcode',trimSize='$trimSize',visonInteriorDesign='$visonInteriorDesign',paperWeight='$paperWeight',requestedServices='$requestedServices',
             dimenSpecification='$dimenSpecification',bookCoverFront='$bookCoverFront',
-            spine='$spine',bookCoverBack='$bookCoverBack',priceBarcode='$priceBarcode',
+            spine='$spine',bookCoverBack='$bookCoverBack',
             authorImage='$authorImage',artImage='$artImage',visionDesign='$visionDesign',template_id='$template_id',submitCount='$submitCount',trimSizeWidth='$trimSizeWidth',trimSizeHeight='$trimSizeHeight',other='$other'
             where id='$id'";
 
@@ -275,7 +275,7 @@ $submitCount = 1;
 
                 $resp[] = array(
                     'StatusCode' => 'JSON004',
-                    'Status' => 'Mysql insert query is failed.'
+                    'Status' => 'Mysql update query is failed.'
                 );
                 $error_count += 1;
             }
@@ -367,7 +367,7 @@ if($error_count==0)
         $mail->send(); 
         $resp = array(
             'StatusCode' => 'JSON200',
-            'Status' => 'Mail sent successfully.'
+            'Status' => 'Thank you! Form submitted successfully.'
         );
         header('Content-Type: application/json; charset=utf-8');
         echo json_encode($resp);
@@ -375,7 +375,7 @@ if($error_count==0)
         //<script>alert('\n\u2139 Message could not be sent.');</script>-->
         $resp = array(
             'StatusCode' => 'JSON005',
-            'Status' => 'Mail not sent.'
+            'Status' => 'Form cannot be submitted. Please try again!'
         );
         header('Content-Type: application/json; charset=utf-8');
         echo json_encode($resp);
@@ -385,7 +385,7 @@ if($error_count==0)
 else{
     $resp[] = array(
         'StatusCode' => 'JSON005',
-        'Status' => 'Mail not sent.'
+        'Status' => 'Form cannot be submitted. Please try again!'
     );
     header('Content-Type: application/json; charset=utf-8');
     echo json_encode($resp);
