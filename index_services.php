@@ -279,29 +279,41 @@ window.addEventListener("load", () => {
 
                             </div>
                             <script>
-                                 // file Upload
-
+                                   // File Upload
                                     var fileList = [];
                                     var totalFileSize = 0;
                                     var maxFileSize = 500 * 1024 * 1024; // 500MB limit
 
-                                    // Function to handle file drop
-                                    function handleDrop(e) {
-                                        e.preventDefault();
-                                        var files = e.dataTransfer.files;
+                                    function handleFiles(files) {
                                         for (var i = 0; i < files.length; i++) {
                                             var file = files[i];
                                             if (isValidFile(file)) {
                                                 addFileToList(file);
                                                 totalFileSize += file.size;
                                             } else {
-                                               // alert('Invalid file format or size exceeded. \n\nAllowed file types (Image, Text, Pdf, Word, Excel, PowerPoint, Zip) \nOverall maximum file size limit is 500 MB.');
-                                               alert('\n\u26A0\uFE0F Invalid file format or size exceeded. \n\nAllowed file types are Image, Text, Pdf, Word, Excel, PowerPoint and Zip. \nOverall maximum file size limit is 500 MB.');
-
-
+                                                alert('\n\u26A0\uFE0F Invalid file format or size exceeded. \n\nAllowed file types are Image, Text, Pdf, Word, Excel, PowerPoint and Zip. \nOverall maximum file size limit is 500 MB.');
                                             }
                                         }
                                         document.getElementById('uploadButton').disabled = !canUpload();
+                                    }
+
+                                    // Function to handle file drop
+                                    function handleDrop(e) {
+                                        e.preventDefault();
+                                        var files = e.dataTransfer.files;
+                                        handleFiles(files);
+                                    }
+
+                                    // Function to handle file click
+                                    function handleClick() {
+                                        var fileInput = document.createElement('input');
+                                        fileInput.type = 'file';
+                                        fileInput.multiple = true;
+                                        fileInput.addEventListener('change', function (e) {
+                                            var files = e.target.files;
+                                            handleFiles(files);
+                                        });
+                                        fileInput.click();
                                     }
 
                                     // Function to handle file drag over
@@ -417,17 +429,20 @@ window.addEventListener("load", () => {
                                     }
 
                                     // Attach event listeners to the drop zone
+                                    
                                     var dropZone = document.getElementById('dropZone');
                                     var msg = document.getElementById('msg');
                                     var upload = document.getElementById('uploadButton');
+
                                     dropZone.addEventListener('dragover', handleDragOver);
                                     dropZone.addEventListener('drop', handleDrop);
+                                   
+                                    dropZone.addEventListener('click', handleClick);
 
                                     // Attach event listener to the upload button
                                     var uploadButton = document.getElementById('uploadButton');
                                     uploadButton.addEventListener('click', uploadFiles);
                             </script>
-
                         </div>
                         <div <?php if ((!empty($result['fileName']))&&(($result['submitCount']))) {
                             echo 'style="display:block;"';

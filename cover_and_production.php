@@ -942,155 +942,170 @@ $(document).ready(function () {
 
                                 </div>
                                 <script>
-                                    // file Upload
+                                   // File Upload
+                                    var fileList = [];
+                                    var totalFileSize = 0;
+                                    var maxFileSize = 500 * 1024 * 1024; // 500MB limit
 
-                                        var fileList = [];
-                                        var totalFileSize = 0;
-                                        var maxFileSize = 500 * 1024 * 1024; // 500MB limit
-
-                                        // Function to handle file drop
-                                        function handleDrop(e) {
-                                            e.preventDefault();
-                                            var files = e.dataTransfer.files;
-                                            for (var i = 0; i < files.length; i++) {
-                                                var file = files[i];
-                                                if (isValidFile(file)) {
-                                                    addFileToList(file);
-                                                    totalFileSize += file.size;
-                                                } else {
-                                                // alert('Invalid file format or size exceeded. \n\nAllowed file types (Image, Text, Pdf, Word, Excel, PowerPoint, Zip) \nOverall maximum file size limit is 500 MB.');
+                                    function handleFiles(files) {
+                                        for (var i = 0; i < files.length; i++) {
+                                            var file = files[i];
+                                            if (isValidFile(file)) {
+                                                addFileToList(file);
+                                                totalFileSize += file.size;
+                                            } else {
                                                 alert('\n\u26A0\uFE0F Invalid file format or size exceeded. \n\nAllowed file types are Image, Text, Pdf, Word, Excel, PowerPoint and Zip. \nOverall maximum file size limit is 500 MB.');
+                                            }
+                                        }
+                                        document.getElementById('uploadButton').disabled = !canUpload();
+                                    }
 
+                                    // Function to handle file drop
+                                    function handleDrop(e) {
+                                        e.preventDefault();
+                                        var files = e.dataTransfer.files;
+                                        handleFiles(files);
+                                    }
 
+                                    // Function to handle file click
+                                    function handleClick() {
+                                        var fileInput = document.createElement('input');
+                                        fileInput.type = 'file';
+                                        fileInput.multiple = true;
+                                        fileInput.addEventListener('change', function (e) {
+                                            var files = e.target.files;
+                                            handleFiles(files);
+                                        });
+                                        fileInput.click();
+                                    }
+
+                                    // Function to handle file drag over
+                                    function handleDragOver(e) {
+                                        e.preventDefault();
+                                    }
+
+                                    // Function to check if file is valid
+                                    function isValidFile(file) {
+                                        var fileType = file.type.toLowerCase();
+                                        var validExtensions = [ 'image/jpeg',
+                                                                'image/png',
+                                                                'application/msword',
+                                                                'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+                                                                'application/pdf',
+                                                                'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+                                                                'application/zip',
+                                                                'application/x-zip-compressed',
+                                                                'application/x-7z-compressed',
+                                                                'application/x-rar-compressed',
+                                                                'text/plain',
+                                                                'application/xml',
+                                                                'application/vnd.ms-powerpoint',
+                                                                'application/vnd.openxmlformats-officedocument.presentationml.presentation'];
+                                        var maxFileSizeExceeded = file.size > maxFileSize;
+
+                                        return validExtensions.includes(fileType) && !maxFileSizeExceeded;
+                                    }
+
+                                    // Function to add file to the file list
+                                    function addFileToList(file) {
+                                        var fileItem = document.createElement('div');
+                                        fileItem.className = 'file-item';
+
+                                        var fileName = document.createElement('span');
+                                        fileName.className = 'file-name';
+                                        fileName.textContent = file.name;
+                                        fileItem.appendChild(fileName);
+
+                                        var deleteButton = document.createElement('span');
+                                        deleteButton.className = 'delete-button';
+                                        deleteButton.textContent = 'Delete';
+                                        deleteButton.addEventListener('click', function () {
+                                            deleteFile(file);
+                                            fileItem.remove();
+                                        });
+                                        fileItem.appendChild(deleteButton);
+
+                                        fileList.push(file);
+                                        document.getElementById('fileList').appendChild(fileItem);
+                                    }
+
+                                    // Function to delete file from the file list
+                                    function deleteFile(file) {
+                                        var index = fileList.indexOf(file);
+                                        if (index !== -1) {
+                                            fileList.splice(index, 1);
+                                            totalFileSize -= file.size;
+                                        }
+                                    }
+
+                                    // Function to check if files can be uploaded
+                                    function canUpload() {
+                                        return fileList.length > 0 && totalFileSize <= maxFileSize;
+                                    }
+
+                                    // Function to upload the files to the server
+                                    function uploadFiles() {
+                                        var formData = new FormData();
+                                        for (var i = 0; i < fileList.length; i++) {
+                                            var file = fileList[i];
+                                            document.getElementById("fileLength").value=fileList.length;
+                                            formData.append('files[]', file);
+                                        }
+
+                                        var xhr = new XMLHttpRequest();
+                                        xhr.open('POST', 'zip_files.php?id=<?php echo $eid; ?>', true);
+                                        xhr.onreadystatechange = function () {
+                                            if (xhr.readyState === 4 && xhr.status === 200) {
+                                                var response = JSON.parse(xhr.responseText);
+                                                //console.log(response);
+                                                //var fileUploadresponse = JSON.parse(xhr.responseText);
+
+                                                /*if (fileUploadresponse.success) {
+                                                    alert('Files were uploaded in mysql');
+                                                    resetFileList();
+                                                    dropZone.style.display = 'none';
+                                                    msg.style.display = 'block';
+                                                } else {
+                                                    alert('An error occurred while zipping the files.');
+                                                }*/
+
+                                                if (response.success) {
+                                                    alert('\n\u2714 File(s) uploaded successfully!');
+                                                    resetFileList();
+                                                    dropZone.style.display = 'none';
+                                                    upload.style.display = 'none';
+                                                    msg.style.display = 'block';
+                                                } else {
+                                                    alert('\n\u26A0 An error occurred while uploading the files.');
                                                 }
                                             }
-                                            document.getElementById('uploadButton').disabled = !canUpload();
-                                        }
+                                        };
+                                        xhr.send(formData);
+                                    }
 
-                                        // Function to handle file drag over
-                                        function handleDragOver(e) {
-                                            e.preventDefault();
-                                        }
+                                    // Function to reset the file list
+                                    function resetFileList() {
+                                        fileList = [];
+                                        totalFileSize = 0;
+                                        document.getElementById('fileList').innerHTML = '';
+                                        document.getElementById('uploadButton').disabled = true;
+                                    }
 
-                                        // Function to check if file is valid
-                                        function isValidFile(file) {
-                                            var fileType = file.type.toLowerCase();
-                                            var validExtensions = [ 'image/jpeg',
-                                                                    'image/png',
-                                                                    'application/msword',
-                                                                    'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
-                                                                    'application/pdf',
-                                                                    'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
-                                                                    'application/zip',
-                                                                    'application/x-zip-compressed',
-                                                                    'application/x-7z-compressed',
-                                                                    'application/x-rar-compressed',
-                                                                    'text/plain',
-                                                                    'application/xml',
-                                                                    'application/vnd.ms-powerpoint',
-                                                                    'application/vnd.openxmlformats-officedocument.presentationml.presentation'];
-                                            var maxFileSizeExceeded = file.size > maxFileSize;
+                                    // Attach event listeners to the drop zone
+                                    
+                                    var dropZone = document.getElementById('dropZone');
+                                    var msg = document.getElementById('msg');
+                                    var upload = document.getElementById('uploadButton');
 
-                                            return validExtensions.includes(fileType) && !maxFileSizeExceeded;
-                                        }
+                                    dropZone.addEventListener('dragover', handleDragOver);
+                                    dropZone.addEventListener('drop', handleDrop);
+                                   
+                                    dropZone.addEventListener('click', handleClick);
 
-                                        // Function to add file to the file list
-                                        function addFileToList(file) {
-                                            var fileItem = document.createElement('div');
-                                            fileItem.className = 'file-item';
-
-                                            var fileName = document.createElement('span');
-                                            fileName.className = 'file-name';
-                                            fileName.textContent = file.name;
-                                            fileItem.appendChild(fileName);
-
-                                            var deleteButton = document.createElement('span');
-                                            deleteButton.className = 'delete-button';
-                                            deleteButton.textContent = 'Delete';
-                                            deleteButton.addEventListener('click', function () {
-                                                deleteFile(file);
-                                                fileItem.remove();
-                                            });
-                                            fileItem.appendChild(deleteButton);
-
-                                            fileList.push(file);
-                                            document.getElementById('fileList').appendChild(fileItem);
-                                        }
-
-                                        // Function to delete file from the file list
-                                        function deleteFile(file) {
-                                            var index = fileList.indexOf(file);
-                                            if (index !== -1) {
-                                                fileList.splice(index, 1);
-                                                totalFileSize -= file.size;
-                                            }
-                                        }
-
-                                        // Function to check if files can be uploaded
-                                        function canUpload() {
-                                            return fileList.length > 0 && totalFileSize <= maxFileSize;
-                                        }
-
-                                        // Function to upload the files to the server
-                                        function uploadFiles() {
-                                            var formData = new FormData();
-                                            for (var i = 0; i < fileList.length; i++) {
-                                                var file = fileList[i];
-                                                document.getElementById("fileLength").value=fileList.length;
-                                                formData.append('files[]', file);
-                                            }
-
-                                            var xhr = new XMLHttpRequest();
-                                            xhr.open('POST', 'zip_files.php?id=<?php echo $eid; ?>', true);
-                                            xhr.onreadystatechange = function () {
-                                                if (xhr.readyState === 4 && xhr.status === 200) {
-                                                    var response = JSON.parse(xhr.responseText);
-                                                    //console.log(response);
-                                                    //var fileUploadresponse = JSON.parse(xhr.responseText);
-
-                                                    /*if (fileUploadresponse.success) {
-                                                        alert('Files were uploaded in mysql');
-                                                        resetFileList();
-                                                        dropZone.style.display = 'none';
-                                                        msg.style.display = 'block';
-                                                    } else {
-                                                        alert('An error occurred while zipping the files.');
-                                                    }*/
-
-                                                    if (response.success) {
-                                                        alert('\n\u2714 File(s) uploaded successfully!');
-                                                        resetFileList();
-                                                        dropZone.style.display = 'none';
-                                                        upload.style.display = 'none';
-                                                        msg.style.display = 'block';
-                                                    } else {
-                                                        alert('\n\u26A0 An error occurred while uploading the files.');
-                                                    }
-                                                }
-                                            };
-                                            xhr.send(formData);
-                                        }
-
-                                        // Function to reset the file list
-                                        function resetFileList() {
-                                            fileList = [];
-                                            totalFileSize = 0;
-                                            document.getElementById('fileList').innerHTML = '';
-                                            document.getElementById('uploadButton').disabled = true;
-                                        }
-
-                                        // Attach event listeners to the drop zone
-                                        var dropZone = document.getElementById('dropZone');
-                                        var msg = document.getElementById('msg');
-                                        var upload = document.getElementById('uploadButton');
-                                        dropZone.addEventListener('dragover', handleDragOver);
-                                        dropZone.addEventListener('drop', handleDrop);
-
-                                        // Attach event listener to the upload button
-                                        var uploadButton = document.getElementById('uploadButton');
-                                        uploadButton.addEventListener('click', uploadFiles);
-                                </script>
-
+                                    // Attach event listener to the upload button
+                                    var uploadButton = document.getElementById('uploadButton');
+                                    uploadButton.addEventListener('click', uploadFiles);
+                            </script>
                             </div>
                             <div <?php if ((!empty($result['fileName']))&&(($result['submitCount']))) {
                                 echo 'style="display:block;"';
