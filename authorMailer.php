@@ -107,12 +107,13 @@ if (isset($_GET['bookInfo'])) {
         //ISBN
         if (isset($bookInfo["ISBN"])) {
             if (!empty($bookInfo["ISBN"])) {
-                $isbn = $isbn["ISBN"];
+                $isbn = $bookInfo["ISBN"];
             } else {
                 $isbn = null;
             }
         } else {
-           /* $isbn = null;
+           $isbn = null;
+           /*
             $resp[] = array(
                 'StatusCode' => 'JSON001',
                 'Status' => 'ISBN is not found.'
@@ -229,7 +230,7 @@ if (isset($_GET['bookDetails'])) {
                 }
                 //echo ($category=="Cover Design");
 
-                if (($category == "Full Services") || ($category == "Cover Design") || ($category == "Production and Index") || ($category == "Cover and Production") || ($category == "Production, Cover, and Editorial") || ($category == "Production and Editorial") || ($category == "Production Services") || ($category == "Index Services") || ($category == "Editorial Services") || ($category == "Production, Editorial, and Index") || ($category == "Production, Cover, and Index")) {
+                if (($category == "Full Services") || ($category == "Cover Design") || ($category == "Production and Index") || ($category == "Cover and Production") || ($category == "Production, Cover, and Editorial") || ($category == "Production and Editorial") || ($category == "Production Services") || ($category == "Index Services") || ($category == "Editorial Services") || ($category == "Production, Editorial, and Index") || ($category == "Production, Cover, and Index")||($category == "Editorial and Index")) {
                     $categoryName = cleanStr($category);
                 } else {
                     $categoryName = cleanStr($category);
@@ -487,13 +488,17 @@ if ($category == "Full Services") {
 } else if ($category == "Editorial Services") {
 
     $id = substr($authorName, 0, 4) . time() . rand(0, 9) . "es";
-} else if ($category == "Production, Editorial, and Index") {
+} else if ($category == "Production, Editorial, and Index") {
 
     $id = substr($authorName, 0, 4) . time() . rand(0, 9) . "pei";
 } else if ($category == "Production, Cover, and Index") {
 
     $id = substr($authorName, 0, 4) . time() . rand(0, 9) . "pci";
-} else {
+}else if ($category == "Editorial and Index") {
+
+    $id = substr($authorName, 0, 4) . time() . rand(0, 9) . "ei";
+}
+else {
     $id = substr($authorName, 0, 4) . time() . rand(0, 9);
     $resp[] = array(
         'StatusCode' => 'JSON004',
@@ -609,7 +614,7 @@ if ($error_count == 0) {
 
         $resp[] = array(
             'StatusCode' => 'JSON200',
-            'Status' => 'Mail sent successfully.'
+            'Status' => 'Mail sent successfully. Please check your mail.'
         );
         header('Content-Type: application/json; charset=utf-8');
         echo json_encode($resp);

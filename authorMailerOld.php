@@ -162,7 +162,7 @@ else if($category=="Editorial Services")
     
     $id = substr($authorName, 0, 4) . time().rand(0,9) ."es";
 }
-else if($category=="Production, Editorial, and Index")
+else if($category=="Production, Editorial, and Index")
 {
     
     $id = substr($authorName, 0, 4) . time().rand(0,9) ."pei";

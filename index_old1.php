@@ -17,6 +17,10 @@
     <script src="style/jquery.bootpag.min.js"></script>
     <link rel="stylesheet" href="style/style1.css">
     <link rel="stylesheet" href="style/style.css">
+    
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
 
 
     <style>
@@ -73,7 +77,7 @@
                         <option value="Full Services">Full Services</option>
                         <option value="Production and Index">Production and Index</option>
                         <option value="Production and Editorial">Production and Editorial</option>
-                        <option value="Production, Editorial, and Index">Production, Editorial, and Index</option>
+                        <option value="Production, Editorial, and Index">Production, Editorial, and Index</option>
                         <option value="Cover and Production">Cover and Production</option>
                         <option value="Production, Cover, and Index">Production, Cover, and Index</option>
                         <option value="Production, Cover, and Editorial">Production, Cover, and Editorial</option>

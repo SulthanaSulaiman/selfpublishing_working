@@ -42,35 +42,30 @@ $error_count = 0;
 $resp = array();
 
 
-/*if (isset($_POST['authorName'])) {
-    $authorName = $_POST['authorName'];
-} else {
-    $authorName = null;
-    $resp[] = array(
-        'StatusCode' => 'JSON001',
-        'Status' => 'authorName is not found.'
-    );
-    $error_count += 1;
-
-}
-
-if (isset($_GET['authorEmail'])) {
-    $authorMail = $_GET['authorEmail'];
-} else {
-    $authorMail = null;
-    $resp[] = array(
-        'StatusCode' => 'JSON001',
-        'Status' => 'authorEmail is not found.'
-    );
-    $error_count += 1;
-
-}
-*/
 if (isset($_POST['bookSubTitle'])) {
     $bookSubtitle = $_POST['bookSubTitle'];
 } else {
     $bookSubtitle = null;
 }
+
+if (isset($_POST['interiorDesign'])) {
+    $interiorDesign = $_POST['interiorDesign'];
+} else {
+    $interiorDesign = null;
+}
+
+if (isset($_POST['editorialComplexity'])) {
+    $editorialComplexity = $_POST['editorialComplexity'];
+} else {
+    $editorialComplexity = null;
+}
+
+if (isset($_POST['nuberOfMenuscriptPages'])) {
+    $nuberOfMenuscriptPages = $_POST['nuberOfMenuscriptPages'];
+} else {
+    $nuberOfMenuscriptPages = null;
+}
+
 
 if (isset($_POST['isbn'])) {
     $isbn = $_POST['isbn'];
@@ -78,6 +73,11 @@ if (isset($_POST['isbn'])) {
     $isbn = null;
 }
 
+if (isset($_POST['interiorDesign1'])) {
+    $interiorDesign1 = $_POST['interiorDesign1'];
+} else {
+    $interiorDesign1 = null;
+}
 if (isset($_POST['coverType'])) {
     $coverType = $_POST['coverType'];
 } else {
@@ -104,17 +104,6 @@ if (isset($_POST['paperWeight'])) {
     $paperWeight = 0;
 }
 
-if (isset($_POST['requestedServices'])) {
-    if (!empty($_POST['requestedServices'])) {
-        $requestedServices = implode(',', ($_POST['requestedServices']));
-    } else {
-        $requestedServices = "";
-    }
-}
-else
-{
-    $requestedServices = null;
-}
 
 if (isset($_POST['visonInteriorDesign'])) {
     $visonInteriorDesign = trim($_POST['visonInteriorDesign']);
@@ -263,9 +252,9 @@ $submitCount = 1;
        
 
             $sql1 = "update services set bookSubtitle='$bookSubtitle',isbn='$isbn',coverType='$coverType',
-            priceBarcode='$priceBarcode',trimSize='$trimSize',visonInteriorDesign='$visonInteriorDesign',paperWeight='$paperWeight',requestedServices='$requestedServices',
-            dimenSpecification='$dimenSpecification',bookCoverFront='$bookCoverFront',
-            spine='$spine',bookCoverBack='$bookCoverBack',
+            priceBarcode='$priceBarcode',trimSize='$trimSize',visonInteriorDesign='$visonInteriorDesign',paperWeight='$paperWeight',interiorDesign='$interiorDesign',
+            dimenSpecification='$dimenSpecification',bookCoverFront='$bookCoverFront',editorialComplexity='$editorialComplexity',nuberOfMenuscriptPages='$nuberOfMenuscriptPages',
+            spine='$spine',bookCoverBack='$bookCoverBack',interiorDesign1='$interiorDesign1',
             authorImage='$authorImage',artImage='$artImage',visionDesign='$visionDesign',template_id='$template_id',submitCount='$submitCount',trimSizeWidth='$trimSizeWidth',trimSizeHeight='$trimSizeHeight',other='$other'
             where id='$id'";
 
