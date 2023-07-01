@@ -513,8 +513,8 @@ else {
 $eid = encryptor('encrypt', $id);
 
 //Inserting data into table
-$sql1 = "INSERT INTO services (id,authorName,authorEmail,category,bookTitle,isbn,interiorDesign,editorialComplexity,nuberOfMenuscriptPages,userName,userMail) 
-VALUES ('" . $id . "','" . $authorName . "','" . $authorEmail . "','" . $category . "','" . $bookTitle . "','" . $isbn . "','" . $interiorDesign . "','" . $editorialComplexity . "','" . $nuberOfMenuscriptPages . "','" . $userName . "','" . $userMail . "')";
+$sql1 = "INSERT INTO services (id,authorName,authorEmail,category,bookTitle,isbn,interiorDesign,editorialComplexity,nuberOfMenuscriptPages,userName,userMail,project_date) 
+VALUES ('" . $id . "','" . $authorName . "','" . $authorEmail . "','" . $category . "','" . $bookTitle . "','" . $isbn . "','" . $interiorDesign . "','" . $editorialComplexity . "','" . $nuberOfMenuscriptPages . "','" . $userName . "','" . $userMail . "',CURRENT_TIMESTAMP())";
 
 $query_run = mysqli_query($conn, $sql1) or die(mysqli_error($conn));
 

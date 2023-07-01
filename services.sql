@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 15, 2023 at 02:54 PM
+-- Generation Time: Jun 24, 2023 at 02:56 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -36,17 +36,17 @@ CREATE TABLE `services` (
   `isbn` varchar(255) DEFAULT NULL,
   `interiorDesign` varchar(255) DEFAULT NULL,
   `editorialComplexity` varchar(255) DEFAULT NULL,
-  `nuberOfMenuscriptPages` int(255) DEFAULT NULL,
+  `nuberOfMenuscriptPages` varchar(255) DEFAULT NULL,
   `bookSubtitle` text DEFAULT NULL,
   `coverType` text DEFAULT NULL,
-  `trimSizeWidth` double DEFAULT NULL,
-  `trimSizeHeight` double DEFAULT NULL,
-  `paperWeight` double DEFAULT NULL,
+  `trimSizeWidth` varchar(255) DEFAULT NULL,
+  `trimSizeHeight` varchar(255) DEFAULT NULL,
+  `paperWeight` varchar(255) DEFAULT NULL,
   `dimenSpecification` varchar(255) DEFAULT NULL,
   `bookCoverFront` text DEFAULT NULL,
   `spine` text DEFAULT NULL,
   `bookCoverBack` text DEFAULT NULL,
-  `priceBarcode` double DEFAULT NULL,
+  `priceBarcode` varchar(255) DEFAULT NULL,
   `authorImage` varchar(255) DEFAULT NULL,
   `artImage` varchar(255) DEFAULT NULL,
   `visionDesign` text DEFAULT NULL,
@@ -54,11 +54,13 @@ CREATE TABLE `services` (
   `trimSize` text DEFAULT NULL,
   `visonInteriorDesign` text DEFAULT NULL,
   `requestedServices` varchar(255) DEFAULT NULL,
-  `userName` varchar(255) NOT NULL,
-  `userMail` text NOT NULL,
+  `userName` varchar(255) DEFAULT NULL,
+  `userMail` text DEFAULT NULL,
   `submitCount` int(11) NOT NULL DEFAULT 0,
   `fileName` varchar(255) DEFAULT NULL,
-  `other` text DEFAULT NULL
+  `other` text DEFAULT NULL,
+  `interiorDesign1` varchar(255) DEFAULT NULL,
+  `project_date` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
