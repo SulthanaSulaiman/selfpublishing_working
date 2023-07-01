@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 07, 2023 at 03:28 PM
+-- Generation Time: Jul 01, 2023 at 01:30 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `s4c`
+-- Database: `selfpublish`
 --
 
 -- --------------------------------------------------------
@@ -29,30 +29,66 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `covers` (
   `cover_id` varchar(255) NOT NULL,
-  `category` varchar(255) NOT NULL,
-  `cover_image_subject` varchar(255) NOT NULL,
-  `cover_image` text NOT NULL,
-  `cover_usage` varchar(255) NOT NULL,
-  `background_color` varchar(255) NOT NULL,
-  `internal_colors` varchar(255) NOT NULL,
-  `orientation` varchar(255) NOT NULL
+  `cover_image` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `covers`
 --
 
-INSERT INTO `covers` (`cover_id`, `category`, `cover_image_subject`, `cover_image`, `cover_usage`, `background_color`, `internal_colors`, `orientation`) VALUES
-('Book_001', 'Abstract', 'Spikes of multocolor', 'Cover_Template_001 copy.jpg', 'Front and Back Same', 'Black', 'Multicolor', 'Portrait'),
-('Book_002', 'Abstract', 'Philosophy', 'Cover_Template_002 copy.jpg', 'Front only', 'Olive green', 'Red yellow', 'Lanscape'),
-('Book_003', 'Adventure', 'Circular rings in shades of yellow/sand dunes?', 'Cover_Template_003 copy.jpg', 'Front and Back Same', 'Peach', 'Shades of yellow', 'Portrait'),
-('Book_004', 'Adventure', 'Patches of pastel shades', 'Cover_Template_004 copy.jpg', 'Front and Back Single continuous', 'Brown', 'Shades of peach', 'Portrait'),
-('Book_005', 'Adventure', 'Circles of pastel shades', 'Cover_Template_005 copy.jpg', 'Front and Back Single continuous', 'Light blue', 'Shades of peach', 'Lanscape'),
-('Book_006', 'Biology', 'Geometric illustration', 'Cover_Template_006 copy.jpg', 'Front and Back Single continuous', 'Black', 'Shades of black green', 'Portrait'),
-('Book_007', 'Biology', 'Curls of yellow on a red background', 'Cover_Template_007 copy.jpg', 'Front and Back Different', 'Greyish blue', 'Red yellow', 'Portrait'),
-('Book_008', 'Biology', 'Lines and curves', 'Cover_Template_008 copy.jpg', 'Front and Back Different', 'Brown', 'Red off-white black', 'Portrait'),
-('Book_009', 'Gambling', 'Wood surface', 'Cover_Template_009 copy.jpg', 'Front and Back Single continuous', 'Peach', 'Brown peach', 'Portrait'),
-('Book_010', 'Gambling', 'Maple and oak leaves', 'Cover_Template_010 copy.jpg', 'Front and Back Different', 'Burnt red', 'Brown peach', 'Lanscape');
+INSERT INTO `covers` (`cover_id`, `cover_image`) VALUES
+('Book_001', 'Cover_Template_001 copy.jpg'),
+('Book_002', 'Cover_Template_002 copy.jpg'),
+('Book_003', 'Cover_Template_003 copy.jpg'),
+('Book_004', 'Cover_Template_004 copy.jpg'),
+('Book_005', 'Cover_Template_005 copy.jpg'),
+('Book_006', 'Cover_Template_006 copy.jpg'),
+('Book_007', 'Cover_Template_007 copy.jpg'),
+('Book_008', 'Cover_Template_008 copy.jpg'),
+('Book_009', 'Cover_Template_009 copy.jpg'),
+('Book_010', 'Cover_Template_010 copy.jpg'),
+('Template_001', 'Cover_Template_001.jpg'),
+('Template_002', 'Cover_Template_002.jpg'),
+('Template_003', 'Cover_Template_003.jpg'),
+('Template_004', 'Cover_Template_004.jpg'),
+('Template_005', 'Cover_Template_005.jpg'),
+('Template_006', 'Cover_Template_006.jpg'),
+('Template_007', 'Cover_Template_007.jpg'),
+('Template_008', 'Cover_Template_008.jpg'),
+('Template_009', 'Cover_Template_009.jpg'),
+('Template_010', 'Cover_Template_010.jpg'),
+('Template_011', 'Cover_Template_011.jpg'),
+('Template_012', 'Cover_Template_012.jpg'),
+('Template_013', 'Cover_Template_013.jpg'),
+('Template_014', 'Cover_Template_014.jpg'),
+('Template_015', 'Cover_Template_015.jpg'),
+('Template_016', 'Cover_Template_016.jpg'),
+('Template_017', 'Cover_Template_017.jpg'),
+('Template_018', 'Cover_Template_018.jpg'),
+('Template_019', 'Cover_Template_019.jpg'),
+('Template_020', 'Cover_Template_020.jpg'),
+('Template_021', 'Cover_Template_021.jpg'),
+('Template_022', 'Cover_Template_022.jpg'),
+('Template_023', 'Cover_Template_023.jpg'),
+('Template_024', 'Cover_Template_024.jpg'),
+('Template_025', 'Cover_Template_025.jpg'),
+('Template_026', 'Cover_Template_026.jpg'),
+('Template_027', 'Cover_Template_027.jpg'),
+('Template_028', 'Cover_Template_028.jpg'),
+('Template_029', 'Cover_Template_029.jpg'),
+('Template_030', 'Cover_Template_030.jpg'),
+('Template_031', 'Cover_Template_031.jpg'),
+('Template_032', 'Cover_Template_032.jpg'),
+('Template_033', 'Cover_Template_033.jpg'),
+('Template_034', 'Cover_Template_034.jpg'),
+('Template_035', 'Cover_Template_035.jpg'),
+('Template_036', 'Cover_Template_036.jpg'),
+('Template_037', 'Cover_Template_037.jpg'),
+('Template_038', 'Cover_Template_038.jpg'),
+('Template_039', 'Cover_Template_039.jpg'),
+('Template_040', 'Cover_Template_040.jpg'),
+('Template_041', 'Cover_Template_041.jpg'),
+('Template_042', 'Cover_Template_042.jpg');
 
 --
 -- Indexes for dumped tables

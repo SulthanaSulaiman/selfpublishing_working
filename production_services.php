@@ -581,6 +581,13 @@ require 'connection.php';
     <script>
         /* covers slide show*/
         $(document).ready(function () {
+             // Check if the form should be disabled
+            var isFormDisabled = <?php echo !empty($result['submitCount']) ? 'true' : 'false'; ?>;
+        
+            if (isFormDisabled) {
+                // Disable all form elements
+                $('#authorForm input, #authorForm select, #authorForm textarea').prop('disabled', true);
+            }
 
             $.ajax({
                 type: 'POST',
@@ -695,7 +702,7 @@ require 'connection.php';
                 }
 
                 return isValidISBN(value);
-            }, "Please enter valid ISBN number in 13 digits");
+            }, "Please enter a valid 13-digit ISBN number starting with 978 or 979");
             jQuery.validator.addMethod("colorValidation", function (value, element) {
                 if (value.trim() === "") {
                     return true; // Skip validation for empty values
@@ -707,15 +714,23 @@ require 'connection.php';
             jQuery.validator.addMethod("filesSelected", function(value, element) {
              return $('#fileList .file-item').length > 0; // Check if files are selected
             });
-            // ISBN Number basic validationValidation
             function isValidISBN(isbn) {
                 // Remove hyphens from the string
                 var digitsOnly = isbn.replace(/-/g, "");
 
                 // Check if the resulting string has exactly 13 digits
-                return /^\d{13}$/.test(digitsOnly);
-            }
+                if (!/^\d{13}$/.test(digitsOnly)) {
+                    return false;
+                }
 
+                // Check if the first three digits are 978 or 979
+                var firstThreeDigits = digitsOnly.slice(0, 3);
+                if (firstThreeDigits !== "978" && firstThreeDigits !== "979") {
+                    return false;
+                }
+
+                return true;
+            }
 
             function handleResponse(response) {
                 if (typeof response === 'string') {
