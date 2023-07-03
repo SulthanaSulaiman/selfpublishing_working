@@ -550,7 +550,7 @@ require 'connection.php';
                    
                         <label>Price to create barcode in dollars
                             <div style="display: inline-block;" data-toggle="tooltip" data-placement="top"
-                                title="This field is considered as industry best practice for bookstores.">
+                                title="In the US, this field is considered as industry best practice for bookstores.">
                                 <sup> <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="18" height="18"
                                         viewBox="0 0 512 512">
                                         <path fill="#25B7D3"
@@ -758,7 +758,7 @@ require 'connection.php';
                                 var fileList = [];
                                 var totalFileSize = 0;
                                 var maxFileSize = 500 * 1024 * 1024; // 500MB limit
-
+                               
                                 function handleFiles(files) {
                                     for (var i = 0; i < files.length; i++) {
                                         var file = files[i];
@@ -768,7 +768,7 @@ require 'connection.php';
                                         } else {
                                             alert('\n\u26A0\uFE0F Invalid file format or size exceeded. \n\nAllowed file types are Image, Text, Pdf, Word, Excel, PowerPoint and Zip. \nOverall maximum file size limit is 500 MB.');
                                         }
-                                    }
+                                    }          
                                     document.getElementById('uploadButton').disabled = !canUpload();
                                 }
 
@@ -780,13 +780,13 @@ require 'connection.php';
                                 }
 
                                 // Function to handle file click
-                                function handleClick() {
+                               function handleClick() {
                                     var fileInput = document.createElement('input');
                                     fileInput.type = 'file';
                                     fileInput.multiple = true;
                                     fileInput.addEventListener('change', function (e) {
                                         var files = e.target.files;
-                                        handleFiles(files);
+                                        handleFiles(files);             
                                     });
                                     fileInput.click();
                                 }
@@ -856,7 +856,7 @@ require 'connection.php';
                                 }
 
                                 // Function to upload the files to the server
-                                function uploadFiles() {
+                                function uploadFiles() { 
                                     var formData = new FormData();
                                     for (var i = 0; i < fileList.length; i++) {
                                         var file = fileList[i];
@@ -944,7 +944,7 @@ require 'connection.php';
                             <label> Download manuscript or other file(s)<!--<span class="text-danger">*</span>--></label>
                             <div class="text-center">
                                 <label class="form-control dropzone1">
-                                    <a download="<?php if (!empty($result['fileName'])) {
+                                   <!-- <a  download="<?php if (!empty($result['fileName'])) {
                                         echo $result['fileName'];
                                     } else {
                                         echo 'fileNotUploaded';
@@ -953,7 +953,8 @@ require 'connection.php';
                                             echo $result['fileName'];
                                         } else {
                                             echo 'fileNotUploaded';
-                                        } ?>"><span><i
+                                        } ?>">-->
+                                        <span><i
                                                 class="fa fa-cloud-download text-centre text-primary fa-5x"></i></span>
                                         <p class="text-centre text-primary" id="noOfFiles">Download manuscript
                                             file(s)
@@ -1042,7 +1043,7 @@ require 'connection.php';
             if (isFormDisabled) {
                 // Disable all form elements
                 $('#authorForm input, #authorForm select, #authorForm textarea').prop('disabled', true);
-            }
+               }
             
             $.ajax({
                 type: 'POST',
@@ -1215,7 +1216,7 @@ require 'connection.php';
 
             jQuery.validator.addMethod("filesSelected", function(value, element) {
              return $('#fileList .file-item').length > 0; // Check if files are selected
-            });
+            });         
             function isValidISBN(isbn) {
                 // Remove hyphens from the string
                 var digitsOnly = isbn.replace(/-/g, "");
@@ -1251,50 +1252,63 @@ require 'connection.php';
             }
 
             function sendRequest() {
-                // Disable the submit button to prevent multiple submissions
-                $('#save').hide();
-
-                // Show the spinner inside the submit button
-                $('#spinner').show();
-
-                // console.log("URL before decode:http://10.1.6.32/selfpublishing/authorMailer.php?bookDetails=%7B%22categoryName%22%3A%22" + category + "%22%2C%22bookName%22%3A%22" + bookName + "%22%7D&userDetails=%7B%22firstName%22%3A%22" + firstName + "%22%2C%22surName%22%3A%22" + surName + "%22%2C%22mailId%22%3A%22" + mailId + "%22%7D&bookInfo=%7B%22ISBN%22%3A%20%22" + isbn + "%22%2C%22Cover%22%3A%20%22" + cover + "%22%2C%22Editorial%20Complexity%22%3A%20%22" + editorialComplexity + "%22%2C%22Number%20of%20Manuscript%20Pages%22%3A%20%22" + numberOfManuscriptPages + "%22%7D");
-
-                $.ajax({
-                    method: "post",
-                    url: "http://10.1.6.32/selfpublishing/productionMailer.php?id=<?php echo $eid; ?>",
-                    dataType: "json",
-                    data: $('#authorForm').serialize(),
-                    success: function (response) {
-                        // Enable the submit button
-                        $('#save').show();
-
-                        // Restore the original text of the submit button
-                        $('#spinner').hide();
-                        // Process the response(s)
-                        if (Array.isArray(response)) {
-                            // Handle multiple responses
-                            response.forEach(function (item) {
-                                handleResponse(item);
-                            });
-                        } else {
-                            // Handle a single response
-                            handleResponse(response);
-                        }
-                        location.reload();
-
-                    },
-                    error: function (xhr, status, error) {
-                        // Enable the submit button
-                        $('#save').show();
-
-                        // Restore the original text of the submit button
-                        $('#spinner').hide();
-                        // Handle the error
-                        //alert("Error: " + error);
-                        alert('\n\u26A0 An error occurred while submitting the form. Please contact the help desk: selfpublish@s4carlisle.com.');
-                        location.reload();
+                var fileFlag=0;
+                    
+                // Check if there are elements with the class "file-item"
+                    if ($('.file-item').length > 0) {
+                        console.log($('.file-item').length);
+                       
+                        alert('File(s) selected, Please click Upload.');
+                       fileFlag+=1; // Prevent the form from being submitted
                     }
-                });
+                
+                 if(fileFlag==0)
+                    {
+                    // Disable the submit button to prevent multiple submissions
+                    $('#save').hide();
+
+                    // Show the spinner inside the submit button
+                    $('#spinner').show();
+
+                    // console.log("URL before decode:http://10.1.6.32/selfpublishing/authorMailer.php?bookDetails=%7B%22categoryName%22%3A%22" + category + "%22%2C%22bookName%22%3A%22" + bookName + "%22%7D&userDetails=%7B%22firstName%22%3A%22" + firstName + "%22%2C%22surName%22%3A%22" + surName + "%22%2C%22mailId%22%3A%22" + mailId + "%22%7D&bookInfo=%7B%22ISBN%22%3A%20%22" + isbn + "%22%2C%22Cover%22%3A%20%22" + cover + "%22%2C%22Editorial%20Complexity%22%3A%20%22" + editorialComplexity + "%22%2C%22Number%20of%20Manuscript%20Pages%22%3A%20%22" + numberOfManuscriptPages + "%22%7D");
+
+                    $.ajax({
+                        method: "post",
+                        url: "http://10.1.6.32/selfpublishing/productionMailer.php?id=<?php echo $eid; ?>",
+                        dataType: "json",
+                        data: $('#authorForm').serialize(),
+                        success: function (response) {
+                            // Enable the submit button
+                            $('#save').show();
+
+                            // Restore the original text of the submit button
+                            $('#spinner').hide();
+                            // Process the response(s)
+                            if (Array.isArray(response)) {
+                                // Handle multiple responses
+                                response.forEach(function (item) {
+                                    handleResponse(item);
+                                });
+                            } else {
+                                // Handle a single response
+                                handleResponse(response);
+                            }
+                            location.reload();
+
+                        },
+                        error: function (xhr, status, error) {
+                            // Enable the submit button
+                            $('#save').show();
+
+                            // Restore the original text of the submit button
+                            $('#spinner').hide();
+                            // Handle the error
+                            //alert("Error: " + error);
+                            alert('\n\u26A0 An error occurred while submitting the form. Please contact the help desk: selfpublish@s4carlisle.com.');
+                            location.reload();
+                        }
+                    });
+                }
             }
         });
 

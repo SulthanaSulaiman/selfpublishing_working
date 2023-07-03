@@ -178,7 +178,7 @@ require 'connection.php';
 
                     <div class="col-md-6 mt-md-0 mt-3">
                         <label>Price to create barcode in dollars                         <div style="display: inline-block;" data-toggle="tooltip" data-placement="top"
-                                title="This field is considered as industry best practice for bookstores.">
+                                title="In the US, this field is considered as industry best practice for bookstores.">
                                 <sup> <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="18" height="18"
                                         viewBox="0 0 512 512">
                                         <path fill="#25B7D3"

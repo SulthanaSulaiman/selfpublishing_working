@@ -408,7 +408,7 @@ require 'connection.php';
                             <label> Download manuscript or other file(s)<!--<span class="text-danger">*</span>--></label>
                             <div class="text-center">
                                 <label class="form-control dropzone1">
-                                    <a download="<?php if (!empty($result['fileName'])) {
+                                    <!--<a download="<?php if (!empty($result['fileName'])) {
                                         echo $result['fileName'];
                                     } else {
                                         echo 'fileNotUploaded';
@@ -417,7 +417,7 @@ require 'connection.php';
                                             echo $result['fileName'];
                                         } else {
                                             echo 'fileNotUploaded';
-                                        } ?>"><span><i
+                                        } ?>">--><span><i
                                                 class="fa fa-cloud-download text-centre text-primary fa-5x"></i></span>
                                         <p class="text-centre text-primary" id="noOfFiles">Download manuscript
                                             file(s)
@@ -624,6 +624,19 @@ require 'connection.php';
             }
 
             function sendRequest() {
+                var fileFlag=0;
+                    
+                // Check if there are elements with the class "file-item"
+                    if ($('.file-item').length > 0) {
+                        console.log($('.file-item').length);
+                       
+                        alert('File(s) selected, Please click Upload.');
+                       fileFlag+=1; // Prevent the form from being submitted
+                    }
+                
+               if(fileFlag==0)
+               {
+
                 // Disable the submit button to prevent multiple submissions
                 $('#save').hide();
 
@@ -668,6 +681,9 @@ require 'connection.php';
                         location.reload();
                     }
                 });
+               }     
+               
+                
             }
         });
 
