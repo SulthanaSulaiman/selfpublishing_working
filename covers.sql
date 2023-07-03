@@ -37,16 +37,6 @@ CREATE TABLE `covers` (
 --
 
 INSERT INTO `covers` (`cover_id`, `cover_image`) VALUES
-('Book_001', 'Cover_Template_001 copy.jpg'),
-('Book_002', 'Cover_Template_002 copy.jpg'),
-('Book_003', 'Cover_Template_003 copy.jpg'),
-('Book_004', 'Cover_Template_004 copy.jpg'),
-('Book_005', 'Cover_Template_005 copy.jpg'),
-('Book_006', 'Cover_Template_006 copy.jpg'),
-('Book_007', 'Cover_Template_007 copy.jpg'),
-('Book_008', 'Cover_Template_008 copy.jpg'),
-('Book_009', 'Cover_Template_009 copy.jpg'),
-('Book_010', 'Cover_Template_010 copy.jpg'),
 ('Template_001', 'Cover_Template_001.jpg'),
 ('Template_002', 'Cover_Template_002.jpg'),
 ('Template_003', 'Cover_Template_003.jpg'),
